@@ -10,9 +10,9 @@ include_once("Board.php");
 
 
 $testBoard= new Board(20,20);
-$testBoard->initRandom();
+$testBoard->initSpecial();
 
-for ($i=0; $i<15; $i++)
+for ($i=0; $i<10; $i++)
 {
     $testBoard->print();
     $testBoard=$testBoard->calculateNextStep();
