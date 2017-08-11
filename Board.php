@@ -11,6 +11,8 @@
  */
 class Board
 {
+    private $finishString = "";
+    private $oldFinishString = "";
     private $width;
     private $height;
     private $board=array();
@@ -20,11 +22,6 @@ class Board
         $this->height=$_height;
         $this->width=$_width;
         $this->initEmpty();
-
-        //$this->setField("test",2,5);
-
-        //$this->setField(4,"a",true);
-
     }
 
 
@@ -73,6 +70,7 @@ class Board
         $this->setField(0, 2, true);
         $this->setField(1, 2, true);
         $this->setField(2, 2, true);
+        //$this->setField(2,2, true);
     }
 
     /**
@@ -120,7 +118,7 @@ class Board
      */
     function calculateNextStep()
     {
-        $nextBoard=new Board($this->width,$this->height);
+        $nextBoard = new Board($this->width,$this->height);
 
         for ($y=0; $y < count($this->board); $y++)
         {
@@ -186,6 +184,44 @@ class Board
             }
         }
         return $aliveNeighbours;
+    }
+
+    function _isFinish()
+    {
+        $board=$this->calculateNextStep();
+        if ($this->board == $board->board) return true;
+        else return false;
+
+        /**for ($y=0; $y < count($this->board); $y++)
+        {
+            for ($x=0; $x<count($this->board[$y]); $x++)
+            {
+                if ($this->board[$x][$y] === false)
+                {
+                    $this->finishString=$this->finishString.="a";
+                } elseif ($this->board[$x][$y] === true)
+                {
+                    $this->finishString=$this->finishString.="b";
+                }
+            }
+        }
+        echo "oldfinish ".$this->oldFinishString;
+        echo "\n";
+        if ($this->finishString == $this->oldFinishString)
+        {
+            echo "Keine Veränderung mehr im Spielfeld!";
+            return true;
+        }
+        else
+        {
+            $this->oldFinishString = $this->finishString;
+            echo "finish    ".$this->finishString;
+            echo "\n";
+            //echo "oldfinish ".$this->oldFinishString;
+            echo "\n";
+            return false;
+        }**/
+
     }
 
     /**

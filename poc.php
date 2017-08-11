@@ -6,7 +6,8 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-include_once("Board.php");
+include_once"Board.php";
+include_once "GetOpt.php";
 
 
 $testBoard= new Board(20,20);
