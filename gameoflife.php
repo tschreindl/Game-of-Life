@@ -23,11 +23,10 @@ $options = new  GetOpt(array(
 $options->parse();
 
 
-$height = 5;
-$width = 5;
+$height = 10;
+$width = 10;
 $startType = 1;
 $maxSteps = 0;
-$futureGenerations = 1;
 $generation = 0;
 
 
@@ -109,13 +108,18 @@ if ($maxSteps > 0)
 
 
          $board->print();
-         $board=$board->calculateNextStep();
+         $board->calculateNextStep();
      }
 }
 else
 {
     do{
+        echo "Aktuelle Generation: ";
+        echo $generation;
+        echo "\n";
+        $generation++;
+
         $board->print();
-        $board=$board->calculateNextStep();
-    } while($board->_isFinish($futureGenerations) == false);
+        $board->calculateNextStep();
+    } while($board->isFinished() == false);
 }
