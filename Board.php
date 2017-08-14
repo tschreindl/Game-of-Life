@@ -142,12 +142,6 @@ class Board
             }
 
         }
-
-        for ($strokes = 1; $strokes <= $this->width; $strokes++)
-        {
-            echo " - ";
-        }
-        echo "\n";
         return $nextBoard;
     }
 
@@ -186,41 +180,30 @@ class Board
         return $aliveNeighbours;
     }
 
-    function _isFinish()
+    /**
+     * Checks if there is no further generation
+     * var futureGenerations calculates x times to the
+     * future to catch repeating generations
+     *
+     * @param $futureGenerations
+     * @return bool
+     */
+    function _isFinish($futureGenerations)
     {
-        $board=$this->calculateNextStep();
-        if ($this->board == $board->board) return true;
-        else return false;
-
-        /**for ($y=0; $y < count($this->board); $y++)
+        for ($gen = 1; $gen <= $futureGenerations; $gen++)
         {
-            for ($x=0; $x<count($this->board[$y]); $x++)
+            $board=$this->calculateNextStep();
+            if ($this->board == $board->board)
             {
-                if ($this->board[$x][$y] === false)
-                {
-                    $this->finishString=$this->finishString.="a";
-                } elseif ($this->board[$x][$y] === true)
-                {
-                    $this->finishString=$this->finishString.="b";
-                }
+                echo "Keine weitere Generation mehr";
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-        echo "oldfinish ".$this->oldFinishString;
-        echo "\n";
-        if ($this->finishString == $this->oldFinishString)
-        {
-            echo "Keine Veränderung mehr im Spielfeld!";
-            return true;
-        }
-        else
-        {
-            $this->oldFinishString = $this->finishString;
-            echo "finish    ".$this->finishString;
-            echo "\n";
-            //echo "oldfinish ".$this->oldFinishString;
-            echo "\n";
-            return false;
-        }**/
+
 
     }
 
@@ -244,7 +227,13 @@ class Board
                 echo "  ";
             }
             echo "\n";
+
         }
+        for ($strokes = 1; $strokes <= $this->width; $strokes++)
+        {
+            echo "---";
+        }
+        echo "\n";
     }
 
 
