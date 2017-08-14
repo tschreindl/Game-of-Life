@@ -11,8 +11,6 @@
  */
 class Board
 {
-    private $finishString = "";
-    private $oldFinishString = "";
     private $width;
     private $height;
     private $board=array();
@@ -24,8 +22,7 @@ class Board
         $this->initEmpty();
     }
 
-
-    /**
+  /**
      * Initialize an empty field.
      * Sets every entry of "array" board to false.
      */
@@ -70,7 +67,6 @@ class Board
         $this->setField(0, 2, true);
         $this->setField(1, 2, true);
         $this->setField(2, 2, true);
-        //$this->setField(2,2, true);
     }
 
     /**
@@ -106,7 +102,7 @@ class Board
      * @param int $_y The y-coordinate of the field that should be set.
      * @param bool $_value The value the field should have.
      */
-    function setField(int $_x, int $_y, $_value)
+    function setField($_x,$_y,$_value)
     {
         $this->board[$_x][$_y]=$_value;
     }
@@ -140,12 +136,11 @@ class Board
                 }
                 $nextBoard->setField($x,$y,$newCellState);
             }
-
         }
         return $nextBoard;
     }
-
-    /**
+  
+  /**
      * Checks how many neighbours are alive
      *
      * \b Note: $_x and $_y must type int and 0 indexed
@@ -227,14 +222,12 @@ class Board
                 echo "  ";
             }
             echo "\n";
-
         }
         for ($strokes = 1; $strokes <= $this->width; $strokes++)
         {
             echo "---";
         }
         echo "\n";
+        }
     }
-
-
 }
