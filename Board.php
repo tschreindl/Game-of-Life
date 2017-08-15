@@ -6,91 +6,42 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+namespace GameOfLife;
+
 /**
  * Represents a game of life game board.
  */
 class Board
 {
-    private $width;
-    private $height;
-    private $board=array();
+    public $width;
+    public $height;
+    public $board = array();
+    private $historyOfBoards = array();
 
     function __construct($_width, $_height)
     {
         $this->height=$_height;
         $this->width=$_width;
-        $this->initEmpty();
+        $this->board = $this->initEmpty();
     }
 
-  /**
+
+    /**
      * Initialize an empty field.
      * Sets every entry of "array" board to false.
      */
     private function initEmpty()
     {
+        $newBoard = array();
         for ($x=0; $x < $this->width; $x++)
         {
-            $this->board[$x]=array();
+            $newBoard[$x]=array();
             for ($y=0; $y<$this->height; $y++)
             {
-                $this->board[$x][$y]=false;
+                $newBoard[$x][$y]=false;
             }
         }
-    }
-
-
-    /**
-     * Initialize a random generation on the field
-     * Sets random entries of array "board" to true.
-     */
-    function initRandom()
-    {
-        for ($x=0; $x < $this->width; $x++)
-        {
-            for ($y=0; $y<$this->height; $y++)
-            {
-                $rand=rand(0,1);
-                if ($rand==1) $this->board[$x][$y]=true;
-            }
-        }
-    }
-
-    /**
-     * Initialize a generation called "Rider".
-     * Calls the function setField to sets different
-     * entries to true, to initialize the "Rider".
-     */
-    function initRider()
-    {
-        $this->setField(1, 0, true);
-        $this->setField(2, 1, true);
-        $this->setField(0, 2, true);
-        $this->setField(1, 2, true);
-        $this->setField(2, 2, true);
-    }
-
-    /**
-     * Initialize a generation that is not named.
-     * Calls the function setField to sets different
-     * entries to true, to initialize a special generation
-     * that will disappear after 54 generations.
-     */
-    function initSpecial()
-    {
-        $this->setField(0, 0, true);
-        $this->setField(1, 0, true);
-        $this->setField(2, 0, true);
-        $this->setField(0, 1, true);
-        $this->setField(0, 2, true);
-        $this->setField(2, 1, true);
-        $this->setField(2, 2, true);
-        $this->setField(0, 4, true);
-        $this->setField(0, 5, true);
-        $this->setField(0, 6, true);
-        $this->setField(2, 4, true);
-        $this->setField(2, 5, true);
-        $this->setField(2, 6, true);
-        $this->setField(1, 6, true);
+        return $newBoard;
     }
 
     /**
@@ -102,7 +53,7 @@ class Board
      * @param int $_y The y-coordinate of the field that should be set.
      * @param bool $_value The value the field should have.
      */
-    function setField($_x,$_y,$_value)
+    function setField(int $_x, int $_y, $_value)
     {
         $this->board[$_x][$_y]=$_value;
     }
@@ -110,11 +61,11 @@ class Board
 
     /**
      * Calculates the next generation
-     * @return Board The board of the calculated next step.
      */
     function calculateNextStep()
     {
-        $nextBoard = new Board($this->width,$this->height);
+        $this->historyOfBoards[] = $this->board;
+        $nextBoard = $this->initEmpty();
 
         for ($y=0; $y < count($this->board); $y++)
         {
@@ -134,13 +85,13 @@ class Board
                 {
                    $newCellState = false;
                 }
-                $nextBoard->setField($x,$y,$newCellState);
+                $nextBoard[$x][$y] = $newCellState;
             }
         }
-        return $nextBoard;
+        $this->board = $nextBoard;
     }
-  
-  /**
+
+    /**
      * Checks how many neighbours are alive
      *
      * \b Note: $_x and $_y must type int and 0 indexed
@@ -159,9 +110,7 @@ class Board
                 if ($y>=0 && $y<$this->height && $x>=0 && $x<$this->width)
                 {
                     if ($x==$_x && $y==$_y)
-                    {
-
-                    }
+                    {}
                     else
                     {
                         if ($this->board[$x][$y] === true)
@@ -180,26 +129,19 @@ class Board
      * var futureGenerations calculates x times to the
      * future to catch repeating generations
      *
-     * @param $futureGenerations
      * @return bool
      */
-    function _isFinish($futureGenerations)
+    function isFinished()
     {
-        for ($gen = 1; $gen <= $futureGenerations; $gen++)
+        foreach ($this->historyOfBoards as $oldBoard)
         {
-            $board=$this->calculateNextStep();
-            if ($this->board == $board->board)
+            if ($this->board == $oldBoard)
             {
-                echo "Keine weitere Generation mehr";
+                echo "Keine weiteren Generationen mehr!";
                 return true;
             }
-            else
-            {
-                return false;
-            }
         }
-
-
+        return false;
     }
 
     /**
@@ -221,13 +163,12 @@ class Board
                 else echo $this->board[$x][$y];
                 echo "  ";
             }
-            echo "\n";
+            echo "|\n";
         }
         for ($strokes = 1; $strokes <= $this->width; $strokes++)
         {
             echo "---";
         }
         echo "\n";
-        }
     }
 }
