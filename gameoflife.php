@@ -130,7 +130,6 @@ else
         {
             echo "---";
         }
-
         $board->print();
         $board->calculateNextStep();
     } while($board->isFinished() == false);

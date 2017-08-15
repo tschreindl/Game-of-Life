@@ -5,7 +5,6 @@
  * @copyright 2017 CN-Consult GmbH
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
-
 namespace GameOfLife;
 
 /**
@@ -35,10 +34,10 @@ class Board
         $newBoard = array();
         for ($x=0; $x < $this->width; $x++)
         {
-            $newBoard[$x]=array();
+            $newBoard[$x] = array();
             for ($y=0; $y<$this->height; $y++)
             {
-                $newBoard[$x][$y]=false;
+                $newBoard[$x][$y] = false;
             }
         }
         return $newBoard;
@@ -87,6 +86,7 @@ class Board
                 }
                 $nextBoard[$x][$y] = $newCellState;
             }
+
         }
         $this->board = $nextBoard;
     }
@@ -171,4 +171,6 @@ class Board
         }
         echo "\n";
     }
+
+
 }
