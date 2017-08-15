@@ -6,20 +6,17 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-//namespace Input;
+namespace GameOfLife;
 
 /**
  * Represents a game of life game board.
  */
 class Board
 {
-    private $finishString = "";
-    private $oldFinishString = "";
-    private $width;
-    private $height;
-    private $board=array();
+    public $width;
+    public $height;
+    public $board = array();
     private $historyOfBoards = array();
-
 
     function __construct($_width, $_height)
     {
@@ -45,64 +42,6 @@ class Board
             }
         }
         return $newBoard;
-    }
-
-
-    /**
-     * Initialize a random generation on the field
-     * Sets random entries of array "board" to true.
-     */
-    function initRandom()
-    {
-        for ($x=0; $x < $this->width; $x++)
-        {
-            for ($y=0; $y<$this->height; $y++)
-            {
-                $rand=rand(0,1);
-                if ($rand==1) $this->board[$x][$y]=true;
-            }
-        }
-    }
-
-    /**
-     * Initialize a generation called "Rider".
-     * Calls the function setField to sets different
-     * entries to true, to initialize the "Rider".
-     */
-    function initRider()
-    {
-        /**$this->setField(1, 0, true);
-        $this->setField(2, 1, true);
-        $this->setField(0, 2, true);
-        $this->setField(1, 2, true);
-        $this->setField(2, 2, true);**/
-        $this->setField(2,2, true);
-        $this->setField(3,2, true);
-        $this->setField(4,2, true);
-    }
-
-    /**
-     * Initialize a generation that is not named.
-     * Calls the function setField to sets different
-     * entries to true, to initialize a special generation
-     * that will disappear after 54 generations.
-     */
-    function initSpecial()
-    {
-        $this->setField(0, 0, true);
-        $this->setField(1, 0, true);
-        $this->setField(2, 0, true);
-        $this->setField(0, 1, true);
-        $this->setField(0, 2, true);
-        $this->setField(2, 1, true);
-        $this->setField(2, 2, true);
-        $this->setField(0, 4, true);
-        $this->setField(0, 5, true);
-        $this->setField(0, 6, true);
-        $this->setField(2, 4, true);
-        $this->setField(2, 5, true);
-        $this->setField(2, 6, true);
-        $this->setField(1, 6, true);
     }
 
     /**
@@ -138,7 +77,8 @@ class Board
                 if ($this->board[$x][$y] === false && $numAliveNeighbors == 3)
                 {
                     $newCellState = true;
-                }elseif ($this->board[$x][$y] === true && $numAliveNeighbors < 2)
+                }
+                else if ($this->board[$x][$y] === true && $numAliveNeighbors < 2)
                 {
                     $newCellState = false;
                 }
@@ -146,10 +86,8 @@ class Board
                 {
                    $newCellState = false;
                 }
-                //$this->setField($x,$y,$newCellState);
                 $nextBoard[$x][$y] = $newCellState;
             }
-
         }
         $this->board = $nextBoard;
     }
@@ -172,11 +110,7 @@ class Board
             {
                 if ($y>=0 && $y<$this->height && $x>=0 && $x<$this->width)
                 {
-                    if ($x==$_x && $y==$_y)
-                    {
-
-                    }
-                    else
+                    if ($x !== $_x || $y !== $_y)
                     {
                         if ($this->board[$x][$y] === true)
                         {
@@ -202,11 +136,10 @@ class Board
         {
             if ($this->board == $oldBoard)
             {
-                echo "Keine weitere Generation mehr";
+                echo "Keine weiteren Generationen mehr!";
                 return true;
             }
         }
-
         return false;
     }
 
@@ -215,6 +148,7 @@ class Board
      */
     function print()
     {
+
         for ($y=0; $y < count($this->board); $y++)
         {
             for ($x=0; $x<count($this->board[$y]); $x++)
@@ -226,18 +160,15 @@ class Board
                 {
                     echo "x";
                 }
-                else echo $this->board[$x][$y];
                 echo "  ";
             }
-            echo "\n";
-
+            echo "|\n";
         }
+
         for ($strokes = 1; $strokes <= $this->width; $strokes++)
         {
             echo "---";
         }
         echo "\n";
-    }
-
-
+        }
 }
