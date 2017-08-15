@@ -5,6 +5,7 @@
  * @copyright 2017 CN-Consult GmbH
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
+
 namespace GameOfLife;
 
 /**
@@ -34,10 +35,10 @@ class Board
         $newBoard = array();
         for ($x=0; $x < $this->width; $x++)
         {
-            $newBoard[$x] = array();
+            $newBoard[$x]=array();
             for ($y=0; $y<$this->height; $y++)
             {
-                $newBoard[$x][$y] = false;
+                $newBoard[$x][$y]=false;
             }
         }
         return $newBoard;
@@ -76,7 +77,8 @@ class Board
                 if ($this->board[$x][$y] === false && $numAliveNeighbors == 3)
                 {
                     $newCellState = true;
-                }elseif ($this->board[$x][$y] === true && $numAliveNeighbors < 2)
+                }
+                else if ($this->board[$x][$y] === true && $numAliveNeighbors < 2)
                 {
                     $newCellState = false;
                 }
@@ -86,7 +88,6 @@ class Board
                 }
                 $nextBoard[$x][$y] = $newCellState;
             }
-
         }
         $this->board = $nextBoard;
     }
@@ -109,9 +110,7 @@ class Board
             {
                 if ($y>=0 && $y<$this->height && $x>=0 && $x<$this->width)
                 {
-                    if ($x==$_x && $y==$_y)
-                    {}
-                    else
+                    if ($x !== $_x || $y !== $_y)
                     {
                         if ($this->board[$x][$y] === true)
                         {
@@ -149,6 +148,7 @@ class Board
      */
     function print()
     {
+
         for ($y=0; $y < count($this->board); $y++)
         {
             for ($x=0; $x<count($this->board[$y]); $x++)
@@ -160,17 +160,15 @@ class Board
                 {
                     echo "x";
                 }
-                else echo $this->board[$x][$y];
                 echo "  ";
             }
             echo "|\n";
         }
+
         for ($strokes = 1; $strokes <= $this->width; $strokes++)
         {
             echo "---";
         }
         echo "\n";
-    }
-
-
+        }
 }

@@ -109,11 +109,12 @@ if ($maxSteps > 0)
          echo "\n";
          $generation++;
 
-         for ($strokes = 1; $strokes <= $this->width; $strokes++)
+         for ($strokes = 1; $strokes <= $width; $strokes++)
          {
              echo "---";
          }
-
+         echo "\n";
+         
          $board->print();
          $board->calculateNextStep();
      }
@@ -130,6 +131,8 @@ else
         {
             echo "---";
         }
+        echo "\n";
+
         $board->print();
         $board->calculateNextStep();
     } while($board->isFinished() == false);
