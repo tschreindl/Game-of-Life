@@ -21,7 +21,7 @@ class FileInput extends BaseInput
     /** Path to Input File
      * @var string
      */
-    private $path = __DIR__."\\Example\\GOL.txt";    //current size 10x10 fields
+    private $path = __DIR__."\\Example\\GOL.txt";    //current size 10x10 field
 
     /**Fills the board from the the txt file
      *

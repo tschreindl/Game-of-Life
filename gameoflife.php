@@ -18,13 +18,13 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 $options = new  GetOpt(array(
-    array("i", "input", GetOpt::REQUIRED_ARGUMENT),
-    array("w", "width", GetOpt::REQUIRED_ARGUMENT),
-    array("h", "height", GetOpt::REQUIRED_ARGUMENT),
-    array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT),
-    array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT),
-    array("v", "version", GetOpt::NO_ARGUMENT),
-    array("r", "help", GetOpt::NO_ARGUMENT),
+    array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
+    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
+    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
+    array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
+    array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.2"),
+    array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
+    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an."),
 ));
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
@@ -97,7 +97,8 @@ if ($options->getOption("input"))
 
 if ($options->getOption("version"))
 {
-    echo "Game of Life -- Version 1.0\n";
+    echo "Game of Life -- Version 1.1\n";
+    return;
 }
 
 if ($options->getOption("help"))
@@ -111,6 +112,7 @@ if ($options->getOption("help"))
     echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung\n";
     echo "\n";
     echo $options->showHelp();
+    return;
 }
 
 $board = new Board($width, $height);

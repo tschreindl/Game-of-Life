@@ -58,7 +58,7 @@ class Random extends BaseInput
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT)
+            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT, "Füllgrad der Lebenden Zellen in Prozent. Standard: 20-80%")
         ));
     }
 }
