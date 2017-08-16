@@ -46,7 +46,7 @@ class User extends BaseInput
             $inputX = readline("X:");
 
             if ($inputX == "s" || $inputX == "start") $inputEnd = true;
-            elseif ($inputX - 1 < 0 || $inputX - 1 > $_board->width)
+            elseif ($inputX - 1 < 0 || $inputX - 1 >= $_board->width)
             {
                 echo "\nError: X Coordinate must be between 1 and " . $_board->width . "\n\n";
             }
@@ -55,7 +55,7 @@ class User extends BaseInput
                 $inputY = readline("Y:");
 
                 if ($inputY == "s" || $inputX == "start") $inputEnd = true;
-                elseif ($inputY - 1 < 0 || $inputY - 1 > $_board->height)
+                elseif ($inputY - 1 < 0 || $inputY - 1 >= $_board->height)
                 {
                     echo "\nError: Y Coordinate must be between 1 and " . $_board->height . "\n\n";
                 }
