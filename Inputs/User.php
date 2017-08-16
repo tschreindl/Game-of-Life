@@ -79,13 +79,8 @@ class User extends BaseInput
                             echo "the cell at (" . $inputX . "|" . $inputY . ")!\n\n";
                         }
                     }
-
-
                 }
             }
-
-
-
         }
     }
 
