@@ -46,31 +46,46 @@ class User extends BaseInput
             $inputX = readline("X:");
 
             if ($inputX == "s" || $inputX == "start") $inputEnd = true;
-            elseif ($inputX - 1 < 0 || $inputX - 1 >= $_board->width)
-            {
-                echo "\nError: X Coordinate must be between 1 and " . $_board->width . "\n\n";
-            }
             else
             {
-                $inputY = readline("Y:");
+                $inputX = intval($inputX);
 
-                if ($inputY == "s" || $inputX == "start") $inputEnd = true;
-                elseif ($inputY - 1 < 0 || $inputY - 1 >= $_board->height)
+                if ($inputX - 1 < 0 || $inputX - 1 >= $_board->width)
                 {
-                    echo "\nError: Y Coordinate must be between 1 and " . $_board->height . "\n\n";
+                    echo "\nError: X Coordinate must be between 1 and " . $_board->width . "\n\n";
                 }
                 else
                 {
-                    $currentCellState = $_board->board[$inputX - 1][$inputY - 1];
+                    $inputY = readline("Y:");
 
-                    $_board->setField($inputX - 1, $inputY - 1, ! $currentCellState);
+                    if ($inputY == "s" || $inputX == "start") $inputEnd = true;
+                    else
+                    {
+                        $inputY = intval($inputY);
 
-                    echo "Successfully ";
-                    if ($currentCellState == true) echo "unset ";
-                    else echo "set ";
-                    echo "the cell at (" . $inputX . "|" . $inputY . ")!\n\n";
+                        if ($inputY - 1 < 0 || $inputY - 1 >= $_board->height)
+                        {
+                            echo "\nError: Y Coordinate must be between 1 and " . $_board->height . "\n\n";
+                        }
+                        else
+                        {
+                            $currentCellState = $_board->board[$inputX - 1][$inputY - 1];
+
+                            $_board->setField($inputX - 1, $inputY - 1, ! $currentCellState);
+
+                            echo "Successfully ";
+                            if ($currentCellState == true) echo "unset ";
+                            else echo "set ";
+                            echo "the cell at (" . $inputX . "|" . $inputY . ")!\n\n";
+                        }
+                    }
+
+
                 }
             }
+
+
+
         }
     }
 
