@@ -87,7 +87,11 @@ if ($options->getOption("input"))
     }
     if ($options->getOption("input") == "GliderGun" && $width < 38)
     {
-        if ($width < 37 || $height < 11) echo "Für die Glider Gun sollte mindestens eine Breite von 37 und eine Höhe von 11 angegeben werden!";
+        if ($width < 37 || $height < 11)
+        {
+            echo "-->Für die Glider Gun sollte mindestens eine Breite von 37 und eine Höhe von 11 angegeben werden!<--\n";
+            sleep(3);
+        }
     }
 }
 
@@ -132,6 +136,7 @@ if ($maxSteps > 0)
          $board->calculateNextStep();
          usleep($sleep*1000000);
      }
+     echo "Anzahl von $maxSteps Generationen erreicht.";
 }
 else
 {

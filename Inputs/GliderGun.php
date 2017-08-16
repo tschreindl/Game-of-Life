@@ -7,6 +7,8 @@
  */
 
 namespace Input;
+use GameOfLife\Board;
+use UlrichSG\GetOpt;
 
 
 /**
@@ -16,6 +18,11 @@ namespace Input;
  */
 class GliderGun extends BaseInput
 {
+    /**Fills the board with a Generation called Glider Gun
+     *
+     * @param Board $_board
+     * @param GetOpt $_options
+     */
     function fillBoard($_board, $_options)
     {
         $_board->setField(1, 5, true);

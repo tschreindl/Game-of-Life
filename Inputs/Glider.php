@@ -8,6 +8,7 @@
 
 namespace Input;
 
+use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
@@ -17,10 +18,10 @@ use UlrichSG\GetOpt;
  */
 class Glider extends BaseInput
 {
-    /**Fills the board and set available options
-     * Overwrites method from Class BaseInput
-     * @param $_board
-     * @param $_options
+    /**Fills the board with a generation called Glider and set available options
+     *
+     * @param Board $_board
+     * @param GetOpt $_options
      */
     function fillBoard($_board, $_options)
     {
@@ -45,7 +46,7 @@ class Glider extends BaseInput
 
     /**
      * Add available options
-     * @param $_options
+     * @param GetOpt $_options
      */
     function addOptions($_options)
     {
