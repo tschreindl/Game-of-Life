@@ -18,12 +18,13 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 $options = new  GetOpt(array(
-    array("i", "input", GetOpt::OPTIONAL_ARGUMENT),
-    array("w", "width", GetOpt::OPTIONAL_ARGUMENT),
-    array("h", "height", GetOpt::OPTIONAL_ARGUMENT),
-    array("s", "maxSteps", GetOpt::OPTIONAL_ARGUMENT),
-    array("v", "version", GetOpt::NO_ARGUMENT),
-    array("r", "help", GetOpt::NO_ARGUMENT),
+    array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
+    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
+    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
+    array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
+    array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.2"),
+    array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
+    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an."),
 ));
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
@@ -31,7 +32,6 @@ foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
     $className = "Input\\".basename($input, ".php");
     $inputClass = new $className();
     $inputClass->addOptions($options);
-
 }
 
 $options->parse();
@@ -40,6 +40,8 @@ $height = 10;
 $width = 10;
 $maxSteps = 0;
 $generation = 0;
+$sleep = 0.2;
+$className = "Input\\Random";
 
 if ($options->getOption("width"))
 {
@@ -61,14 +63,20 @@ if ($options->getOption("height"))
     }
 }
 
-$board = new Board($width, $height);
-
 if ($options->getOption("maxSteps"))
 {
     $maxSteps = $options->getOption("maxSteps");
 }
 
-$className = "Input\\Random";
+if ($options->getOption("sleepTime"))
+{
+    $sleep = $options->getOption("sleepTime");
+    if ($sleep > 5)
+    {
+        echo "Sleeptime sollte nicht mehr als 5 Sekunden betragen!";
+        $sleep = 5;
+    }
+}
 
 if ($options->getOption("input"))
 {
@@ -77,14 +85,20 @@ if ($options->getOption("input"))
     {
         $className = "Input\\".$options->getOption("input");
     }
+    if ($options->getOption("input") == "GliderGun" && $width < 38)
+    {
+        if ($width < 37 || $height < 11)
+        {
+            echo "-->Für die Glider Gun sollte mindestens eine Breite von 37 und eine Höhe von 11 angegeben werden!<--\n";
+            sleep(3);
+        }
+    }
 }
-
-$input = new $className($width, $height);
-$input->fillBoard($board, $options);
 
 if ($options->getOption("version"))
 {
-    echo "Game of Life -- Version 1.0\n";
+    echo "Game of Life -- Version 1.1\n";
+    return;
 }
 
 if ($options->getOption("help"))
@@ -98,7 +112,12 @@ if ($options->getOption("help"))
     echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung\n";
     echo "\n";
     echo $options->showHelp();
+    return;
 }
+
+$board = new Board($width, $height);
+$input = new $className();
+$input->fillBoard($board, $options);
 
 if ($maxSteps > 0)
 {
@@ -117,7 +136,9 @@ if ($maxSteps > 0)
          
          $board->print();
          $board->calculateNextStep();
+         usleep($sleep*1000000);
      }
+     echo "Anzahl von $maxSteps Generationen erreicht.";
 }
 else
 {
@@ -135,5 +156,6 @@ else
 
         $board->print();
         $board->calculateNextStep();
+        usleep($sleep*1000000);
     } while($board->isFinished() == false);
 }

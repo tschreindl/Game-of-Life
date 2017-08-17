@@ -8,6 +8,7 @@
 
 namespace Input;
 
+use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
@@ -18,10 +19,10 @@ use UlrichSG\GetOpt;
 
 class Random extends BaseInput
 {
-    /**Fills the board and set available options
-     * Overwrites method from Class BaseInput
-     * @param $_board
-     * @param $_options
+    /**Fills the board random and set available options
+     *
+     * @param Board $_board
+     * @param GetOpt $_options
      */
     function fillBoard($_board, $_options)
 
@@ -52,12 +53,12 @@ class Random extends BaseInput
 
     /**
      * Add available options
-     * @param $_options
+     * @param GetOpt $_options
      */
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT)
+            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT, "Füllgrad der Lebenden Zellen in Prozent. Standard: 20-80%")
         ));
     }
 }

@@ -33,12 +33,11 @@ class Board
     private function initEmpty()
     {
         $newBoard = array();
-        for ($x=0; $x < $this->width; $x++)
+        for ($y = 0; $y < $this->height; $y++)
         {
-            $newBoard[$x]=array();
-            for ($y=0; $y<$this->height; $y++)
+            for ($x = 0; $x < $this->width; $x++)
             {
-                $newBoard[$x][$y]=false;
+                $newBoard[$x][$y] = false;
             }
         }
         return $newBoard;
@@ -55,7 +54,7 @@ class Board
      */
     function setField(int $_x, int $_y, $_value)
     {
-        $this->board[$_x][$_y]=$_value;
+        $this->board[$_x][$_y] = $_value;
     }
 
 
@@ -66,23 +65,22 @@ class Board
     {
         $this->historyOfBoards[] = $this->board;
         $nextBoard = $this->initEmpty();
-
-        for ($y=0; $y < count($this->board); $y++)
+        for ($y = 0; $y < $this->height; $y++)
         {
-            for ($x=0; $x<count($this->board[$y]); $x++)
+            for ($x = 0; $x < $this->width; $x++)
             {
                 $numAliveNeighbors=$this->checkNeighbour($x,$y);
                 $currentCellState = $this->board[$x][$y];
                 $newCellState = $currentCellState;
-                if ($this->board[$x][$y] === false && $numAliveNeighbors == 3)
+                if ($this->board[$x][$y] == false && $numAliveNeighbors == 3)
                 {
                     $newCellState = true;
                 }
-                else if ($this->board[$x][$y] === true && $numAliveNeighbors < 2)
+                else if ($this->board[$x][$y] == true && $numAliveNeighbors < 2)
                 {
                     $newCellState = false;
                 }
-                elseif ($this->board[$x][$y] === true && $numAliveNeighbors > 3)
+                elseif ($this->board[$x][$y] == true && $numAliveNeighbors > 3)
                 {
                    $newCellState = false;
                 }
@@ -136,7 +134,7 @@ class Board
         {
             if ($this->board == $oldBoard)
             {
-                echo "Keine weiteren Generationen mehr!";
+                echo "Keine weiteren Generationen mehr oder wiederholende Generationen!";
                 return true;
             }
         }
@@ -148,15 +146,14 @@ class Board
      */
     function print()
     {
-
-        for ($y=0; $y < count($this->board); $y++)
+        for ($y = 0; $y < $this->height; $y++)
         {
-            for ($x=0; $x<count($this->board[$y]); $x++)
+            for ($x = 0; $x < $this->width; $x++)
             {
-                if ($this->board[$x][$y] === false)
+                if ($this->board[$x][$y] == false)
                 {
                     echo " ";
-                } elseif ($this->board[$x][$y] === true)
+                } elseif ($this->board[$x][$y] == true)
                 {
                     echo "x";
                 }
