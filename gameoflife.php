@@ -10,6 +10,7 @@ require_once "PSR4AutoLoader.php";
 
 $loader = new Psr4Autoloader();
 $loader->addNamespace("Input", __DIR__ . "/Inputs/");
+$loader->addNamespace("Output", __DIR__ . "/Output/");
 $loader->addNamespace("UlrichSG", __DIR__ . "/");
 $loader->addNamespace("GameOfLife", __DIR__ . "/");
 $loader->register();
@@ -19,6 +20,7 @@ use UlrichSG\GetOpt;
 
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
+    array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
     array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
     array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
@@ -29,9 +31,16 @@ $options = new  GetOpt(array(
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
 {
-    $className = "Input\\".basename($input, ".php");
-    $inputClass = new $className();
+    $inputClassName = "Input\\" . basename($input, ".php");
+    $inputClass = new $inputClassName();
     $inputClass->addOptions($options);
+}
+
+foreach (glob(__DIR__ . "/Output/*.php") as $output)
+{
+    $outputClassName = "Output\\" . basename($output, ".php");
+    $outputClass = new $outputClassName();
+    $outputClass->addOptions($options);
 }
 
 $options->parse();
@@ -41,14 +50,15 @@ $width = 10;
 $maxSteps = 0;
 $generation = 0;
 $sleep = 0.2;
-$className = "Input\\Random";
+$inputClassName = "Input\\Random";
+$outputClassName = "Output\\ConsoleOutput";
 
 if ($options->getOption("width"))
 {
     $width = $options->getOption("width");
     if ($options->getOption("width") < 5)
     {
-        echo "Breite ->".$options->getOption("height")."<- ist zu klein.\n\n";
+        echo "Breite ->" . $options->getOption("height") . "<- ist zu klein.\n\n";
         die();
     }
 }
@@ -58,7 +68,7 @@ if ($options->getOption("height"))
     $height = $options->getOption("height");
     if ($options->getOption("height") < 5)
     {
-        echo "Höhe ->".$options->getOption("height")."<- ist zu klein.\n\n";
+        echo "Höhe ->" . $options->getOption("height") . "<- ist zu klein.\n\n";
         die();
     }
 }
@@ -81,13 +91,13 @@ if ($options->getOption("sleepTime"))
 if ($options->getOption("input"))
 {
 
-    if (class_exists("Input\\".$options->getOption("input")))
+    if (class_exists("Input\\" . $options->getOption("input")))
     {
-        $className = "Input\\".$options->getOption("input");
+        $inputClassName = "Input\\" . $options->getOption("input");
     }
     else
     {
-        echo "Input ->".$options->getOption("input").".php<- wurde nicht gefunden!";
+        echo "Input ->" . $options->getOption("input") . ".php<- wurde nicht gefunden!";
         die();
     }
     if ($options->getOption("input") == "GliderGun")
@@ -97,6 +107,20 @@ if ($options->getOption("input"))
             echo "-->Für die Glider Gun sollte mindestens eine Breite von 37 und eine Höhe von 11 angegeben werden!<--\n";
             sleep(3);
         }
+    }
+}
+
+if ($options->getOption("output"))
+{
+
+    if (class_exists("Output\\" . $options->getOption("output")))
+    {
+        $outputClassName = "Output\\" . $options->getOption("output");
+    }
+    else
+    {
+        echo "Output ->" . $options->getOption("output") . ".php<- wurde nicht gefunden!";
+        die();
     }
 }
 
@@ -116,51 +140,32 @@ if ($options->getOption("help"))
     echo "-Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben\n";
     echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung\n";
     echo "\n";
-    echo $options->showHelp();
+    $options->showHelp();
     return;
 }
 
 $board = new Board($width, $height);
-$input = new $className();
+$input = new $inputClassName();
 $input->fillBoard($board, $options);
+
+$output = new $outputClassName();
 
 if ($maxSteps > 0)
 {
-     for ($i = 0; $i <= $maxSteps; $i++)
-     {
-         echo "Aktuelle Generation: ";
-         echo $generation;
-         echo "\n";
-         $generation++;
-
-         for ($strokes = 1; $strokes <= $width; $strokes++)
-         {
-             echo "---";
-         }
-         echo "\n";
-         
-         $board->print();
-         $board->calculateNextStep();
-         usleep($sleep*1000000);
-     }
-     echo "Anzahl von $maxSteps Generationen erreicht.";
+    for ($i = 0; $i <= $maxSteps; $i++)
+    {
+        $output->outputBoard($board, $options);
+        $board->calculateNextStep();
+        usleep($sleep * 1000000);
+    }
+    echo "Anzahl von $maxSteps Generationen erreicht.";
 }
 else
 {
-    do{
-        echo "Aktuelle Generation: ";
-        echo $generation;
-        echo "\n";
-        $generation++;
-
-        for ($strokes = 1; $strokes <= $width; $strokes++)
-        {
-            echo "---";
-        }
-        echo "\n";
-
-        $board->print();
+    do
+    {
+        $output->outputBoard($board, $options);
         $board->calculateNextStep();
-        usleep($sleep*1000000);
-    } while($board->isFinished() == false);
+        usleep($sleep * 1000000);
+    } while ($board->isFinished() == false);
 }

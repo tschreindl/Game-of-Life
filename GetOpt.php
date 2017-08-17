@@ -81,8 +81,10 @@ class GetOpt
             global $argv;
             $arguments = $argv;
             $this->scriptName = array_shift($arguments); // $argv[0] is the script's name
-        } elseif (is_string($arguments)) {
-        	$this->scriptName = $_SERVER['PHP_SELF'];
+        }
+        elseif (is_string($arguments))
+        {
+            $this->scriptName = $_SERVER['PHP_SELF'];
             $arguments = explode(' ', $arguments);
         }
 
@@ -108,21 +110,25 @@ class GetOpt
                 if (strpos($option, '=') === false)
                 {
                     if ($i < $num_args - 1
-                            && mb_substr($arguments[$i + 1], 0, 1) != '-'
-                            && $this->optionHasArgument($option, true)) {
+                        && mb_substr($arguments[$i + 1], 0, 1) != '-'
+                        && $this->optionHasArgument($option, true))
+                    {
                         $value = $arguments[$i + 1];
                         ++$i;
-                    } else
-                        {
+                    }
+                    else
+                    {
                         $value = null;
                     }
-                } else
-                    {
+                }
+                else
+                {
                     list($option, $value) = explode('=', $option, 2);
                 }
                 $this->addOption($option, $value, true);
-            } else
-                {
+            }
+            else
+            {
                 // short option
                 $option = mb_substr($arg, 1);
                 if (mb_strlen($option) > 1)
@@ -132,15 +138,18 @@ class GetOpt
                     {
                         $this->addOption($ch, null, false);
                     }
-                } else
-                    {
+                }
+                else
+                {
                     if ($i < $num_args - 1
-                            && mb_substr($arguments[$i + 1], 0, 1) != '-'
-                            && $this->optionHasArgument($option, false)) {
+                        && mb_substr($arguments[$i + 1], 0, 1) != '-'
+                        && $this->optionHasArgument($option, false))
+                    {
                         $value = $arguments[$i + 1];
                         ++$i;
-                    } else
-                        {
+                    }
+                    else
+                    {
                         $value = null;
                     }
                     $this->addOption($option, $value, false);
@@ -215,7 +224,8 @@ class GetOpt
         foreach ($this->optionList as $name => $option)
         {
             @list($short, $long, $arg, $description) = $option;
-            switch ($arg) {
+            switch ($arg)
+            {
                 case self::NO_ARGUMENT:
                     $arg = '';
                     break;
@@ -226,16 +236,18 @@ class GetOpt
                     $arg = "[<arg>]";
                     break;
             }
-            $short = ($short) ? '-'.$short : '';
-            $long = ($long) ? '--'.$long : '';
+            $short = ($short) ? '-' . $short : '';
+            $long = ($long) ? '--' . $long : '';
             if ($short && $long)
             {
-                $options = $short.', '.$long;
-            } else if ($short)
+                $options = $short . ', ' . $long;
+            }
+            else if ($short)
             {
                 $options = $short;
-            } else
-                {
+            }
+            else
+            {
                 $options = $long;
             }
             $padded = str_pad(sprintf("  %s %s", $options, $arg), $padding);
@@ -280,17 +292,20 @@ class GetOpt
             {
                 $colon = $next_can_be_colon ? " or ':'" : '';
                 throw new \InvalidArgumentException("Option string is not well formed: "
-                        . "expected a letter$colon, found '$ch' at position " . ($i + 1));
+                    . "expected a letter$colon, found '$ch' at position " . ($i + 1));
             }
             if ($i == $eol || $string[$i + 1] != ':')
             {
                 $option_list[] = array($ch, null, self::NO_ARGUMENT);
                 $next_can_be_colon = true;
-            } elseif ($i < $eol - 1 && $string[$i + 2] == ':') {
+            }
+            elseif ($i < $eol - 1 && $string[$i + 2] == ':')
+            {
                 $option_list[] = array($ch, null, self::OPTIONAL_ARGUMENT);
                 $i += 2;
                 $next_can_be_colon = false;
-            } else
+            }
+            else
             {
                 $option_list[] = array($ch, null, self::REQUIRED_ARGUMENT);
                 ++$i;
@@ -328,12 +343,12 @@ class GetOpt
             if (!(is_null($option[0]) || preg_match("/^[a-zA-Z]$/", $option[0])))
             {
                 throw new \InvalidArgumentException("First component of option must be "
-                        . "null or a letter, found '" . $option[0] . "'");
+                    . "null or a letter, found '" . $option[0] . "'");
             }
             if (!(is_null($option[1]) || preg_match("/^[a-zA-Z0-9_-]*$/", $option[1])))
             {
                 throw new \InvalidArgumentException("Second component of option must be "
-                        . "null or an alphanumeric string, found '" . $option[1] . "'");
+                    . "null or an alphanumeric string, found '" . $option[1] . "'");
             }
             if (!mb_strlen($option[0]) && !mb_strlen($option[1]))
             {
@@ -342,11 +357,11 @@ class GetOpt
             if (!in_array($option[2], $valid_argument_specs, true))
             {
                 throw new \InvalidArgumentException("Third component of option must be one of "
-                        . "Getopt::NO_ARGUMENT, Getopt::OPTIONAL_ARGUMENT and Getopt::REQUIRED_ARGUMENT");
+                    . "Getopt::NO_ARGUMENT, Getopt::OPTIONAL_ARGUMENT and Getopt::REQUIRED_ARGUMENT");
             }
             if (!isset($option[3]))
             {
-            	$option[3] = ""; // description
+                $option[3] = ""; // description
             }
         }
         return $options;
@@ -413,7 +428,8 @@ class GetOpt
         foreach ($this->optionList as $option)
         {
             if ((!$is_long && $option[0] == $name)
-                    || ($is_long && $option[1] == $name)) {
+                || ($is_long && $option[1] == $name))
+            {
                 return $option[2] != self::NO_ARGUMENT;
             }
         }
@@ -465,14 +481,14 @@ class GetOpt
      * @return array
      * @internal
      */
-    protected function addParsedOptions (array $options)
+    protected function addParsedOptions(array $options)
     {
         return $this->optionList = array_merge($this->optionList, $options);
     }
 
     /**
      * @param string $str string to split
-     * @param int $l 
+     * @param int $l
      *
      * @return string
      * @internal

@@ -11,6 +11,7 @@
  *
  * @package Inputs
  */
+
 /**
  * Class Psr4Autoloader
  */
@@ -24,7 +25,7 @@ class Psr4Autoloader
         spl_autoload_register(
             function ($_class)
             {
-                foreach ($this->prefixes as $prefix=>$baseDirectory)
+                foreach ($this->prefixes as $prefix => $baseDirectory)
                 {
                     // check whether class uses the namespace prefix
                     $len = strlen($prefix);

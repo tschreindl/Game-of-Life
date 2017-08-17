@@ -7,6 +7,7 @@
  */
 
 namespace Input;
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
@@ -21,7 +22,7 @@ class FileInput extends BaseInput
     /** Path to Input File
      * @var string
      */
-    private $path = __DIR__."\\Example\\";
+    private $path = __DIR__ . "\\Example\\";
     private $fileName = "Glider";            //current size 10x10 field
 
     /**Fills the board from the the txt file
@@ -33,31 +34,31 @@ class FileInput extends BaseInput
     {
         if ($_options->getOption("fileName") != null)
         {
-            if (file_exists($this->path.$_options->getOption("fileName").".txt"))
+            if (file_exists($this->path . $_options->getOption("fileName") . ".txt"))
             {
                 $this->fileName = $_options->getOption("fileName");
             }
             else
             {
-                echo "Datei ".$_options->getOption("fileName").".txt wurde nicht gefunden!\n";
+                echo "Datei " . $_options->getOption("fileName") . ".txt wurde nicht gefunden!\n";
                 die();
             }
         }
 
-        $newPath = $this->path.$this->fileName.".txt";
-        $lines = file($newPath, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+        $newPath = $this->path . $this->fileName . ".txt";
+        $lines = file($newPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         for ($y = 0; $y < count($lines); $y++)
         {
             for ($x = 0; $x < strlen($lines[$y]); $x++)
             {
-             if (substr($lines[$y], $x, 1) == "x")
-             {
-                 $_board->setField($x, $y, true);
-             }
-             else
-             {
-                 $_board->setField($x, $y, false);
-             }
+                if (substr($lines[$y], $x, 1) == "x")
+                {
+                    $_board->setField($x, $y, true);
+                }
+                else
+                {
+                    $_board->setField($x, $y, false);
+                }
             }
         }
     }
