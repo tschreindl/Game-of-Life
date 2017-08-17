@@ -48,8 +48,8 @@ if ($options->getOption("width"))
     $width = $options->getOption("width");
     if ($options->getOption("width") < 5)
     {
-        echo "Breite ->".$options->getOption("height")."<- ist zu klein. Breite wurde auf 5 gesetzt!\n\n";
-        $width = 5;
+        echo "Breite ->".$options->getOption("height")."<- ist zu klein.\n\n";
+        die();
     }
 }
 
@@ -58,8 +58,8 @@ if ($options->getOption("height"))
     $height = $options->getOption("height");
     if ($options->getOption("height") < 5)
     {
-        echo "Höhe ->".$options->getOption("height")."<- ist zu klein. Höhe wurde auf 5 gesetzt!\n\n";
-        $height = 5;
+        echo "Höhe ->".$options->getOption("height")."<- ist zu klein.\n\n";
+        die();
     }
 }
 
@@ -74,7 +74,7 @@ if ($options->getOption("sleepTime"))
     if ($sleep > 5)
     {
         echo "Sleeptime sollte nicht mehr als 5 Sekunden betragen!";
-        $sleep = 5;
+        die();
     }
 }
 
@@ -85,7 +85,12 @@ if ($options->getOption("input"))
     {
         $className = "Input\\".$options->getOption("input");
     }
-    if ($options->getOption("input") == "GliderGun" && $width < 38)
+    else
+    {
+        echo "Input ->".$options->getOption("input").".php<- wurde nicht gefunden!";
+        die();
+    }
+    if ($options->getOption("input") == "GliderGun")
     {
         if ($width < 37 || $height < 11)
         {

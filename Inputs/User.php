@@ -87,7 +87,7 @@ class User extends BaseInput
     /**
      * Adds UserInput specific options to the option list
      *
-     * @param Getopt $_options  Options to which the input specific options are added
+     * @param GetOpt $_options  Options to which the input specific options are added
      */
     public function addOptions($_options)
     {

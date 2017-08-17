@@ -21,7 +21,8 @@ class FileInput extends BaseInput
     /** Path to Input File
      * @var string
      */
-    private $path = __DIR__."\\Example\\GOL.txt";    //current size 10x10 field
+    private $path = __DIR__."\\Example\\";
+    private $fileName = "Glider";            //current size 10x10 field
 
     /**Fills the board from the the txt file
      *
@@ -30,7 +31,21 @@ class FileInput extends BaseInput
      */
     function fillBoard($_board, $_options)
     {
-        $lines = file($this->path, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+        if ($_options->getOption("fileName") != null)
+        {
+            if (file_exists($this->path.$_options->getOption("fileName").".txt"))
+            {
+                $this->fileName = $_options->getOption("fileName");
+            }
+            else
+            {
+                echo "Datei ".$_options->getOption("fileName").".txt wurde nicht gefunden!\n";
+                die();
+            }
+        }
+
+        $newPath = $this->path.$this->fileName.".txt";
+        $lines = file($newPath, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
         for ($y = 0; $y < count($lines); $y++)
         {
             for ($x = 0; $x < strlen($lines[$y]); $x++)
@@ -52,5 +67,8 @@ class FileInput extends BaseInput
      */
     function addOptions($_options)
     {
+        $_options->addOptions(array(
+            array(null, "fileName", GetOpt::REQUIRED_ARGUMENT, "Der Dateiname für die Input Datei.")
+        ));
     }
 }
