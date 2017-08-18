@@ -152,6 +152,7 @@ $output = new $outputClassName();
 
 if ($maxSteps > 0)
 {
+    $output->startOutput();
     for ($i = 0; $i <= $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
@@ -162,10 +163,12 @@ if ($maxSteps > 0)
 }
 else
 {
+    $output->startOutput();
     do
     {
         $output->outputBoard($board, $options);
         $board->calculateNextStep();
         usleep($sleep * 1000000);
     } while ($board->isFinished() == false);
+
 }

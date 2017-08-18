@@ -22,6 +22,11 @@ class ConsoleOutput extends BaseOutput
     private $echo1 = "─────┐\n";
     private $echo2 = "─────┘\n";
 
+    function startOutput($_options)
+    {
+        echo "Ausgabe in Konsole erfolgt...\n";
+    }
+
     function outputBoard($_board, $_options)
     {
         if ($_options->getOption("cmd") != null)
@@ -50,13 +55,12 @@ class ConsoleOutput extends BaseOutput
 
                 if ($_board->board[$x][$y] == false)
                 {
-                    echo " ";
+                    echo "   ";
                 }
                 elseif ($_board->board[$x][$y] == true)
                 {
-                    echo "¤";
+                    echo " ¤ ";
                 }
-                echo "  ";
             }
             echo "│\n";
         }
