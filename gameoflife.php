@@ -37,7 +37,7 @@ foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
     $inputClass->addOptions($options);
 }
 
-foreach (glob(__DIR__ . "/Output/*.php") as $output)
+foreach (glob(__DIR__ . "/Output/*Output.php") as $output)
 {
     $outputClassName = "Output\\" . basename($output, ".php");
     $outputClass = new $outputClassName();
@@ -153,7 +153,7 @@ $output = new $outputClassName();
 
 if ($maxSteps > 0)
 {
-    $output->startOutput();
+    $output->startOutput($options);
     for ($i = 0; $i < $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
@@ -166,7 +166,7 @@ if ($maxSteps > 0)
 }
 else
 {
-    $output->startOutput();
+    $output->startOutput($options);
 
     do
     {
