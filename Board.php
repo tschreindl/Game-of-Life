@@ -17,6 +17,7 @@ class Board
     public $height;
     public $board = array();
     private $historyOfBoards = array();
+    private $curGameStep = 0;
 
     function __construct($_width, $_height)
     {
@@ -63,6 +64,7 @@ class Board
      */
     function calculateNextStep()
     {
+        $this->curGameStep ++;
         $this->historyOfBoards[] = $this->board;
         $nextBoard = $this->initEmpty();
         for ($y = 0; $y < $this->height; $y++)
@@ -169,4 +171,22 @@ class Board
         }
         echo "\n";**/
     }
+
+    /**
+     * @return int
+     */
+    public function curGameStep(): int
+    {
+        return $this->curGameStep;
+    }
+
+    /**
+     * @param int $curGameStep
+     */
+    public function setCurGameStep(int $_curGameStep)
+    {
+        $this->curGameStep = $_curGameStep;
+    }
+
+
 }
