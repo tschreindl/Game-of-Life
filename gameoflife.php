@@ -13,6 +13,7 @@ $loader->addNamespace("Input", __DIR__ . "/Inputs/");
 $loader->addNamespace("Output", __DIR__ . "/Output/");
 $loader->addNamespace("UlrichSG", __DIR__ . "/");
 $loader->addNamespace("GameOfLife", __DIR__ . "/");
+$loader->addNamespace("GifCreator", __DIR__ . "/");
 $loader->register();
 
 use GameOfLife\Board;
@@ -153,17 +154,20 @@ $output = new $outputClassName();
 if ($maxSteps > 0)
 {
     $output->startOutput();
-    for ($i = 0; $i <= $maxSteps; $i++)
+    for ($i = 0; $i < $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
         $board->calculateNextStep();
         usleep($sleep * 1000000);
     }
-    echo "Anzahl von $maxSteps Generationen erreicht.";
+
+    $output->finishOutput();
+    echo "\nAnzahl von $maxSteps Generationen erreicht.";
 }
 else
 {
     $output->startOutput();
+
     do
     {
         $output->outputBoard($board, $options);
@@ -171,4 +175,5 @@ else
         usleep($sleep * 1000000);
     } while ($board->isFinished() == false);
 
+    $output->finishOutput();
 }

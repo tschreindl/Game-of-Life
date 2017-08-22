@@ -17,7 +17,7 @@ namespace Output;
 class PNGOutput
 {
     private $generation = 0;
-    private $path;
+    protected $path;
 
     function startOutput()
     {
@@ -25,7 +25,13 @@ class PNGOutput
         $this->path = __DIR__ . "\\PNG\\" . round(microtime(true));
     }
 
-    function outputBoard($_board)
+    /**
+     * Creates and returns an image of the current board
+     *
+     * @param \GameOfLife\Board $_board     Current board
+     * @return resource                     Image
+     */
+    function createImage($_board)
     {
         $sizeX = $_board->width * 21 + 2;
         $sizeY = $_board->height * 21 + 2;
@@ -87,6 +93,14 @@ class PNGOutput
             $charPosX = 9;
             $charPosY = $charPosY + 21;
         }
+
+        return $image;
+    }
+
+    function outputBoard($_board)
+    {
+        $image = $this->createImage($_board);
+
         if (! file_exists($this->path)) mkdir($this->path);
         imagepng($image, $this->path . "\\" . $this->generation . ".png");
         imagedestroy($image);

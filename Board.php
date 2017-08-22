@@ -134,7 +134,7 @@ class Board
         {
             if ($this->board == $oldBoard)
             {
-                echo "Keine weiteren Generationen mehr oder wiederholende Generationen!";
+                echo "\nKeine weiteren Generationen mehr oder wiederholende Generationen!";
                 return true;
             }
         }
