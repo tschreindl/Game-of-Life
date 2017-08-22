@@ -20,8 +20,8 @@ class User extends BaseInput
     /**
      * Fills the board with cells that the user inputs
      *
-     * @param Board $_board     The Board
-     * @param Getopt $_options  All options (including input specific options)
+     * @param Board $_board The Board
+     * @param Getopt $_options All options (including input specific options)
      */
     public function fillBoard($_board, $_options)
     {
@@ -71,7 +71,7 @@ class User extends BaseInput
                         {
                             $currentCellState = $_board->board[$inputX - 1][$inputY - 1];
 
-                            $_board->setField($inputX - 1, $inputY - 1, ! $currentCellState);
+                            $_board->setField($inputX - 1, $inputY - 1, !$currentCellState);
 
                             echo "Successfully ";
                             if ($currentCellState == true) echo "unset ";
@@ -87,7 +87,7 @@ class User extends BaseInput
     /**
      * Adds UserInput specific options to the option list
      *
-     * @param GetOpt $_options  Options to which the input specific options are added
+     * @param GetOpt $_options Options to which the input specific options are added
      */
     public function addOptions($_options)
     {

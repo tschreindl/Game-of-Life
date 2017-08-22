@@ -16,7 +16,6 @@ use UlrichSG\GetOpt;
  *
  * @package GameOfLife\Inputs
  */
-
 class Random extends BaseInput
 {
     /**Fills the board random and set available options
@@ -34,19 +33,22 @@ class Random extends BaseInput
             if ($_options->getOption("fillingLVL") < 1 || $_options->getOption("fillingLVL") > 100)
             {
                 echo "Der Wert darf nur zwischen 1 und 100 liegen\n";
-                echo "Zufälligen Füllungsgrad von ".$percent." % ausgewählt\n";
+                echo "Zufälligen Füllungsgrad von " . $percent . " % ausgewählt\n";
             }
             else
-                $percent = $fillingLVL;
-                echo "Füllgrad von ~".$percent."%\n";
-        }
-        for ($x=0; $x < $_board->width; $x++)
-        {
-            for ($y=0; $y < $_board->height; $y++)
             {
-                $rand=rand( 1, 100);
-                if ($rand <= $percent) $_board->setField($x,$y,true);
-                if ($rand > $percent) $_board->setField($x,$y,false);
+                $percent = $fillingLVL;
+                echo "Füllgrad von ~" . $percent . "%\n";
+            }
+
+        }
+        for ($x = 0; $x < $_board->width; $x++)
+        {
+            for ($y = 0; $y < $_board->height; $y++)
+            {
+                $rand = rand(1, 100);
+                if ($rand <= $percent) $_board->setField($x, $y, true);
+                if ($rand > $percent) $_board->setField($x, $y, false);
             }
         }
     }

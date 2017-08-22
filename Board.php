@@ -17,11 +17,12 @@ class Board
     public $height;
     public $board = array();
     private $historyOfBoards = array();
+    private $curGameStep = 0;
 
     function __construct($_width, $_height)
     {
-        $this->height=$_height;
-        $this->width=$_width;
+        $this->height = $_height;
+        $this->width = $_width;
         $this->board = $this->initEmpty();
     }
 
@@ -63,13 +64,14 @@ class Board
      */
     function calculateNextStep()
     {
+        $this->curGameStep ++;
         $this->historyOfBoards[] = $this->board;
         $nextBoard = $this->initEmpty();
         for ($y = 0; $y < $this->height; $y++)
         {
             for ($x = 0; $x < $this->width; $x++)
             {
-                $numAliveNeighbors=$this->checkNeighbour($x,$y);
+                $numAliveNeighbors = $this->checkNeighbour($x, $y);
                 $currentCellState = $this->board[$x][$y];
                 $newCellState = $currentCellState;
                 if ($this->board[$x][$y] == false && $numAliveNeighbors == 3)
@@ -82,7 +84,7 @@ class Board
                 }
                 elseif ($this->board[$x][$y] == true && $numAliveNeighbors > 3)
                 {
-                   $newCellState = false;
+                    $newCellState = false;
                 }
                 $nextBoard[$x][$y] = $newCellState;
             }
@@ -102,11 +104,11 @@ class Board
     private function checkNeighbour($_x, $_y)
     {
         $aliveNeighbours = 0;
-        for ($x = $_x-1; $x <= $_x+1; $x++)
+        for ($x = $_x - 1; $x <= $_x + 1; $x++)
         {
-            for ($y = $_y-1; $y <= $_y+1; $y++)
+            for ($y = $_y - 1; $y <= $_y + 1; $y++)
             {
-                if ($y>=0 && $y<$this->height && $x>=0 && $x<$this->width)
+                if ($y >= 0 && $y < $this->height && $x >= 0 && $x < $this->width)
                 {
                     if ($x !== $_x || $y !== $_y)
                     {
@@ -134,7 +136,7 @@ class Board
         {
             if ($this->board == $oldBoard)
             {
-                echo "Keine weiteren Generationen mehr oder wiederholende Generationen!";
+                echo "\nKeine weiteren Generationen mehr oder wiederholende Generationen!\n";
                 return true;
             }
         }
@@ -146,14 +148,15 @@ class Board
      */
     function print()
     {
-        for ($y = 0; $y < $this->height; $y++)
+        /**for ($y = 0; $y < $this->height; $y++)
         {
             for ($x = 0; $x < $this->width; $x++)
             {
                 if ($this->board[$x][$y] == false)
                 {
                     echo " ";
-                } elseif ($this->board[$x][$y] == true)
+                }
+                elseif ($this->board[$x][$y] == true)
                 {
                     echo "x";
                 }
@@ -166,6 +169,24 @@ class Board
         {
             echo "---";
         }
-        echo "\n";
-        }
+        echo "\n";**/
+    }
+
+    /**
+     * @return int
+     */
+    public function curGameStep(): int
+    {
+        return $this->curGameStep;
+    }
+
+    /**
+     * @param int $curGameStep
+     */
+    public function setCurGameStep(int $_curGameStep)
+    {
+        $this->curGameStep = $_curGameStep;
+    }
+
+
 }
