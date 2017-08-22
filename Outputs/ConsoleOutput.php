@@ -8,6 +8,7 @@
 
 namespace Output;
 
+use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 
@@ -27,6 +28,10 @@ class ConsoleOutput extends BaseOutput
         echo "Ausgabe in Konsole erfolgt...\n";
     }
 
+    /**
+     * @param Board $_board
+     * @param GetOpt $_options
+     */
     function outputBoard($_board, $_options)
     {
         if ($_options->getOption("cmd") != null)
@@ -73,6 +78,9 @@ class ConsoleOutput extends BaseOutput
         echo $this->echo2;
     }
 
+    /**
+     * @param GetOpt $_options
+     */
     function addOptions($_options)
     {
         $_options->addOptions(array(
