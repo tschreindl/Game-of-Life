@@ -74,7 +74,7 @@ class GifOutput extends BaseOutput
     /**
      * Collects the gif frames in an array
      *
-     * @param \GameOfLife\Board $_board     Current game board
+     * @param \GameOfLife\Board $_board Current game board
      * @param GetOpt $_options
      */
     public function outputBoard($_board, $_options)
@@ -90,7 +90,7 @@ class GifOutput extends BaseOutput
      */
     public function finishOutput()
     {
-        if (! file_exists($this->path)) mkdir($this->path, 0777, true);
+        if (!file_exists($this->path)) mkdir($this->path, 0777, true);
 
         $durations = array();
         for ($i = 0; $i < count($this->frames) - 1; $i++)
@@ -103,21 +103,23 @@ class GifOutput extends BaseOutput
         $gif = new GifCreator();
         $gif->create($this->frames, $durations, 0);
 
-        file_put_contents($this->path . "/test.gif", $gif->getGif());
+        file_put_contents($this->path . "/Gif_1.gif", $gif->getGif());
+
+        echo "GIF Datei wurde erzeugt.\n";
     }
 
     /**
      * Adds GifOutput's class specific options to the option list
      *
-     * @param \UlrichSG\GetOpt $_options    Option List
+     * @param \UlrichSG\GetOpt $_options Option List
      */
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "Die Größe der lebenden Zellen."),
-            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B"),
-            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "Die Dauer der einzelnen Frames.")
+            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "Die Größe der lebenden Zellen. Standard: 40"),
+            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,255 (Schwarz)"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 0,0,0 (Weiß)"),
+            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "Die Dauer der einzelnen Frames. Standard: 100")
         ));
     }
 }

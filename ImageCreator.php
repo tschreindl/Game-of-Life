@@ -33,9 +33,9 @@ class ImageCreator
         $sizeY = $_board->height * ($this->cellSize + 2) + 2;
 
         $image = imagecreate($sizeX, $sizeY);
-        imagecolorallocate($image, 255, 255, 255);
+        imagecolorallocate($image, $this->backgroundColor[0], $this->backgroundColor[1], $this->backgroundColor[2]);
         $lineColor = imagecolorallocate($image, 100, 100, 100);
-        $charColor = imagecolorallocate($image, 0, 0, 0);
+        $charColor = imagecolorallocate($image, $this->cellColor[0], $this->cellColor[1], $this->cellColor[2]);
 
         imageline($image, 0, 0, $sizeX, 0, $lineColor);
         imageline($image, 0, 1, $sizeX, 1, $lineColor);

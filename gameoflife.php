@@ -6,7 +6,10 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+ini_set("memory_limit", "1024M");
+
 require_once "PSR4AutoLoader.php";
+require_once "ImageCreator.php";
 
 $loader = new Psr4Autoloader();
 $loader->addNamespace("Input", __DIR__ . "/Inputs/");

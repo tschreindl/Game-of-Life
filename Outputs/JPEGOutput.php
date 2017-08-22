@@ -11,11 +11,11 @@ namespace Output;
 use UlrichSG\GetOpt;
 
 /**
- * Class PNGOutput
+ * Class JPGOutput
  *
  * @package Output
  */
-class PNGOutput extends BaseOutput
+class JPEGOutput extends BaseOutput
 {
     private $generation = 0;
     private $imageCreator;
@@ -26,13 +26,13 @@ class PNGOutput extends BaseOutput
      */
     function startOutput($_options)
     {
-        echo "PNG Dateien werden erzeugt. Bitte warten...\n";
+        echo "JPEG Dateien werden erzeugt. Bitte warten...\n";
 
         $cellSize = 40;
         $cellColor = array(0, 0, 0);
         $bkColor = array(255, 255, 255);
 
-        $this->path = __DIR__ . "\\PNG\\" . round(microtime(true));
+        $this->path = __DIR__ . "\\JPEG\\" . round(microtime(true));
 
         if ($_options->getOption("cellSize") != null)
         {
@@ -62,7 +62,7 @@ class PNGOutput extends BaseOutput
     /**
      * Creates and returns an image of the current board
      *
-     * @param GameOfLife/Board $_board
+     * @param GameOfLife /Board $_board
      * @param GetOpt $_options
      */
 
@@ -71,14 +71,14 @@ class PNGOutput extends BaseOutput
         echo "\rAktuelle Generation: " . $this->generation;
         $image = $this->imageCreator->createImage($_board);
         if (!file_exists($this->path)) mkdir($this->path, 0777, true);
-        imagepng($image, $this->path . "\\" . $this->generation . ".png");
+        imagejpeg($image, $this->path . "\\" . $this->generation . ".jpeg");
         imagedestroy($image);
         $this->generation++;
     }
 
     function finishOutput()
     {
-        echo "PNG Dateien wurden erzeugt.\n";
+        echo "JPEG Dateien wurden erzeugt.\n";
     }
 
     /**
