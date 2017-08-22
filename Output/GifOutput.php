@@ -20,18 +20,17 @@ use GifCreator\GifCreator;
  *
  * @package Output
  */
-class GifOutput extends BaseOutput
+class GifOutput extends PNGOutput
 {
     private $frames = array();
-    private $path;
 
     /**
      * Initializes the output path of the object
      */
-    public function startOutput($_options)
+    public function startOutput()
     {
         echo "Gif Datei wird erzeugt. Bitte warten...\n";
-        $this->path = __DIR__ . "/Gif/";
+        $this->path = __DIR__ . "\\Gif\\" . round(microtime(true));
     }
 
     /**
@@ -39,10 +38,9 @@ class GifOutput extends BaseOutput
      *
      * @param \GameOfLife\Board $_board     Current game board
      */
-    public function outputBoard($_board, $_options)
+    public function outputBoard($_board)
     {
-        $imageCreator = new ImageCreator( $_board, 100);
-        $frame = $imageCreator->createImage($_board, "gif");
+        $frame = $this->createImage($_board);
         $this->frames[] = $frame;
 
         echo "\r" . count($this->frames) . " Generationen berechnet";
@@ -66,16 +64,7 @@ class GifOutput extends BaseOutput
         $gif = new GifCreator();
         $gif->create($this->frames, $durations, 0);
 
-        file_put_contents($this->path . round(microtime(true)) . ".gif", $gif->getGif());
-
-        $tmpDirectory = basename($this->frames[0]);
-
-        foreach ($this->frames as $frame)
-        {
-            unlink($frame);
-        }
-
-        rmdir(__DIR__ . "/Gif/Tmp");
+        file_put_contents($this->path . "/test.gif", $gif->getGif());
     }
 
     /**
