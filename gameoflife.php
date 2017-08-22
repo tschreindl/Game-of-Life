@@ -10,7 +10,7 @@ require_once "PSR4AutoLoader.php";
 
 $loader = new Psr4Autoloader();
 $loader->addNamespace("Input", __DIR__ . "/Inputs/");
-$loader->addNamespace("Output", __DIR__ . "/Output/");
+$loader->addNamespace("Output", __DIR__ . "/Outputs/");
 $loader->addNamespace("UlrichSG", __DIR__ . "/");
 $loader->addNamespace("GameOfLife", __DIR__ . "/");
 $loader->addNamespace("GifCreator", __DIR__ . "/");
@@ -37,7 +37,7 @@ foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
     $inputClass->addOptions($options);
 }
 
-foreach (glob(__DIR__ . "/Output/*.php") as $output)
+foreach (glob(__DIR__ . "/Outputs/*.php") as $output)
 {
     $outputClassName = "Output\\" . basename($output, ".php");
     $outputClass = new $outputClassName();
@@ -46,8 +46,8 @@ foreach (glob(__DIR__ . "/Output/*.php") as $output)
 
 $options->parse();
 
-$height = 10;
-$width = 10;
+$height = 20;
+$width = 20;
 $maxSteps = 0;
 $generation = 0;
 $sleep = 0.2;
@@ -113,7 +113,6 @@ if ($options->getOption("input"))
 
 if ($options->getOption("output"))
 {
-
     if (class_exists("Output\\" . $options->getOption("output")))
     {
         $outputClassName = "Output\\" . $options->getOption("output");
@@ -153,7 +152,7 @@ $output = new $outputClassName();
 
 if ($maxSteps > 0)
 {
-    $output->startOutput();
+    $output->startOutput($options);
     for ($i = 0; $i < $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
@@ -166,7 +165,7 @@ if ($maxSteps > 0)
 }
 else
 {
-    $output->startOutput();
+    $output->startOutput($options);
 
     do
     {
