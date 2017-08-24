@@ -26,7 +26,6 @@ class Board
         $this->board = $this->initEmpty();
     }
 
-
     /**
      * Initialize an empty field.
      * Sets every entry of "array" board to false.
@@ -58,13 +57,12 @@ class Board
         $this->board[$_x][$_y] = $_value;
     }
 
-
     /**
      * Calculates the next generation
      */
     function calculateNextStep()
     {
-        $this->curGameStep ++;
+        $this->curGameStep++;
         $this->historyOfBoards[] = $this->board;
         $nextBoard = $this->initEmpty();
         for ($y = 0; $y < $this->height; $y++)
@@ -142,51 +140,4 @@ class Board
         }
         return false;
     }
-
-    /**
-     * Prints the next field out with echo
-     */
-    function print()
-    {
-        /**for ($y = 0; $y < $this->height; $y++)
-        {
-            for ($x = 0; $x < $this->width; $x++)
-            {
-                if ($this->board[$x][$y] == false)
-                {
-                    echo " ";
-                }
-                elseif ($this->board[$x][$y] == true)
-                {
-                    echo "x";
-                }
-                echo "  ";
-            }
-            echo "|\n";
-        }
-
-        for ($strokes = 1; $strokes <= $this->width; $strokes++)
-        {
-            echo "---";
-        }
-        echo "\n";**/
-    }
-
-    /**
-     * @return int
-     */
-    public function curGameStep(): int
-    {
-        return $this->curGameStep;
-    }
-
-    /**
-     * @param int $curGameStep
-     */
-    public function setCurGameStep(int $_curGameStep)
-    {
-        $this->curGameStep = $_curGameStep;
-    }
-
-
 }

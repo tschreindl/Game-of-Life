@@ -17,8 +17,11 @@ use UlrichSG\GetOpt;
  */
 class JPEGOutput extends BaseOutput
 {
-    private $generation = 0;
+    /**
+     * @var ImageCreator
+     */
     private $imageCreator;
+    private $generation = 1;
     protected $path;
 
     /**
@@ -29,8 +32,8 @@ class JPEGOutput extends BaseOutput
         echo "JPEG Dateien werden erzeugt. Bitte warten...\n";
 
         $cellSize = 40;
-        $cellColor = array(0, 0, 0);
-        $bkColor = array(255, 255, 255);
+        $cellColor = array(255, 255, 0);
+        $bkColor = array(135, 135, 135);
 
         $this->path = __DIR__ . "\\JPEG\\" . round(microtime(true));
 
@@ -57,6 +60,7 @@ class JPEGOutput extends BaseOutput
             }
         }
         $this->imageCreator = new ImageCreator($cellSize, $cellColor, $bkColor);
+        if (!file_exists($this->path)) mkdir($this->path, 0777, true);
     }
 
     /**
@@ -65,12 +69,10 @@ class JPEGOutput extends BaseOutput
      * @param GameOfLife /Board $_board
      * @param GetOpt $_options
      */
-
     function outputBoard($_board, $_options)
     {
         echo "\rAktuelle Generation: " . $this->generation;
         $image = $this->imageCreator->createImage($_board);
-        if (!file_exists($this->path)) mkdir($this->path, 0777, true);
         imagejpeg($image, $this->path . "\\" . $this->generation . ".jpeg");
         imagedestroy($image);
         $this->generation++;
@@ -78,7 +80,7 @@ class JPEGOutput extends BaseOutput
 
     function finishOutput()
     {
-        echo "JPEG Dateien wurden erzeugt.\n";
+        echo "\nJPEG Dateien wurden erzeugt.\n";
     }
 
     /**
@@ -88,8 +90,8 @@ class JPEGOutput extends BaseOutput
     {
         $_options->addOptions(array(
             array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "Die Größe der lebenden Zellen. Standard: 40"),
-            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,255 (Schwarz)"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 0,0,0 (Weiß)")
+            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)")
         ));
     }
 }

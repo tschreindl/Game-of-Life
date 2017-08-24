@@ -202,8 +202,6 @@ class GifCreator
      */
     public function gifAddHeader()
     {
-        $cmap = 0;
-
         if (ord($this->frameSources[0]{10}) & 0x80)
         {
 

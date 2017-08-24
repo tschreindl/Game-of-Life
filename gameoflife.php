@@ -28,7 +28,7 @@ $options = new  GetOpt(array(
     array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
     array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
-    array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.2"),
+    array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.0"),
     array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
     array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an."),
 ));
@@ -53,9 +53,9 @@ $height = 20;
 $width = 20;
 $maxSteps = 0;
 $generation = 0;
-$sleep = 0.2;
-$inputClassName = "Input\\Random";
-$outputClassName = "Output\\ConsoleOutput";
+$sleep = 0.0;
+$inputClassName = null;
+$outputClassName = null;
 
 if ($options->getOption("width"))
 {
@@ -147,11 +147,26 @@ if ($options->getOption("help"))
     return;
 }
 
-$board = new Board($width, $height);
-$input = new $inputClassName();
-$input->fillBoard($board, $options);
+if ($inputClassName != null)
+{
+    $input = new $inputClassName();
+}
+else
+{
+    $input = new Input\Random();
+}
 
-$output = new $outputClassName();
+if ($outputClassName != null)
+{
+    $output = new $outputClassName();
+}
+else
+{
+    $output = new Output\ConsoleOutput();
+}
+
+$board = new Board($width, $height);
+$input->fillBoard($board, $options);
 
 if ($maxSteps > 0)
 {

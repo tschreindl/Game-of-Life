@@ -37,7 +37,8 @@ class User extends BaseInput
                 echo "---";
             }
             echo "\n";
-            $_board->print();
+
+            $this->print($_board);
 
             // command prompt
             echo "\nEnter the coordinates of the cell that you want to set/unset";
@@ -91,6 +92,31 @@ class User extends BaseInput
      */
     public function addOptions($_options)
     {
+    }
 
+    private function print($_board)
+    {
+        for ($y = 0; $y < $_board->height; $y++)
+        {
+            for ($x = 0; $x < $_board->width; $x++)
+            {
+                if ($_board->board[$x][$y] == false)
+                {
+                    echo " ";
+                }
+                elseif ($_board->board[$x][$y] == true)
+                {
+                    echo "x";
+                }
+                echo "  ";
+            }
+            echo "|\n";
+        }
+
+        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        {
+            echo "---";
+        }
+        echo "\n";
     }
 }
