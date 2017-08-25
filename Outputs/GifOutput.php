@@ -90,8 +90,9 @@ class GifOutput extends BaseOutput
 
     /**
      * Creates and saves the gif file
+     * @param $_options
      */
-    public function finishOutput()
+    public function finishOutput($_options)
     {
         if (!file_exists($this->path)) mkdir($this->path, 0777, true);
 
@@ -119,10 +120,10 @@ class GifOutput extends BaseOutput
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "Die Größe der lebenden Zellen. Standard: 40"),
-            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)"),
-            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "Die Dauer der einzelnen Frames. Standard: 10")
+            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Größe der lebenden Zellen. Standard: 40"),
+            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)"),
+            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Dauer der einzelnen Frames. Standard: 10")
         ));
     }
 }

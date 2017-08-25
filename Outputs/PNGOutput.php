@@ -79,7 +79,7 @@ class PNGOutput extends BaseOutput
         $this->generation++;
     }
 
-    function finishOutput()
+    function finishOutput($_options)
     {
         echo "\nPNG Dateien wurden erzeugt.\n";
     }
@@ -90,9 +90,9 @@ class PNGOutput extends BaseOutput
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "Die Größe der lebenden Zellen. Standard: 40"),
-            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)")
+            array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "PNGOutput - Die Größe der lebenden Zellen. Standard: 40"),
+            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "PNGOutput - Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "PNGOutput - Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)")
         ));
     }
 }

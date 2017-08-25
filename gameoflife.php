@@ -60,9 +60,9 @@ $outputClassName = null;
 if ($options->getOption("width"))
 {
     $width = $options->getOption("width");
-    if ($options->getOption("width") < 5)
+    if ($width < 5)
     {
-        echo "Breite ->" . $options->getOption("height") . "<- ist zu klein.\n\n";
+        echo "Breite ->" . $width . "<- ist zu klein.\n\n";
         die();
     }
 }
@@ -70,16 +70,27 @@ if ($options->getOption("width"))
 if ($options->getOption("height"))
 {
     $height = $options->getOption("height");
-    if ($options->getOption("height") < 5)
+    if ($height < 5)
     {
-        echo "Höhe ->" . $options->getOption("height") . "<- ist zu klein.\n\n";
+        echo "Höhe ->" . $height . "<- ist zu klein.\n\n";
         die();
     }
+}
+
+if ($width > 80 || $height > 80)
+{
+    echo "Achtung! Ein großes Feld verbraucht viel RAM!";
+    sleep(2);
 }
 
 if ($options->getOption("maxSteps"))
 {
     $maxSteps = $options->getOption("maxSteps");
+    if ($maxSteps >= 10000)
+    {
+        echo "Maximale Anzahl von Schritten ist 9999!";
+        die();
+    }
 }
 
 if ($options->getOption("sleepTime"))
@@ -177,9 +188,8 @@ if ($maxSteps > 0)
         $board->calculateNextStep();
         usleep($sleep * 1000000);
     }
-
-    $output->finishOutput();
     echo "\nAnzahl von $maxSteps Generationen erreicht.";
+    $output->finishOutput($options);
 }
 else
 {
@@ -192,5 +202,5 @@ else
         usleep($sleep * 1000000);
     } while ($board->isFinished() == false);
 
-    $output->finishOutput();
+    $output->finishOutput($options);
 }

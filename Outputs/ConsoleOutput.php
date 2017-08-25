@@ -84,7 +84,7 @@ class ConsoleOutput extends BaseOutput
     function addOptions($_options)
     {
         $_options->addOptions(array(
-            array(null, "cmd", GetOpt::NO_ARGUMENT, "Wenn die Ausgabe per CMD Fenster oder Terminal erfolgt.")
+            array(null, "cmd", GetOpt::NO_ARGUMENT, "ConsoleOutput - Wenn die Ausgabe per CMD Fenster oder Terminal erfolgt.")
         ));
     }
 }

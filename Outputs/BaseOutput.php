@@ -23,7 +23,7 @@ class BaseOutput
     {
     }
 
-    function finishOutput()
+    function finishOutput($_options)
     {
     }
 
