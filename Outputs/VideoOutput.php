@@ -86,12 +86,15 @@ class VideoOutput extends BaseOutput
      */
     function finishOutput($_options)
     {
-        echo "\nVideo Datei wird erzeugt. Geschätze Dauer: ~" . $this->calculateDuration() . "Sek. Bitte warten...";
-        exec(__DIR__ . "/../ffmpeg.exe -loglevel fatal -i " . $this->path . "%04d.png " . $this->path . "/../GOL_NS.avi", $options, $return);
+        echo "\nVideo Datei wird erzeugt. Bitte warten...\n";
+        echo $this->generation - 1 . " Frames werden verarbeitet...\n\n";
+        exec(__DIR__ . "/../ffmpeg.exe -stats -loglevel fatal -i " . $this->path . "%04d.png -c:v libxvid -q:v 1 " . $this->path . "/../GOL_NS.avi", $options, $return);
 
-        if ($_options->getOption("noSound") == null)
+        if ($_options->getOption("noSound") == null && $return == 0)
         {
-            exec(__DIR__ . "/../ffmpeg.exe -y -loglevel fatal -i " . $this->path . "/../GOL_NS.avi -i loop.mp3 -shortest " . $this->path . "/../GOL.avi", $options, $return);
+            echo "Erfolgreich\n";
+            echo "Musik wird eingefügt...\n";
+            exec(__DIR__ . "/../ffmpeg.exe -y -stats -loglevel fatal -i " . $this->path . "/../GOL_NS.avi -i loop.mp3 -codec copy -shortest " . $this->path . "/../GOL.avi", $options, $return);
             unlink($this->path . "/../GOL_NS.avi");
         }
 
@@ -132,57 +135,5 @@ class VideoOutput extends BaseOutput
             array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
             array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)")
         ));
-    }
-
-    function calculateDuration()
-    {
-        $multiplier = 0.02;
-        $imageSize = getimagesize($this->path . "0001.png");
-        /**
-        if ($imageSize[0] < 422 && $imageSize < 422) //10x10
-        {
-            $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 842 && $imageSize < 842) //20x20
-        {
-            $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 1262 && $imageSize < 1262) //30x30
-        {
-            $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 1682 && $imageSize < 1682) //40x40
-        {
-            $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 2102 && $imageSize < 2102) //50x50
-        {
-            $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 2522 && $imageSize < 2522)  //60x60
-        {
-        $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 2942 && $imageSize < 2942)  //70x70
-        {
-        $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 3362 && $imageSize < 3362) //80x80
-        {
-        $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 3782 && $imageSize < 3782) //90x90
-        {
-        $multiplier = 0;
-        }
-        elseif ($imageSize[0] < 4202 && $imageSize < 4202) //100x100
-        {
-        $multiplier = 0;
-        }
-        **/
-        //print_r($imageSize);
-        $duration = round($this->generation * $multiplier);
-
-        return $duration;
     }
 }

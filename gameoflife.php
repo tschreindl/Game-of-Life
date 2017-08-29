@@ -6,7 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-ini_set("memory_limit", "1024M");
+ini_set("memory_limit", "2048M");
 
 require_once "PSR4AutoLoader.php";
 require_once "ImageCreator.php";
@@ -79,7 +79,7 @@ if ($options->getOption("height"))
 
 if ($width > 80 || $height > 80)
 {
-    echo "Achtung! Ein großes Feld verbraucht viel RAM!";
+    echo "Achtung! Ein großes Feld verbraucht viel RAM!\n";
     sleep(2);
 }
 
