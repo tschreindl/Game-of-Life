@@ -8,6 +8,8 @@
 
 namespace Output;
 
+require_once "BaseOutput.php";
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
@@ -57,7 +59,6 @@ class ConsoleOutput extends BaseOutput
             echo "│";
             for ($x = 0; $x < $_board->width; $x++)
             {
-
                 if ($_board->board[$x][$y] == false)
                 {
                     echo "   ";

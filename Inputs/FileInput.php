@@ -8,6 +8,8 @@
 
 namespace Input;
 
+require_once "BaseInput.php";
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 

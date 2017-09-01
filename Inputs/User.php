@@ -8,6 +8,8 @@
 
 namespace Input;
 
+require_once "BaseInput.php";
+
 use UlrichSG\Getopt;
 use GameOfLife\Board;
 
@@ -94,7 +96,7 @@ class User extends BaseInput
     {
     }
 
-    private function print($_board)
+    public function print($_board)
     {
         for ($y = 0; $y < $_board->height; $y++)
         {
@@ -102,13 +104,12 @@ class User extends BaseInput
             {
                 if ($_board->board[$x][$y] == false)
                 {
-                    echo " ";
+                    echo "   ";
                 }
                 elseif ($_board->board[$x][$y] == true)
                 {
-                    echo "x";
+                    echo " x ";
                 }
-                echo "  ";
             }
             echo "|\n";
         }
