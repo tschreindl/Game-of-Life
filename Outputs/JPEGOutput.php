@@ -8,6 +8,9 @@
 
 namespace Output;
 
+require_once "BaseOutput.php";
+require_once __DIR__."/../ImageCreator.php";
+
 use UlrichSG\GetOpt;
 
 /**
@@ -22,8 +25,7 @@ class JPEGOutput extends BaseOutput
      */
     private $imageCreator;
     private $generation = 1;
-    protected $path;
-
+    public $path;
     /**
      * @param GetOpt $_options
      */

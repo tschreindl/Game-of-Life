@@ -10,12 +10,47 @@ use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../Inputs/User.php";
 require_once __DIR__ . "/../Board.php";
+require_once "GetOptMock.php";
 
 /**
  * Class UserTest
  */
 class UserTest extends TestCase
 {
+    function testFillBoard()
+    {
+        $board = new \GameOfLife\Board(20, 20);
+        $user = new \Input\User();
+        $options = new GetOptMock();
+        $this->assertTrue(true);
+        $user->fillBoard($board, $options->createOpt());
+        $this->expectOutputString(
+            "------------------------------------------------------------\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "                                                            |\n" .
+            "------------------------------------------------------------\n" .
+            "\nEnter the coordinates of the cell that you want to set/unset" .
+            "\nEnter 's' or 'start' to start the simulation\n\n");
+    }
+
     function testPrintBoard()
     {
         $count = 0;
@@ -67,4 +102,11 @@ class UserTest extends TestCase
         $this->assertNotEmpty($userInput);
     }
 
+    function testAddOptions()
+    {
+        $user = new \Input\User();
+        $options = new GetOptMock();
+        $user->addOptions($options->createOpt());
+        $this->assertNotEmpty($user);
+    }
 }

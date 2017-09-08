@@ -17,6 +17,14 @@ require_once "GetOptMock.php";
  */
 class ConsoleOutputTest extends TestCase
 {
+    function testStartOutput()
+    {
+        $consoleOutput = new \Output\ConsoleOutput();
+        $options = new GetOptMock();
+        $consoleOutput->startOutput($options->createOpt());
+        $this->expectOutputString("Ausgabe in Konsole erfolgt...\n");
+    }
+
     function testOutputBoard()
     {
         $count = 0;
@@ -77,6 +85,14 @@ class ConsoleOutputTest extends TestCase
         $this->expectOutputString($outString);
         $this->assertEquals($mustBeAlive, $count);
         $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
+        $this->assertNotEmpty($consoleOutput);
+    }
+
+    function testAddOptions()
+    {
+        $options = new GetOptMock();
+        $consoleOutput = new \Output\ConsoleOutput();
+        $consoleOutput->addOptions($options->createOpt());
         $this->assertNotEmpty($consoleOutput);
     }
 

@@ -37,4 +37,12 @@ class GliderTest extends TestCase
         $this->assertEquals(5, $count);
         $this->assertNotEmpty($random);
     }
+
+    function testAddOptions()
+    {
+        $options = new GetOptMock();
+        $glider = new \Input\Glider();
+        $glider->addOptions($options->createOpt());
+        $this->assertNotEmpty($glider);
+    }
 }

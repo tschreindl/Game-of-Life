@@ -20,7 +20,8 @@ class GetOptMock
             array(null, "test", GetOpt::NO_ARGUMENT),
             array(null, "no-configuration", GetOpt::OPTIONAL_ARGUMENT),
             array(null, "teamcity", GetOpt::OPTIONAL_ARGUMENT),
-            array(null, "coverage-clover", GetOpt::OPTIONAL_ARGUMENT)
+            array(null, "coverage-clover", GetOpt::OPTIONAL_ARGUMENT),
+            array(null, "configuration", GetOpt::OPTIONAL_ARGUMENT),
         ));
         $options->parse();
         return $options;

@@ -49,4 +49,12 @@ class FileInputTest extends TestCase
         $this->assertEquals($board->width*$board->height-$mustBeAlive, $falseCount);
         $this->assertNotEmpty($fileInput);
     }
+
+    function testAddOptions()
+    {
+        $fileInput = new \Input\FileInput();
+        $options = new GetOptMock();
+        $fileInput->addOptions($options->createOpt());
+        $this->assertNotEmpty($fileInput);
+    }
 }

@@ -8,6 +8,9 @@
 
 namespace Output;
 
+require_once "BaseOutput.php";
+require_once __DIR__."/../ImageCreator.php";
+
 use UlrichSG\GetOpt;
 
 /**
@@ -22,7 +25,7 @@ class VideoOutput extends BaseOutput
      */
     private $imageCreator;
     private $generation = 1;
-    protected $path;
+    public $path;
     private $keepFrames = false;
 
     /**

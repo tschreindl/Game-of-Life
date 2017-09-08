@@ -34,4 +34,12 @@ class RandomTest extends TestCase
             }
         $this->assertNotEmpty($random);
     }
+
+    function testAddOptions()
+    {
+        $options = new GetOptMock();
+        $random = new \Input\Random();
+        $random->addOptions($options->createOpt());
+        $this->assertNotEmpty($random);
+    }
 }

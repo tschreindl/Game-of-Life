@@ -33,6 +33,11 @@ class BoardTest extends TestCase
             $this->assertEquals($this->height, count($item));
         }
         $this->assertNotEmpty($board->initEmpty());
+
+        $this->assertClassHasAttribute("height", \GameOfLife\Board::class);
+        $this->assertClassHasAttribute("width", \GameOfLife\Board::class);
+        $this->assertClassHasAttribute("board", \GameOfLife\Board::class);
+        $this->assertClassHasAttribute("historyOfBoards", \GameOfLife\Board::class);
     }
 
     function testSetField()
@@ -60,6 +65,10 @@ class BoardTest extends TestCase
         $board = new \GameOfLife\Board($this->width, $this->height);
 
         $this->assertEquals(0, $board->checkNeighbour($this->x, $this->y));
+        $board->setField(1,1,true);
+        $board->setField(2,1,true);
+        $board->setField(3,1,true);
+        $this->assertEquals(2, $board->checkNeighbour(02,1));
     }
 
     function testIsFinished()

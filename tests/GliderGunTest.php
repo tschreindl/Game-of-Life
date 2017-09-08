@@ -48,4 +48,12 @@ class GliderGunTest extends TestCase
         $this->assertEquals($board->width*$board->height-36, $falseCount);
         $this->assertNotEmpty($gliderGun);
     }
+
+    function testAddOptions()
+    {
+        $options = new GetOptMock();
+        $gliderGun = new \Input\GliderGun();
+        $gliderGun->addOptions($options->createOpt());
+        $this->assertNotEmpty($gliderGun);
+    }
 }

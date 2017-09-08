@@ -11,6 +11,8 @@ namespace Output;
 use GifCreator\GifCreator;
 use UlrichSG\GetOpt;
 
+require_once "BaseOutput.php";
+
 /**
  * Class GifOutput
  *
@@ -27,8 +29,8 @@ class GifOutput extends BaseOutput
      * @var ImageCreator
      */
     private $imageCreator;
-    private $frames = array();
-    protected $path;
+    public $frames = array();
+    public $path;
     private $frameTime = 10;
 
     /**
