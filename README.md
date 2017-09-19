@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tschreindl/Game-of-Life.svg?branch=feature%2Fphase5)](https://travis-ci.org/tschreindl/Game-of-Life)
+
 # Game-of-Life
 ###Game of Life mit Conways Regeln
 
