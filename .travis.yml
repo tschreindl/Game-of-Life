@@ -4,4 +4,4 @@ php:
   - nightly
 install: composer install
 script:
-  - vendor/bin/phpunitt
+  - vendor/bin/phpunit
