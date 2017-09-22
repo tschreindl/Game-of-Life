@@ -19,6 +19,8 @@ class UserTest extends TestCase
 {
     function testFillBoard()
     {
+        //this is needed so that it works :-/
+        $GLOBALS["__user_unit_test"]=true;
         $board = new \GameOfLife\Board(20, 20);
         $user = new \Input\User();
         $options = new GetOptMock();
@@ -49,6 +51,9 @@ class UserTest extends TestCase
             "------------------------------------------------------------\n" .
             "\nEnter the coordinates of the cell that you want to set/unset" .
             "\nEnter 's' or 'start' to start the simulation\n\n");
+
+        //cleanup messy stuff
+        unset($GLOBALS["__user_unit_test"]);
     }
 
     function testPrintBoard()

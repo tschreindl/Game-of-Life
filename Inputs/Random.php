@@ -42,7 +42,12 @@ class Random extends BaseInput
                 echo "Füllgrad von ~" . $percent . "%\n";
             }
         }
-        $percent = 100; //for unit test. remove after testing. this sets all cells alive(true)
+
+        //#############################################//
+        $percent = 100; //only for unit test. remove after testing. this sets all cells alive(true)
+        //#############################################//
+
+
         for ($x = 0; $x < $_board->width; $x++)
         {
             for ($y = 0; $y < $_board->height; $y++)

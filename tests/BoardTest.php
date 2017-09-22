@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__ . "/../Board.php";
 
 /**
- * Class BoardTest
+ * Tests that the class Board works as expected.
  */
 class BoardTest extends TestCase
 {

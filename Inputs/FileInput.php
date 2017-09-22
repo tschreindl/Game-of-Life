@@ -21,18 +21,20 @@ use UlrichSG\GetOpt;
  */
 class FileInput extends BaseInput
 {
-    /** Path to Input File
+    /**
+     * Path to Input File
      * @var string
      */
     private $path = __DIR__ . "/Example/";
     private $fileName = "Glider";            //current size 10x10 field
 
-    /**Fills the board from the the txt file
+    /**
+     * Fills the board from the the txt file
      *
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
         if ($_options->getOption("fileName") != null)
         {
@@ -66,9 +68,14 @@ class FileInput extends BaseInput
     }
 
     /**
+     * Sets Parameter for FileInput
+     *
+     * available Parameter:
+     * -fileName
+     *
      * @param GetOpt $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
             array(null, "fileName", GetOpt::REQUIRED_ARGUMENT, "Der Dateiname für die Input Datei.")

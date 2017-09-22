@@ -7,6 +7,9 @@
  */
 
 namespace Input;
+use GameOfLife\Board;
+use UlrichSG\GetOpt;
+
 /**
  * Class BaseInput
  *
@@ -14,11 +17,11 @@ namespace Input;
  */
 class BaseInput
 {
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
     }
 
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
     }
 }

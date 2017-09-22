@@ -45,7 +45,12 @@ class User extends BaseInput
             // command prompt
             echo "\nEnter the coordinates of the cell that you want to set/unset";
             echo "\nEnter 's' or 'start' to start the simulation\n\n";
-            break; //only for unit test. remove for normal use !!!!
+
+
+            //This is an ugly hack to make unit-tests work. Pleaes bear with it! :-)
+            if (isset($GLOBALS["__user_unit_test"])) break;
+
+
             $inputX = readline("X:");
 
             if ($inputX == "s" || $inputX == "start") $inputEnd = true;
