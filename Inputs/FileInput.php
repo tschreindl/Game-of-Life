@@ -34,7 +34,7 @@ class FileInput extends BaseInput
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard(Board $_board, GetOpt $_options)
+    function fillBoard($_board, $_options)
     {
         if ($_options->getOption("fileName") != null)
         {
@@ -75,7 +75,7 @@ class FileInput extends BaseInput
      *
      * @param GetOpt $_options
      */
-    function addOptions(GetOpt $_options)
+    function addOptions($_options)
     {
         $_options->addOptions(array(
             array(null, "fileName", GetOpt::REQUIRED_ARGUMENT, "Der Dateiname für die Input Datei.")

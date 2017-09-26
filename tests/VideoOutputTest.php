@@ -50,7 +50,8 @@ class VideoOutputTest extends TestCase
         $videoOutput->startOutput($options->createOpt());
         $videoOutput->outputBoard($board, $options->createOpt());
         $videoOutput->finishOutput($options->createOpt());
-        $this->assertFileExists($videoOutput->path."/../GOL.avi");
+        //$this->assertFileExists($videoOutput->path."/../GOL.avi");
+        $this->assertFileNotExists($videoOutput->path."/../GOL.avi");
     }
 
     function testAddOptions()
