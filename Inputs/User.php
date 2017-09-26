@@ -8,6 +8,8 @@
 
 namespace Input;
 
+require_once "BaseInput.php";
+
 use UlrichSG\Getopt;
 use GameOfLife\Board;
 
@@ -43,6 +45,11 @@ class User extends BaseInput
             // command prompt
             echo "\nEnter the coordinates of the cell that you want to set/unset";
             echo "\nEnter 's' or 'start' to start the simulation\n\n";
+
+
+            //This is an ugly hack to make unit-tests work. Pleaes bear with it! :-)
+            if (isset($GLOBALS["__user_unit_test"])) break;
+
 
             $inputX = readline("X:");
 
@@ -94,7 +101,7 @@ class User extends BaseInput
     {
     }
 
-    private function print($_board)
+    public function print($_board)
     {
         for ($y = 0; $y < $_board->height; $y++)
         {
@@ -102,13 +109,12 @@ class User extends BaseInput
             {
                 if ($_board->board[$x][$y] == false)
                 {
-                    echo " ";
+                    echo "   ";
                 }
                 elseif ($_board->board[$x][$y] == true)
                 {
-                    echo "x";
+                    echo " x ";
                 }
-                echo "  ";
             }
             echo "|\n";
         }

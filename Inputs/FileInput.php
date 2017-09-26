@@ -8,6 +8,8 @@
 
 namespace Input;
 
+require_once "BaseInput.php";
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
@@ -19,13 +21,15 @@ use UlrichSG\GetOpt;
  */
 class FileInput extends BaseInput
 {
-    /** Path to Input File
+    /**
+     * Path to Input File
      * @var string
      */
-    private $path = __DIR__ . "\\Example\\";
+    private $path = __DIR__ . "/Example/";
     private $fileName = "Glider";            //current size 10x10 field
 
-    /**Fills the board from the the txt file
+    /**
+     * Fills the board from the the txt file
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -64,6 +68,11 @@ class FileInput extends BaseInput
     }
 
     /**
+     * Sets Parameter for FileInput
+     *
+     * available Parameter:
+     * -fileName
+     *
      * @param GetOpt $_options
      */
     function addOptions($_options)

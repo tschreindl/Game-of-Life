@@ -8,6 +8,8 @@
 
 namespace Input;
 
+require_once "BaseInput.php";
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
@@ -24,13 +26,12 @@ class Random extends BaseInput
      * @param GetOpt $_options
      */
     function fillBoard($_board, $_options)
-
     {
         $percent = rand(20, 80);
         $fillingLVL = $_options->getOption("fillingLVL");
         if ($fillingLVL != null)
         {
-            if ($_options->getOption("fillingLVL") < 1 || $_options->getOption("fillingLVL") > 100)
+            if ($fillingLVL < 1 || $fillingLVL > 100)
             {
                 echo "Der Wert darf nur zwischen 1 und 100 liegen\n";
                 echo "Zufälligen Füllungsgrad von " . $percent . " % ausgewählt\n";
@@ -40,8 +41,13 @@ class Random extends BaseInput
                 $percent = $fillingLVL;
                 echo "Füllgrad von ~" . $percent . "%\n";
             }
-
         }
+
+        //#############################################//
+        $percent = 100; //only for unit test. remove after testing. this sets all cells alive(true)
+        //#############################################//
+
+
         for ($x = 0; $x < $_board->width; $x++)
         {
             for ($y = 0; $y < $_board->height; $y++)

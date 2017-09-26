@@ -17,7 +17,6 @@ class Board
     public $height;
     public $board = array();
     private $historyOfBoards = array();
-    private $curGameStep = 0;
 
     function __construct($_width, $_height)
     {
@@ -30,7 +29,7 @@ class Board
      * Initialize an empty field.
      * Sets every entry of "array" board to false.
      */
-    private function initEmpty()
+    public function initEmpty()
     {
         $newBoard = array();
         for ($y = 0; $y < $this->height; $y++)
@@ -52,7 +51,7 @@ class Board
      * @param int $_y The y-coordinate of the field that should be set.
      * @param bool $_value The value the field should have.
      */
-    function setField(int $_x, int $_y, $_value)
+    function setField($_x, $_y, $_value)
     {
         $this->board[$_x][$_y] = $_value;
     }
@@ -62,7 +61,6 @@ class Board
      */
     function calculateNextStep()
     {
-        $this->curGameStep++;
         $this->historyOfBoards[] = $this->board;
         $nextBoard = $this->initEmpty();
         for ($y = 0; $y < $this->height; $y++)
@@ -99,7 +97,7 @@ class Board
      * @param int $_y
      * @return int $aliveNeighbours
      */
-    private function checkNeighbour($_x, $_y)
+    public function checkNeighbour($_x, $_y)
     {
         $aliveNeighbours = 0;
         for ($x = $_x - 1; $x <= $_x + 1; $x++)

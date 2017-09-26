@@ -1,0 +1,7 @@
+{
+    "require-dev": {
+        "PHPUnit/PHPUnit": "^6.3"
+    },
+    "require": {
+    }
+}
