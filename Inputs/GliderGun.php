@@ -8,11 +8,8 @@
 
 namespace Input;
 
-require_once "BaseInput.php";
-
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
-
 
 /**
  * Input Class for a generation called "Glider Gun"

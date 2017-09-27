@@ -8,9 +8,6 @@
 
 namespace Output;
 
-require_once "BaseOutput.php";
-require_once __DIR__."/../ImageCreator.php";
-
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 

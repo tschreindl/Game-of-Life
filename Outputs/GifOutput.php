@@ -12,8 +12,6 @@ use GameOfLife\Board;
 use GifCreator\GifCreator;
 use UlrichSG\GetOpt;
 
-require_once "BaseOutput.php";
-
 /**
  * Class GifOutput
  *

@@ -8,11 +8,8 @@
 
 namespace Input;
 
-require_once "BaseInput.php";
-
 use UlrichSG\Getopt;
 use GameOfLife\Board;
-
 
 /**
  * Input Class to let the user input which cells are alive

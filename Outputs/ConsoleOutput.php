@@ -8,11 +8,8 @@
 
 namespace Output;
 
-require_once "BaseOutput.php";
-
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
-
 
 /**
  * Output Class to Output the Board in PHP/Terminal

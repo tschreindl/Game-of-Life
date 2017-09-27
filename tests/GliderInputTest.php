@@ -10,19 +10,20 @@ use GameOfLife\Board;
 use Input\GliderInput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Inputs/BaseInput.php";
 require_once __DIR__ . "/../Inputs/GliderInput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class GliderTest
+ * Class GliderInputTest
  */
-class GliderTest extends TestCase
+class GliderInputTest extends TestCase
 {
     function testFillBoard()
     {
         $count = 0;
-        $board = new Board(30,20);
+        $board = new Board(30, 20);
         $board->initEmpty();
         $random = new GliderInput();
         $options = new  GetOptMock();

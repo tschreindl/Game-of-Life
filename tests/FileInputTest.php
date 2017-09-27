@@ -10,6 +10,7 @@ use GameOfLife\Board;
 use Input\FileInput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Inputs/BaseInput.php";
 require_once __DIR__ . "/../Inputs/FileInput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
@@ -25,7 +26,7 @@ class FileInputTest extends TestCase
         $falseCount = 0;
         $mustBeAlive = 10;
 
-        $board = new Board(100,100);
+        $board = new Board(100, 100);
         $board->initEmpty();
         $fileInput = new FileInput();
         $options = new  GetOptMock();
@@ -48,7 +49,7 @@ class FileInputTest extends TestCase
             $this->assertEquals($board->height, count($items));
         }
         $this->assertEquals($mustBeAlive, $count);
-        $this->assertEquals($board->width*$board->height-$mustBeAlive, $falseCount);
+        $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
         $this->assertNotEmpty($fileInput);
     }
 

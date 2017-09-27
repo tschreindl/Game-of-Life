@@ -10,6 +10,7 @@ use GameOfLife\Board;
 use Output\ConsoleOutput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Outputs/BaseOutput.php";
 require_once __DIR__ . "/../Outputs/ConsoleOutput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";

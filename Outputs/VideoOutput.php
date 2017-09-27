@@ -8,10 +8,9 @@
 
 namespace Output;
 
-require_once "BaseOutput.php";
-require_once __DIR__ . "/../ImageCreator.php";
 
 use GameOfLife\Board;
+use phpDocumentor\Reflection\Types\Object_;
 use UlrichSG\GetOpt;
 
 /**
@@ -68,9 +67,9 @@ class VideoOutput extends BaseOutput
      */
     function outputBoard(Board $_board, GetOpt $_options)
     {
+        $image = null;
         echo "\rAktuelle Generation: " . $this->generation;
-
-        $image = $this->imageCreator->createImage($_board);
+        if ($this->imageCreator instanceof ImageCreator) $image = $this->imageCreator->createImage($_board);
         imagepng($image, $this->path . str_pad($this->generation, 4, "0", STR_PAD_LEFT) . ".png");
         imagedestroy($image);
         $this->generation++;
@@ -87,13 +86,13 @@ class VideoOutput extends BaseOutput
     {
         echo "\nVideo Datei wird erzeugt. Bitte warten...\n";
         echo $this->generation - 1 . " Frames werden verarbeitet...\n\n";
-        exec(__DIR__ . "/../ffmpeg.exe -stats -loglevel fatal -i " . $this->path . "%04d.png -c:v libxvid -q:v 1 " . $this->path . "/../GOL_NS.avi", $options, $return);
+        exec(__DIR__ . "/../utilities/ffmpeg.exe -stats -loglevel fatal -i " . $this->path . "%04d.png -c:v libxvid -q:v 1 " . $this->path . "/../GOL_NS.avi", $options, $return);
 
         if ($_options->getOption("noSound") == null && $return == 0)
         {
             echo "Erfolgreich\n";
             echo "Musik wird eingefügt...\n";
-            exec(__DIR__ . "/../ffmpeg.exe -y -stats -loglevel fatal -i " . $this->path . "/../GOL_NS.avi -i loop.mp3 -codec copy -shortest " . $this->path . "/../GOL.avi", $options, $return);
+            exec(__DIR__ . "/../utilities/ffmpeg.exe -y -stats -loglevel fatal -i " . $this->path . "/../GOL_NS.avi -i " . __DIR__ . "/../utilities/loop.mp3 -codec copy -shortest " . $this->path . "/../GOL.avi", $options, $return);
             unlink($this->path . "/../GOL_NS.avi");
         }
 

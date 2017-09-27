@@ -6,9 +6,10 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-require_once __DIR__."/../GetOpt.php";
+require_once __DIR__ . "/../utilities/GetOpt.php";
 
 use UlrichSG\GetOpt;
+
 /**
  * Class GetOptMock
  */
