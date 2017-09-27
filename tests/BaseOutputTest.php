@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\BaseOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -28,7 +29,7 @@ class BaseOutputTest extends TestCase
 
     function testOutputBoard()
     {
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $options = new GetOptMock();
         $baseOutput = new BaseOutput();
         $baseOutput->outputBoard($board, $options->createOpt());

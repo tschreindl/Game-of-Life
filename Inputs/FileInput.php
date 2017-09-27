@@ -15,7 +15,8 @@ use UlrichSG\GetOpt;
 
 
 /**
- * Class FileInput
+ * Input Class to fill the board from a .txt File
+ * which must be stored in /Inputs/Example/
  *
  * @package Input
  */
@@ -23,6 +24,7 @@ class FileInput extends BaseInput
 {
     /**
      * Path to Input File
+     *
      * @var string
      */
     private $path = __DIR__ . "/Example/";
@@ -34,17 +36,22 @@ class FileInput extends BaseInput
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
-        if ($_options->getOption("fileName") != null)
+        $fileName = $_options->getOption("fileName");
+        if ($fileName != null)
         {
-            if (file_exists($this->path . $_options->getOption("fileName") . ".txt"))
+            if (stristr($fileName, ".txt"))
             {
-                $this->fileName = $_options->getOption("fileName");
+                $fileName = str_replace(".txt", "", $fileName);
+            }
+            if (file_exists($this->path . $fileName . ".txt"))
+            {
+                $this->fileName = $fileName;
             }
             else
             {
-                echo "Datei " . $_options->getOption("fileName") . ".txt wurde nicht gefunden!\n";
+                echo "Datei " . $fileName . ".txt wurde nicht gefunden!\n";
                 die();
             }
         }
@@ -75,10 +82,10 @@ class FileInput extends BaseInput
      *
      * @param GetOpt $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
-            array(null, "fileName", GetOpt::REQUIRED_ARGUMENT, "Der Dateiname für die Input Datei.")
+            array(null, "fileName", GetOpt::REQUIRED_ARGUMENT, "FileInput - Der Dateiname für die Input Datei. Muss in \\Inputs\\Example\\ als .txt gespeichert sein.\n")
         ));
     }
 }

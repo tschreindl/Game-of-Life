@@ -15,18 +15,19 @@ use UlrichSG\GetOpt;
 
 
 /**
- * Class GliderGun
+ * Input Class for a generation called "Glider Gun"
  *
  * @package Input
  */
 class GliderGun extends BaseInput
 {
-    /**Fills the board with a Generation called Glider Gun
+    /**
+     * Fills the board with a Generation called Glider Gun
      *
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
         $_board->setField(1, 5, true);
         $_board->setField(2, 5, true);
@@ -68,10 +69,10 @@ class GliderGun extends BaseInput
 
     /**
      * Add available options
+     *
      * @param $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
-
     }
 }

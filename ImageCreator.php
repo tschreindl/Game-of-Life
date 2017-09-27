@@ -9,23 +9,31 @@
 namespace Output;
 
 /**
- * Class CreateImage
+ * Class to build an Image for various Outputs
  *
  * @package Output
  */
 class ImageCreator
 {
-    private $cellSize;
-    private $cellColor = array();
-    private $backgroundColor = array();
+    private $cellSize = 40;
+    private $cellColor = array(255, 255, 0); //yellow
+    private $backgroundColor = array(135, 135, 135);  //grey
 
     function __construct($_cellSize, $_cellColor, $_backgroundColor)
     {
-        $this->cellSize = $_cellSize;
-        $this->cellColor = $_cellColor;
-        $this->backgroundColor = $_backgroundColor;
+        if ($_cellSize != null) $this->cellSize = $_cellSize;
+        if ($_cellColor != null) $this->cellColor = $this->getColor($_cellColor);
+        if ($_backgroundColor != null) $this->backgroundColor = $this->getColor($_backgroundColor);
     }
 
+    /**
+     * Creates the image based on the given Board Size and Cell Size
+     * Draws a grid and the living cells
+     * Returns the image to the used Output
+     *
+     * @param $_board
+     * @return resource
+     */
     public function createImage($_board)
     {
         $sizeX = $_board->width * ($this->cellSize + 2) + 2;
@@ -84,5 +92,98 @@ class ImageCreator
             $charPosY = $charPosY + $this->cellSize + 2;
         }
         return $image;
+    }
+
+    /**
+     * Function that handles the colors for
+     * cells, background, etc
+     * Returns array with R,G,B Color
+     *
+     * @param $_color
+     * @return array
+     */
+    function getColor($_color)
+    {
+        $color = array();
+        if (stristr($_color, "#"))
+        {
+            if (strlen($_color) == 7)
+            {
+                $color[0] = hexdec(substr($_color, 1, 2));
+                $color[1] = hexdec(substr($_color, 3, 2));
+                $color[2] = hexdec(substr($_color, 5, 2));
+            }
+            else
+            {
+                die("Bitte die Farbe folgendermaßen angeben: #00FF00");
+            }
+        }
+        elseif (stristr($_color, ","))
+        {
+            $color = explode(",", $_color);
+            if (count($color) != 3) die("Bitte alle 3 Farben angeben. Zahlen müssen zwischen 0 und 255 liegen!");
+            foreach ($color as $cl)
+            {
+                if ($cl < 0 || $cl > 255) die("Die Zahlen müssen zwischen 0 und 255 liegen!");
+            }
+        }
+        else
+        {
+            switch (strtolower($_color)):
+
+                case "black":
+                    $color[0] = 0;
+                    $color[1] = 0;
+                    $color[2] = 0;
+                    break;
+
+                case "white":
+                    $color[0] = 255;
+                    $color[1] = 255;
+                    $color[2] = 255;
+                    break;
+
+                case "red":
+                    $color[0] = 255;
+                    $color[1] = 0;
+                    $color[2] = 0;
+                    break;
+
+                case "green":
+                    $color[0] = 0;
+                    $color[1] = 255;
+                    $color[2] = 0;
+                    break;
+
+                case "blue":
+                    $color[0] = 0;
+                    $color[1] = 0;
+                    $color[2] = 255;
+                    break;
+
+                case "yellow":
+                    $color[0] = 255;
+                    $color[1] = 255;
+                    $color[2] = 0;
+                    break;
+
+                case "cyan":
+                    $color[0] = 0;
+                    $color[1] = 255;
+                    $color[2] = 255;
+                    break;
+
+                case "magenta":
+                    $color[0] = 255;
+                    $color[1] = 0;
+                    $color[2] = 255;
+                    break;
+
+                default:
+                    die("Keine Farbe gefunden! Bitte über R,G,B oder als HEX eingeben!");
+
+            endswitch;
+        }
+        return $color;
     }
 }

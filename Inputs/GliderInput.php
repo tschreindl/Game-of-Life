@@ -14,18 +14,19 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Class Glider
+ * Input Class for a generation called "Glider"
  *
  * @package GameOfLife\Inputs
  */
-class Glider extends BaseInput
+class GliderInput extends BaseInput
 {
-    /**Fills the board with a generation called Glider and set available options
+    /**
+     * Fills the board with a generation called Glider
      *
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
         $posX = round(($_board->width - 3) / 2);
         $posY = round(($_board->height - 3) / 2);
@@ -48,13 +49,18 @@ class Glider extends BaseInput
 
     /**
      * Add available options
+     *
+     * available options:
+     * -PosX
+     * -PosY
+     *
      * @param GetOpt $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
-            array(null, "PosX", GetOpt::REQUIRED_ARGUMENT, "Legt die X Position des Gliders fest. Standard: Mittig"),
-            array(null, "PosY", GetOpt::REQUIRED_ARGUMENT, "Legt die Y Position des Gliders fest. Standard: Mitiig"),
+            array(null, "PosX", GetOpt::REQUIRED_ARGUMENT, "GliderInput - Legt die X Position des Gliders fest. Standard: Mittig"),
+            array(null, "PosY", GetOpt::REQUIRED_ARGUMENT, "GliderInput - Legt die Y Position des Gliders fest. Standard: Mitiig\n"),
         ));
     }
 }

@@ -6,6 +6,8 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
+use Input\GliderGun;
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../Inputs/GliderGun.php";
@@ -22,9 +24,9 @@ class GliderGunTest extends TestCase
         $count = 0;
         $falseCount = 0;
 
-        $board = new \GameOfLife\Board(40,40);
+        $board = new Board(40,40);
         $board->initEmpty();
-        $gliderGun = new \Input\GliderGun();
+        $gliderGun = new GliderGun();
         $options = new  GetOptMock();
         $gliderGun->fillBoard($board, $options->createOpt());
         foreach ($board->board as $items)
@@ -52,7 +54,7 @@ class GliderGunTest extends TestCase
     function testAddOptions()
     {
         $options = new GetOptMock();
-        $gliderGun = new \Input\GliderGun();
+        $gliderGun = new GliderGun();
         $gliderGun->addOptions($options->createOpt());
         $this->assertNotEmpty($gliderGun);
     }

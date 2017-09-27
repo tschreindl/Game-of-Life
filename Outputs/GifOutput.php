@@ -8,6 +8,7 @@
 
 namespace Output;
 
+use GameOfLife\Board;
 use GifCreator\GifCreator;
 use UlrichSG\GetOpt;
 
@@ -25,9 +26,6 @@ require_once "BaseOutput.php";
  */
 class GifOutput extends BaseOutput
 {
-    /**
-     * @var ImageCreator
-     */
     private $imageCreator;
     public $frames = array();
     public $path;
@@ -35,15 +33,16 @@ class GifOutput extends BaseOutput
 
     /**
      * Initializes the output path of the object
+     *
      * @param GetOpt $_options
      */
-    public function startOutput($_options)
+    public function startOutput(GetOpt $_options)
     {
         echo "Gif Datei wird erzeugt. Bitte warten...\n";
 
-        $cellSize = 40;
-        $cellColor = array(255, 255, 0);
-        $bkColor = array(135, 135, 135);
+        $cellSize = null;
+        $cellColor = null;
+        $bkColor = null;
 
         $this->path = __DIR__ . "\\GIF\\" . round(microtime(true));
 
@@ -53,21 +52,11 @@ class GifOutput extends BaseOutput
         }
         if ($_options->getOption("cellColor") != null)
         {
-            $cellColor = explode(",", $_options->getOption("cellColor"));
-            if (count($cellColor) != 3)
-            {
-                echo "Bitte alle Farben angeben. Zahlen müssen zwischen 0 und 255 liegen.";
-                die();
-            }
+            $cellColor = $_options->getOption("cellColor");
         }
         if ($_options->getOption("bkColor") != null)
         {
-            $bkColor = explode(",", $_options->getOption("bkColor"));
-            if (count($bkColor) != 3)
-            {
-                echo "Bitte alle Farben angeben. Zahlen müssen zwischen 0 und 255 liegen.";
-                die();
-            }
+            $bkColor = $_options->getOption("bkColor");
         }
         if ($_options->getOption("frameTime") != null)
         {
@@ -82,7 +71,7 @@ class GifOutput extends BaseOutput
      * @param \GameOfLife\Board $_board Current game board
      * @param GetOpt $_options
      */
-    public function outputBoard($_board, $_options)
+    public function outputBoard(Board $_board, GetOpt $_options)
     {
         $frame = $this->imageCreator->createImage($_board);
         $this->frames[] = $frame;
@@ -92,9 +81,10 @@ class GifOutput extends BaseOutput
 
     /**
      * Creates and saves the gif file
+     *
      * @param $_options
      */
-    public function finishOutput($_options)
+    public function finishOutput(GetOpt $_options)
     {
         if (!file_exists($this->path)) mkdir($this->path, 0777, true);
 
@@ -117,15 +107,21 @@ class GifOutput extends BaseOutput
     /**
      * Adds GifOutput's class specific options to the option list
      *
+     * available options:
+     * -cellSize
+     * -cellColor
+     * -bkColor
+     * -frameTime
+     *
      * @param \UlrichSG\GetOpt $_options Option List
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
             array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Größe der lebenden Zellen. Standard: 40"),
-            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Farbe der lebenden Zellen. Muss als RGB angeben werden. R,G,B. Standard: 255,255,0 (Gelb)"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Hintergrundfarbe des Bildes. Muss als RGB angeben werden. R,G,B. Standard: 135,135,135 (Grau)"),
-            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Dauer der einzelnen Frames. Standard: 10")
+            array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Farbe der lebenden Zellen. Muss als R,G,B oder #HEX angeben werden. Standard: 255,255,0 (Gelb)"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Hintergrundfarbe des Bildes. Muss als R,G,B oder #HEX angeben werden. Standard: 135,135,135 (Grau)"),
+            array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Dauer der einzelnen Frames. Standard: 10\n")
         ));
     }
 }

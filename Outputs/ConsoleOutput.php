@@ -15,7 +15,7 @@ use UlrichSG\GetOpt;
 
 
 /**
- * Class ConsoleOutput
+ * Output Class to Output the Board in PHP/Terminal
  *
  * @package Output
  */
@@ -25,16 +25,23 @@ class ConsoleOutput extends BaseOutput
     private $echo1 = "─────┐\n";
     private $echo2 = "─────┘\n";
 
-    function startOutput($_options)
+    /**
+     * Runs before the Board Output starts
+     *
+     * @param GetOpt $_options
+     */
+    function startOutput(GetOpt $_options)
     {
         echo "Ausgabe in Konsole erfolgt...\n";
     }
 
     /**
+     * Prints the current Board in PHP/Terminal
+     *
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function outputBoard($_board, $_options)
+    function outputBoard(Board $_board, GetOpt $_options)
     {
         if ($_options->getOption("cmd") != null)
         {
@@ -80,12 +87,17 @@ class ConsoleOutput extends BaseOutput
     }
 
     /**
+     * Add available options
+     *
+     * available options:
+     * -cmd
+     *
      * @param GetOpt $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
-            array(null, "cmd", GetOpt::NO_ARGUMENT, "ConsoleOutput - Wenn die Ausgabe per CMD Fenster oder Terminal erfolgt.")
+            array(null, "cmd", GetOpt::NO_ARGUMENT, "ConsoleOutput - Wenn die Ausgabe per CMD Fenster oder Terminal erfolgt.\n")
         ));
     }
 }

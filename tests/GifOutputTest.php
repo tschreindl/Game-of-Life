@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\GifOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +37,7 @@ class GifOutputTest extends TestCase
 
     function testOutputBoard()
     {
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $gifOutput = new GifOutput();
         $options = new GetOptMock();
         $gifOutput->startOutput($options->createOpt());
@@ -47,7 +48,7 @@ class GifOutputTest extends TestCase
 
     function testFinishOutput()
     {
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $options = new GetOptMock();
         $gifOutput = new GifOutput();
         $gifOutput->startOutput($options->createOpt());

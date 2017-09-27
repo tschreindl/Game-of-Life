@@ -25,12 +25,12 @@ use UlrichSG\GetOpt;
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
     array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
-    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
-    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
+    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 20."),
+    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 20"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
     array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.0"),
     array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
-    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an."),
+    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an.\n"),
 ));
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
@@ -140,7 +140,7 @@ if ($options->getOption("output"))
 
 if ($options->getOption("version"))
 {
-    echo "Game of Life -- Version 1.1\n";
+    echo "Game of Life -- Version 1.8\n";
     return;
 }
 
@@ -164,7 +164,7 @@ if ($inputClassName != null)
 }
 else
 {
-    $input = new Input\Random();
+    $input = new Input\RandomInput();
 }
 
 if ($outputClassName != null)

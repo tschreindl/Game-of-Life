@@ -7,27 +7,53 @@
  */
 
 namespace Output;
+use GameOfLife\Board;
+use UlrichSG\GetOpt;
 
 /**
- * Class BaseOutput
+ * Base Class for all outputs
  *
  * @package Output
  */
 class BaseOutput
 {
-    function startOutput($_options)
+    /**
+     * Code that runs before the Board Output starts
+     * Check if options given
+     *
+     * @param $_options
+     */
+    function startOutput(GetOpt $_options)
     {
     }
 
-    function outputBoard($_board, $_options)
+    /**
+     * Starts the Board Output
+     * Check if options given
+     *
+     * @param Board $_board
+     * @param GetOpt $_options
+     */
+    function outputBoard(Board $_board, GetOpt $_options)
     {
     }
 
-    function finishOutput($_options)
+    /**
+     * Code that runs after the Board Output
+     * Check if options given
+     *
+     * @param GetOpt $_options
+     */
+    function finishOutput(GetOpt $_options)
     {
     }
 
-    function addOptions($_options)
+    /**
+     * Add available options
+     *
+     * @param GetOpt $_options
+     */
+    function addOptions(GetOpt $_options)
     {
     }
 }

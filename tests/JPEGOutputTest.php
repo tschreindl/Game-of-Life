@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\JPEGOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +32,7 @@ class JPEGOutputTest extends TestCase
     function testOutputBoard()
     {
         $this->assertTrue(true);
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $board->initEmpty();
         $options = new GetOptMock();
         $JPEGOutput = new JPEGOutput();

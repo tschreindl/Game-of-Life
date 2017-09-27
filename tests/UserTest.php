@@ -6,6 +6,8 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
+use Input\User;
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../Inputs/User.php";
@@ -21,8 +23,8 @@ class UserTest extends TestCase
     {
         //this is needed so that it works :-/
         $GLOBALS["__user_unit_test"]=true;
-        $board = new \GameOfLife\Board(20, 20);
-        $user = new \Input\User();
+        $board = new Board(20, 20);
+        $user = new User();
         $options = new GetOptMock();
         $this->assertTrue(true);
         $user->fillBoard($board, $options->createOpt());
@@ -63,7 +65,7 @@ class UserTest extends TestCase
         $mustBeAlive = 5;
         $outString = "";
 
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $board->initEmpty();
 
         $board->setField(2,2,true);
@@ -73,7 +75,7 @@ class UserTest extends TestCase
         $board->setField(6,6,true);
 
 
-        $userInput = new \Input\User();
+        $userInput = new User();
         $userInput->print($board);
         foreach ($board->board as $items)
         {
@@ -109,7 +111,7 @@ class UserTest extends TestCase
 
     function testAddOptions()
     {
-        $user = new \Input\User();
+        $user = new User();
         $options = new GetOptMock();
         $user->addOptions($options->createOpt());
         $this->assertNotEmpty($user);

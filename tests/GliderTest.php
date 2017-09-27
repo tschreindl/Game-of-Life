@@ -6,9 +6,11 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
+use Input\GliderInput;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Inputs/Glider.php";
+require_once __DIR__ . "/../Inputs/GliderInput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
@@ -20,9 +22,9 @@ class GliderTest extends TestCase
     function testFillBoard()
     {
         $count = 0;
-        $board = new \GameOfLife\Board(30,20);
+        $board = new Board(30,20);
         $board->initEmpty();
-        $random = new \Input\Glider();
+        $random = new GliderInput();
         $options = new  GetOptMock();
         $random->fillBoard($board, $options->createOpt());
         foreach ($board->board as $item)
@@ -30,7 +32,7 @@ class GliderTest extends TestCase
             foreach ($item as $val)
             {
                 if ($val == true) $count++;
-                //$this->assertEquals(true, $val); //must set $percent = 100 in Random.php to pass
+                //$this->assertEquals(true, $val); //must set $percent = 100 in RandomInput.php to pass
             }
             $this->assertEquals($board->height, count($item));
         }
@@ -41,7 +43,7 @@ class GliderTest extends TestCase
     function testAddOptions()
     {
         $options = new GetOptMock();
-        $glider = new \Input\Glider();
+        $glider = new \Input\GliderInput();
         $glider->addOptions($options->createOpt());
         $this->assertNotEmpty($glider);
     }

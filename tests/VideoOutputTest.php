@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\VideoOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +34,7 @@ class VideoOutputTest extends TestCase
 
     function testOutputBoard()
     {
-        $board = new \GameOfLife\Board(20, 20);
+        $board = new Board(20, 20);
         $options = new GetOptMock();
         $videoOutput = new VideoOutput();
         $videoOutput->startOutput($options->createOpt());
@@ -44,14 +45,21 @@ class VideoOutputTest extends TestCase
 
     function testFinishOutput()
     {
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20, 20);
         $options = new GetOptMock();
         $videoOutput = new VideoOutput();
         $videoOutput->startOutput($options->createOpt());
         $videoOutput->outputBoard($board, $options->createOpt());
         $videoOutput->finishOutput($options->createOpt());
-        //$this->assertFileExists($videoOutput->path."/../GOL.avi");
-        $this->assertFileNotExists($videoOutput->path."/../GOL.avi");
+        if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN")
+        {
+            $this->assertFileExists($videoOutput->path . "/../GOL.avi");
+        }
+        else
+        {
+            $this->assertFileNotExists($videoOutput->path."/../GOL.avi");
+        }
+
     }
 
     function testAddOptions()

@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\PNGOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -31,10 +32,10 @@ class PNGOutputTest extends TestCase
     function testOutputBoard()
     {
         $this->assertTrue(true);
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $board->initEmpty();
         $options = new GetOptMock();
-        $PNGOutput = new \Output\PNGOutput();
+        $PNGOutput = new PNGOutput();
         $PNGOutput->startOutput($options->createOpt());
         $PNGOutput->outputBoard($board, $options->createOpt());
         $this->expectOutputString("PNG Dateien werden erzeugt. Bitte warten...\n\rAktuelle Generation: 1");
@@ -43,7 +44,7 @@ class PNGOutputTest extends TestCase
 
     function testFinishOutput()
     {
-        $PNGOutput = new \Output\PNGOutput();
+        $PNGOutput = new PNGOutput();
         $options = new GetOptMock();
 
         $PNGOutput->finishOutput($options->createOpt());

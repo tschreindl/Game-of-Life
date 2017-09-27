@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . "/../Board.php";
@@ -22,7 +23,7 @@ class BoardTest extends TestCase
 
     function testInitEmpty()
     {
-        $board = new \GameOfLife\Board($this->width, $this->height);
+        $board = new Board($this->width, $this->height);
         $this->assertEquals($this->width*$this->height, count($board->initEmpty(), COUNT_RECURSIVE) -$this->width);
         foreach ($board->initEmpty() as $item)
         {
@@ -34,23 +35,23 @@ class BoardTest extends TestCase
         }
         $this->assertNotEmpty($board->initEmpty());
 
-        $this->assertClassHasAttribute("height", \GameOfLife\Board::class);
-        $this->assertClassHasAttribute("width", \GameOfLife\Board::class);
-        $this->assertClassHasAttribute("board", \GameOfLife\Board::class);
-        $this->assertClassHasAttribute("historyOfBoards", \GameOfLife\Board::class);
+        $this->assertClassHasAttribute("height", Board::class);
+        $this->assertClassHasAttribute("width", Board::class);
+        $this->assertClassHasAttribute("board", Board::class);
+        $this->assertClassHasAttribute("historyOfBoards", Board::class);
     }
 
     function testSetField()
     {
         $value = true;
-        $board = new \GameOfLife\Board($this->width, $this->height);
+        $board = new Board($this->width, $this->height);
         $board->setField($this->x,$this->y, $value);
         $this->assertEquals($value, $board->board[$this->x][$this->y]);
     }
 
     function testCalculateNextStep()
     {
-        $board = new \GameOfLife\Board($this->width, $this->height);
+        $board = new Board($this->width, $this->height);
         $board->setField(1,1, true);
         $board->setField(2,1, true);
         $board->setField(3,1, true);
@@ -62,7 +63,7 @@ class BoardTest extends TestCase
 
     function testCheckNeighbours()
     {
-        $board = new \GameOfLife\Board($this->width, $this->height);
+        $board = new Board($this->width, $this->height);
 
         $this->assertEquals(0, $board->checkNeighbour($this->x, $this->y));
         $board->setField(1,1,true);
@@ -73,7 +74,7 @@ class BoardTest extends TestCase
 
     function testIsFinished()
     {
-        $board = new \GameOfLife\Board($this->width, $this->height);
+        $board = new Board($this->width, $this->height);
         $board->initEmpty();
         $board->calculateNextStep();
         $this->assertTrue($board->isFinished());

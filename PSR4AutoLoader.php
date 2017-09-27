@@ -13,7 +13,7 @@
  */
 
 /**
- * Class Psr4Autoloader
+ * Psr4Autoloader Class to load classes automatically
  */
 class Psr4Autoloader
 {
