@@ -4,6 +4,7 @@
 ### Game of Life mit Conways Regeln
 
 Conways Game of Life ist ein Generationen Spiel
+
 Spielregeln:
 * Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren
 * Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit
@@ -12,7 +13,7 @@ Spielregeln:
 
 <br />
 
-##### Verwendung:
+#### Verwendung:
 Projekt Klonen und folgendermaßen ausführen:
 ```
 php gameoflife.php [option] [parameter]
@@ -20,7 +21,7 @@ php gameoflife.php [option] [parameter]
 
 <br />
 
-##### Folgende Optionen können beim Start benutzt werden:
+#### Folgende Optionen können beim Start benutzt werden:
 ```
 -i oder --input [String]--> Legt einen Input fest der sich im Ordner "Inputs" befinden muss. Z.b RandomInput, GliderInput, etc. Standard ist RandomInput.
 -w oder --width [Integer] --> Legt die Breite des Spielfeldes fest. Standard ist 20.
@@ -32,7 +33,7 @@ php gameoflife.php [option] [parameter]
 
 <br />
 
-##### Bei Folgenden Optionen können weitere Parameter benutzt werden:
+#### Bei Folgenden Optionen können weitere Parameter benutzt werden:
 ```
 --input RandomInput 
     --fillingLVL [Integer] --> Legt fest wie viel Prozent der Felder am Leben sein sollen. Standard ist zwischen 20-80%.
@@ -59,5 +60,5 @@ php gameoflife.php [option] [parameter]
 <br />
 <br />
 
-##### Authors
+#### Authors
 Azubi Projekt von Tim Schreindl
