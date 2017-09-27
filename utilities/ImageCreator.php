@@ -149,7 +149,7 @@ class ImageCreator
                     $color[2] = 0;
                     break;
 
-                case "green":
+                case "lime":
                     $color[0] = 0;
                     $color[1] = 255;
                     $color[2] = 0;
@@ -167,20 +167,68 @@ class ImageCreator
                     $color[2] = 0;
                     break;
 
-                case "cyan":
+                case "aqua":
                     $color[0] = 0;
                     $color[1] = 255;
                     $color[2] = 255;
                     break;
 
-                case "magenta":
+                case "fuchsia":
                     $color[0] = 255;
                     $color[1] = 0;
                     $color[2] = 255;
                     break;
 
+                case "gray":
+                    $color[0] = 128;
+                    $color[1] = 128;
+                    $color[2] = 128;
+                    break;
+
+                case "green":
+                    $color[0] = 0;
+                    $color[1] = 128;
+                    $color[2] = 0;
+                    break;
+
+                case "maroon":
+                    $color[0] = 128;
+                    $color[1] = 0;
+                    $color[2] = 0;
+                    break;
+
+                case "navy":
+                    $color[0] = 0;
+                    $color[1] = 0;
+                    $color[2] = 128;
+                    break;
+
+                case "olive":
+                    $color[0] = 128;
+                    $color[1] = 128;
+                    $color[2] = 0;
+                    break;
+
+                case "purple":
+                    $color[0] = 128;
+                    $color[1] = 0;
+                    $color[2] = 128;
+                    break;
+
+                case "silver":
+                    $color[0] = 192;
+                    $color[1] = 192;
+                    $color[2] = 192;
+                    break;
+
+                case "teal":
+                    $color[0] = 0;
+                    $color[1] = 128;
+                    $color[2] = 128;
+                    break;
+
                 default:
-                    die("Keine Farbe gefunden! Bitte über R,G,B oder als HEX eingeben!");
+                    die("Keine Farbe mit diesem Namen gefunden! Bitte über R,G,B oder als HEX eingeben!");
 
             endswitch;
         }

@@ -49,7 +49,6 @@ php gameoflife.php [option] [parameter]
     --cellSize  [Integer] --> Ändert die Zellgröße. Standard ist 40px
     --cellColor [String]  --> Ändert die Zellfarbe. Im Format R,G,B oder #HEX oder Standard Farbe. Standard ist Gelb.
     --bkColor   [String]  --> Ändert die Hintergrundfarbe. Im Format R,G,B oder #HEX oder Standard Farbe. Standard ist Grau.
-                              (Standard Farben: black, white, red, green, blue, yellow, magenta)
     
 --output GifOutput
     --frameTime [Integer] --> Legt die FPS (Frames per second) für die Gif Datei fest. Standard ist 10.
@@ -57,8 +56,8 @@ php gameoflife.php [option] [parameter]
 --output VideoOutput
     --noSound --> Erzeugt das Video ohne Ton. Standard ist ein Endlos-Ton.
 ```
+(16 Standard Farben nach VGA-Palette: aqua, black, blue, fuchsia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white, yellow)
 
-<br />
 <br />
 
 ### Authors
