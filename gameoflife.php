@@ -8,16 +8,13 @@
 
 ini_set("memory_limit", "2048M");
 
-require_once "PSR4AutoLoader.php";
-require_once "ImageCreator.php";
-
-$loader = new Psr4Autoloader();
-$loader->addNamespace("Input", __DIR__ . "/Inputs/");
-$loader->addNamespace("Output", __DIR__ . "/Outputs/");
-$loader->addNamespace("UlrichSG", __DIR__ . "/");
-$loader->addNamespace("GameOfLife", __DIR__ . "/");
-$loader->addNamespace("GifCreator", __DIR__ . "/");
-$loader->register();
+$loader = require __DIR__."/vendor/autoload.php";
+$loader->addPsr4("Input\\", __DIR__ . "/Inputs/");
+$loader->addPsr4("Output\\", __DIR__ . "/Outputs/");
+$loader->addPsr4("Output\\", __DIR__ . "/utilities/");
+$loader->addPsr4("UlrichSG\\", __DIR__ . "/utilities/");
+$loader->addPsr4("GameOfLife\\", __DIR__ . "/");
+$loader->addPsr4("GifCreator\\", __DIR__ . "/utilities/");
 
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
@@ -25,26 +22,26 @@ use UlrichSG\GetOpt;
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
     array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
-    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 10."),
-    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 10"),
+    array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 20."),
+    array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 20"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
     array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.0"),
     array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
-    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an."),
+    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an.\n"),
 ));
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
 {
     $inputClassName = "Input\\" . basename($input, ".php");
     $inputClass = new $inputClassName();
-    $inputClass->addOptions($options);
+    if ($inputClass instanceof \Input\BaseInput) $inputClass->addOptions($options);
 }
 
 foreach (glob(__DIR__ . "/Outputs/*.php") as $output)
 {
     $outputClassName = "Output\\" . basename($output, ".php");
     $outputClass = new $outputClassName();
-    $outputClass->addOptions($options);
+    if ($outputClass instanceof \Output\BaseOutput) $outputClass->addOptions($options);
 }
 
 $options->parse();
@@ -140,7 +137,7 @@ if ($options->getOption("output"))
 
 if ($options->getOption("version"))
 {
-    echo "Game of Life -- Version 1.1\n";
+    echo "Game of Life -- Version 1.8\n";
     return;
 }
 
@@ -164,7 +161,7 @@ if ($inputClassName != null)
 }
 else
 {
-    $input = new Input\Random();
+    $input = new Input\RandomInput();
 }
 
 if ($outputClassName != null)

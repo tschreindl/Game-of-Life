@@ -7,21 +7,33 @@
  */
 
 namespace Input;
+
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Class BaseInput
+ * Base Class for all Inputs.
  *
  * @package GameOfLife\Inputs
  */
 class BaseInput
 {
-    function fillBoard($_board, $_options)
+    /**
+     * Fills the given Board.
+     *
+     * @param Board $_board
+     * @param GetOpt $_options
+     */
+    function fillBoard(Board $_board, GetOpt $_options)
     {
     }
 
-    function addOptions($_options)
+    /**
+     * Adds available options.
+     *
+     * @param GetOpt $_options
+     */
+    function addOptions(GetOpt $_options)
     {
     }
 }

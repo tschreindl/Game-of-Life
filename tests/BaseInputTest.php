@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Input\BaseInput;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +21,7 @@ class BaseInputTest extends TestCase
 {
     function testFillBoard()
     {
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20,20);
         $baseInput = new BaseInput();
         $options = new GetOptMock();
         $baseInput->fillBoard($board, $options->createOpt());

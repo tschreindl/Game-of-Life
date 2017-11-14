@@ -6,11 +6,13 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-require_once __DIR__."/../GetOpt.php";
+require_once __DIR__ . "/../utilities/GetOpt.php";
 
 use UlrichSG\GetOpt;
+
 /**
- * Class GetOptMock
+ * Class to mock options so they can be used to test classes where they needed.
+ * The options that are already set under is to prevent that GetOpt fails because the options not declared, when PHPUnit use these parameter.
  */
 class GetOptMock
 {

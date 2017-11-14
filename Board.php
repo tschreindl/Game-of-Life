@@ -121,8 +121,8 @@ class Board
 
     /**
      * Checks if there is no further generation
-     * var futureGenerations calculates x times to the
-     * future to catch repeating generations
+     * array historyOfBoards contains all previous
+     * boards to check if there is a repeating generation
      *
      * @return bool
      */

@@ -6,20 +6,23 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
+use Output\ConsoleOutput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Outputs/BaseOutput.php";
 require_once __DIR__ . "/../Outputs/ConsoleOutput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class ConsoleOutputTest
+ * Tests that the class ConsoleOutput works as expected.
  */
 class ConsoleOutputTest extends TestCase
 {
     function testStartOutput()
     {
-        $consoleOutput = new \Output\ConsoleOutput();
+        $consoleOutput = new ConsoleOutput();
         $options = new GetOptMock();
         $consoleOutput->startOutput($options->createOpt());
         $this->expectOutputString("Ausgabe in Konsole erfolgt...\n");
@@ -32,7 +35,7 @@ class ConsoleOutputTest extends TestCase
         $mustBeAlive = 5;
         $outString = "";
 
-        $board = new \GameOfLife\Board(20, 20);
+        $board = new Board(20, 20);
         $board->initEmpty();
 
         $board->setField(2, 2, true);
@@ -42,7 +45,7 @@ class ConsoleOutputTest extends TestCase
         $board->setField(6, 6, true);
 
 
-        $consoleOutput = new \Output\ConsoleOutput();
+        $consoleOutput = new ConsoleOutput();
         $options = new GetOptMock();
         $consoleOutput->outputBoard($board, $options->createOpt());
 
@@ -91,7 +94,7 @@ class ConsoleOutputTest extends TestCase
     function testAddOptions()
     {
         $options = new GetOptMock();
-        $consoleOutput = new \Output\ConsoleOutput();
+        $consoleOutput = new ConsoleOutput();
         $consoleOutput->addOptions($options->createOpt());
         $this->assertNotEmpty($consoleOutput);
     }

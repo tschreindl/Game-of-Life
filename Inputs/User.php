@@ -8,24 +8,23 @@
 
 namespace Input;
 
-require_once "BaseInput.php";
-
 use UlrichSG\Getopt;
 use GameOfLife\Board;
 
-
 /**
- * Class UserInput
+ * Input Class to let the user input which cells are alive.
+ *
+ * @package Input
  */
 class User extends BaseInput
 {
     /**
-     * Fills the board with cells that the user inputs
+     * Fills the board with cells that the user inputs.
      *
      * @param Board $_board The Board
-     * @param Getopt $_options All options (including input specific options)
+     * @param GetOpt $_options All options (including input specific options)
      */
-    public function fillBoard($_board, $_options)
+    public function fillBoard(Board $_board, GetOpt $_options)
     {
         // indicates whether the user finished setting cells
         $inputEnd = false;
@@ -93,15 +92,21 @@ class User extends BaseInput
     }
 
     /**
-     * Adds UserInput specific options to the option list
+     * Adds UserInput specific options to the option list.
      *
      * @param GetOpt $_options Options to which the input specific options are added
      */
-    public function addOptions($_options)
+    public function addOptions(GetOpt $_options)
     {
     }
 
-    public function print($_board)
+    /**
+     * Prints the current Board to PHP/Console.
+     * Only needed for this Class.
+     *
+     * @param Board $_board
+     */
+    public function print(Board $_board)
     {
         for ($y = 0; $y < $_board->height; $y++)
         {

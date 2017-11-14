@@ -6,16 +6,19 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\PNGOutput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Outputs/BaseOutput.php";
+require_once __DIR__ . "/../utilities/ImageCreator.php";
 require_once __DIR__ . "/../Outputs/PNGOutput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 
 /**
- * Class PNGOutputTest
+ * Tests that the class PNGOutput works as expected.
  */
 class PNGOutputTest extends TestCase
 {
@@ -31,19 +34,19 @@ class PNGOutputTest extends TestCase
     function testOutputBoard()
     {
         $this->assertTrue(true);
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20, 20);
         $board->initEmpty();
         $options = new GetOptMock();
-        $PNGOutput = new \Output\PNGOutput();
+        $PNGOutput = new PNGOutput();
         $PNGOutput->startOutput($options->createOpt());
         $PNGOutput->outputBoard($board, $options->createOpt());
         $this->expectOutputString("PNG Dateien werden erzeugt. Bitte warten...\n\rAktuelle Generation: 1");
-        $this->assertFileExists($PNGOutput->path."\\1.png");
+        $this->assertFileExists($PNGOutput->path . "\\1.png");
     }
 
     function testFinishOutput()
     {
-        $PNGOutput = new \Output\PNGOutput();
+        $PNGOutput = new PNGOutput();
         $options = new GetOptMock();
 
         $PNGOutput->finishOutput($options->createOpt());

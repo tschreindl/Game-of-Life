@@ -6,23 +6,26 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
+use Input\User;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Inputs/BaseInput.php";
 require_once __DIR__ . "/../Inputs/User.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class UserTest
+ * Tests that the class User works as expected.
  */
 class UserTest extends TestCase
 {
     function testFillBoard()
     {
         //this is needed so that it works :-/
-        $GLOBALS["__user_unit_test"]=true;
-        $board = new \GameOfLife\Board(20, 20);
-        $user = new \Input\User();
+        $GLOBALS["__user_unit_test"] = true;
+        $board = new Board(20, 20);
+        $user = new User();
         $options = new GetOptMock();
         $this->assertTrue(true);
         $user->fillBoard($board, $options->createOpt());
@@ -63,17 +66,17 @@ class UserTest extends TestCase
         $mustBeAlive = 5;
         $outString = "";
 
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20, 20);
         $board->initEmpty();
 
-        $board->setField(2,2,true);
-        $board->setField(3,3,true);
-        $board->setField(4,4,true);
-        $board->setField(5,5,true);
-        $board->setField(6,6,true);
+        $board->setField(2, 2, true);
+        $board->setField(3, 3, true);
+        $board->setField(4, 4, true);
+        $board->setField(5, 5, true);
+        $board->setField(6, 6, true);
 
 
-        $userInput = new \Input\User();
+        $userInput = new User();
         $userInput->print($board);
         foreach ($board->board as $items)
         {
@@ -103,13 +106,13 @@ class UserTest extends TestCase
 
         $this->expectOutputString($outString);
         $this->assertEquals($mustBeAlive, $count);
-        $this->assertEquals($board->width*$board->height-$mustBeAlive, $falseCount);
+        $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
         $this->assertNotEmpty($userInput);
     }
 
     function testAddOptions()
     {
-        $user = new \Input\User();
+        $user = new User();
         $options = new GetOptMock();
         $user->addOptions($options->createOpt());
         $this->assertNotEmpty($user);

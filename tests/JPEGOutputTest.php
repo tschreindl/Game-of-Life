@@ -6,16 +6,19 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use Output\JPEGOutput;
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . "/../Outputs/BaseOutput.php";
+require_once __DIR__ . "/../utilities/ImageCreator.php";
 require_once __DIR__ . "/../Outputs/JPEGOutput.php";
 require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 
 /**
- * Class JPEGOutputTest
+ * Tests that the class JPEGOutput works as expected.
  */
 class JPEGOutputTest extends TestCase
 {
@@ -31,14 +34,14 @@ class JPEGOutputTest extends TestCase
     function testOutputBoard()
     {
         $this->assertTrue(true);
-        $board = new \GameOfLife\Board(20,20);
+        $board = new Board(20, 20);
         $board->initEmpty();
         $options = new GetOptMock();
         $JPEGOutput = new JPEGOutput();
         $JPEGOutput->startOutput($options->createOpt());
         $JPEGOutput->outputBoard($board, $options->createOpt());
         $this->expectOutputString("JPEG Dateien werden erzeugt. Bitte warten...\n\rAktuelle Generation: 1");
-        $this->assertFileExists($JPEGOutput->path."\\1.jpeg");
+        $this->assertFileExists($JPEGOutput->path . "\\1.jpeg");
     }
 
     function testFinishOutput()

@@ -7,7 +7,7 @@
  */
 
 /**
- * Class CreateUser
+ * Test Class CreateUser for a simple Unit test.
  */
 class CreateUser
 {

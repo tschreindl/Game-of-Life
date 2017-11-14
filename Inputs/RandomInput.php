@@ -8,24 +8,23 @@
 
 namespace Input;
 
-require_once "BaseInput.php";
-
 use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Class Random
+ * Input Class for a Random generation.
  *
  * @package GameOfLife\Inputs
  */
-class Random extends BaseInput
+class RandomInput extends BaseInput
 {
-    /**Fills the board random and set available options
+    /**
+     * Fills the board with a random generation.
      *
      * @param Board $_board
      * @param GetOpt $_options
      */
-    function fillBoard($_board, $_options)
+    function fillBoard(Board $_board, GetOpt $_options)
     {
         $percent = rand(20, 80);
         $fillingLVL = $_options->getOption("fillingLVL");
@@ -43,10 +42,7 @@ class Random extends BaseInput
             }
         }
 
-        //#############################################//
-        $percent = 100; //only for unit test. remove after testing. this sets all cells alive(true)
-        //#############################################//
-
+        if (isset($GLOBALS["__user_unit_test"])) $percent = 100; //only for unit test
 
         for ($x = 0; $x < $_board->width; $x++)
         {
@@ -60,13 +56,17 @@ class Random extends BaseInput
     }
 
     /**
-     * Add available options
+     * Add available options.
+     *
+     * available options:
+     *-fillingLVL
+     *
      * @param GetOpt $_options
      */
-    function addOptions($_options)
+    function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
-            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT, "Füllgrad der Lebenden Zellen in Prozent. Standard: 20-80%")
+            array(null, "fillingLVL", GetOpt::REQUIRED_ARGUMENT, "RandomInput - Füllgrad der Lebenden Zellen in Prozent. Standard: 20-80%\n")
         ));
     }
 }

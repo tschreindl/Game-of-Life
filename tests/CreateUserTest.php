@@ -7,21 +7,22 @@
  */
 
 use PHPUnit\Framework\TestCase;
+
 require_once "CreateUser.php";
 
 /**
- * Class CreateUserTest
+ * Tests that the class CreateUser works as expected.
  */
 class CreateUserTest extends TestCase
 {
     public function testCreateUser()
     {
-    $name = "Tim";
-    $language = "German";
+        $name = "Tim";
+        $language = "German";
 
-    $newUser = new CreateUser($name, $language);
-    $this->assertEquals($name, $newUser->createNewUser());
-    $this->assertEquals($language, $newUser->getLanguage());
+        $newUser = new CreateUser($name, $language);
+        $this->assertEquals($name, $newUser->createNewUser());
+        $this->assertEquals($language, $newUser->getLanguage());
     }
 
     public function testArray()
