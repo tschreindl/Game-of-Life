@@ -12,14 +12,14 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Input Class for a Random generation
+ * Input Class for a Random generation.
  *
  * @package GameOfLife\Inputs
  */
 class RandomInput extends BaseInput
 {
     /**
-     * Fills the board with a random generation
+     * Fills the board with a random generation.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -56,7 +56,7 @@ class RandomInput extends BaseInput
     }
 
     /**
-     * Add available options
+     * Add available options.
      *
      * available options:
      *-fillingLVL

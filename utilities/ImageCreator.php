@@ -7,9 +7,10 @@
  */
 
 namespace Output;
+use GameOfLife\Board;
 
 /**
- * Class to build an Image for various Outputs
+ * Class to build an Image for various Outputs.
  *
  * @package Output
  */
@@ -27,14 +28,14 @@ class ImageCreator
     }
 
     /**
-     * Creates the image based on the given Board Size and Cell Size
-     * Draws a grid and the living cells
-     * Returns the image to the used Output
+     * Creates the image based on the given Board Size and Cell Size.
+     * Draws a grid and the living cells.
+     * Returns the image to the used Output.
      *
-     * @param $_board
-     * @return resource
+     * @param Board $_board
+     * @return resource $image
      */
-    public function createImage($_board)
+    public function createImage(Board $_board)
     {
         $sizeX = $_board->width * ($this->cellSize + 2) + 2;
         $sizeY = $_board->height * ($this->cellSize + 2) + 2;
@@ -95,9 +96,8 @@ class ImageCreator
     }
 
     /**
-     * Function that handles the colors for
-     * cells, background, etc
-     * Returns array with R,G,B Color
+     * Function that handles the colors for cells, background, etc.
+     * Returns array with R,G,B Color.
      *
      * @param $_color
      * @return array

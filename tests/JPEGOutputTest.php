@@ -18,7 +18,7 @@ require_once "GetOptMock.php";
 
 
 /**
- * Class JPEGOutputTest
+ * Tests that the class JPEGOutput works as expected.
  */
 class JPEGOutputTest extends TestCase
 {

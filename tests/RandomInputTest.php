@@ -16,7 +16,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class RandomInputTest
+ * Tests that the class RandomInput works as expected.
  */
 class RandomInputTest extends TestCase
 {

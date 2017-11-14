@@ -13,15 +13,14 @@ use UlrichSG\GetOpt;
 
 
 /**
- * Input Class to fill the board from a .txt File
- * which must be stored in /Inputs/Example/
+ * Input Class to fill the board from a .txt File which must be stored in /Inputs/Example/.
  *
  * @package Input
  */
 class FileInput extends BaseInput
 {
     /**
-     * Path to Input File
+     * Path to Input File.
      *
      * @var string
      */
@@ -29,7 +28,7 @@ class FileInput extends BaseInput
     private $fileName = "Glider";            //current size 10x10 field
 
     /**
-     * Fills the board from the the txt file
+     * Fills the board from the the txt file.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -73,7 +72,7 @@ class FileInput extends BaseInput
     }
 
     /**
-     * Sets Parameter for FileInput
+     * Sets Parameter for FileInput.
      *
      * available Parameter:
      * -fileName

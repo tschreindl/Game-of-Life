@@ -12,7 +12,7 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Output Class to Output the Board to a JPEG Image
+ * Output Class to Output the Board to a JPEG Image.
  *
  * @package Output
  */
@@ -23,8 +23,8 @@ class JPEGOutput extends BaseOutput
     public $path;
 
     /**
-     * Code that runs before the Board Output starts
-     * Checks if options given and creates the directory for the JPEG files
+     * Code that runs before the Board Output starts.
+     * Checks if options given and creates the directory for the JPEG files.
      *
      * @param GetOpt $_options
      */
@@ -55,7 +55,7 @@ class JPEGOutput extends BaseOutput
     }
 
     /**
-     * Creates and returns an image of the current board
+     * Creates and returns an image of the current board.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -70,8 +70,8 @@ class JPEGOutput extends BaseOutput
     }
 
     /**
-     * Code that runs after the Board Output
-     * Says that the JPEG creation was successful
+     * Code that runs after the Board Output.
+     * Says that the JPEG creation was successful.
      *
      * @param GetOpt $_options
      */
@@ -81,7 +81,7 @@ class JPEGOutput extends BaseOutput
     }
 
     /**
-     * Set available options
+     * Set available options.
      *
      * available options:
      * -cellSize

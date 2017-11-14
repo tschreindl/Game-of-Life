@@ -16,7 +16,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class FileInputTest
+ * Tests that the class FileInput works as expected.
  */
 class FileInputTest extends TestCase
 {

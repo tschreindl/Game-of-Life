@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 require_once "CreateUser.php";
 
 /**
- * Class CreateUserTest
+ * Tests that the class CreateUser works as expected.
  */
 class CreateUserTest extends TestCase
 {

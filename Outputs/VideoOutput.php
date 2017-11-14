@@ -10,11 +10,10 @@ namespace Output;
 
 
 use GameOfLife\Board;
-use phpDocumentor\Reflection\Types\Object_;
 use UlrichSG\GetOpt;
 
 /**
- * Class VideoOutput
+ * Output Class to Output the Board to a Video File.
  *
  * @package Output
  */
@@ -26,8 +25,8 @@ class VideoOutput extends BaseOutput
     private $keepFrames = false;
 
     /**
-     * Code that runs before the Board Output starts
-     * Checks if options given and creates the directory for the PNG Frames files
+     * Code that runs before the Board Output starts.
+     * Checks if options given and creates the directory for the PNG Frames files.
      *
      * @param GetOpt $_options
      */
@@ -58,9 +57,8 @@ class VideoOutput extends BaseOutput
     }
 
     /**
-     * Creates and returns an image of the current board
-     * Saves the single files into a directory to create
-     * a movie in the function finishOutput
+     * Creates and returns an image of the current board.
+     * Saves the single files into a directory to create a movie in the function finishOutput.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -76,9 +74,8 @@ class VideoOutput extends BaseOutput
     }
 
     /**
-     * Code that runs after the Board Output
-     * Creates from the single files in the directory
-     * a movie with optional sound using ffmpeg.exe
+     * Code that runs after the Board Output.
+     * Creates from the single files in the directory a movie with optional sound using ffmpeg.exe.
      *
      * @param GetOpt $_options
      */
@@ -123,7 +120,7 @@ class VideoOutput extends BaseOutput
     }
 
     /**
-     * Set available options
+     * Set available options.
      *
      * available options:
      * -noSound

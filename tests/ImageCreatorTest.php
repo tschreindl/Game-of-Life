@@ -14,7 +14,7 @@ require_once __DIR__ . "/../Board.php";
 require_once __DIR__ . "/../utilities/ImageCreator.php";
 
 /**
- * Class ImageCreatorTest
+ * Tests that the class ImageCreator works as expected.
  */
 class ImageCreatorTest extends TestCase
 {

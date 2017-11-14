@@ -16,7 +16,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class ConsoleOutputTest
+ * Tests that the class ConsoleOutput works as expected.
  */
 class ConsoleOutputTest extends TestCase
 {

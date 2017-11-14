@@ -12,7 +12,7 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Output Class to Output the Board to a PNG Image
+ * Output Class to Output the Board to a PNG Image.
  *
  * @package Output
  */
@@ -23,8 +23,8 @@ class PNGOutput extends BaseOutput
     public $path;
 
     /**
-     * Code that runs before the Board Output starts
-     * Checks if options given and creates the directory for the PNG files
+     * Code that runs before the Board Output starts.
+     * Checks if options given and creates the directory for the PNG files.
      *
      * @param GetOpt $_options
      */
@@ -55,7 +55,7 @@ class PNGOutput extends BaseOutput
     }
 
     /**
-     * Creates and returns an image of the current board
+     * Creates and returns an image of the current board.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -75,7 +75,7 @@ class PNGOutput extends BaseOutput
     }
 
     /**
-     * Set available options:
+     * Set available options.
      *
      * available options:
      * -cellSize

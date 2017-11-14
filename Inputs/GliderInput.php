@@ -12,14 +12,14 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Input Class for a generation called "Glider"
+ * Input Class for a generation called "Glider".
  *
  * @package GameOfLife\Inputs
  */
 class GliderInput extends BaseInput
 {
     /**
-     * Fills the board with a generation called Glider
+     * Fills the board with a generation called Glider.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -46,7 +46,7 @@ class GliderInput extends BaseInput
     }
 
     /**
-     * Add available options
+     * Add available options.
      *
      * available options:
      * -PosX

@@ -12,14 +12,14 @@ use UlrichSG\Getopt;
 use GameOfLife\Board;
 
 /**
- * Input Class to let the user input which cells are alive
+ * Input Class to let the user input which cells are alive.
  *
  * @package Input
  */
 class User extends BaseInput
 {
     /**
-     * Fills the board with cells that the user inputs
+     * Fills the board with cells that the user inputs.
      *
      * @param Board $_board The Board
      * @param GetOpt $_options All options (including input specific options)
@@ -92,7 +92,7 @@ class User extends BaseInput
     }
 
     /**
-     * Adds UserInput specific options to the option list
+     * Adds UserInput specific options to the option list.
      *
      * @param GetOpt $_options Options to which the input specific options are added
      */
@@ -101,10 +101,10 @@ class User extends BaseInput
     }
 
     /**
-     * Prints the current Board to PHP/Console
-     * Only needed for this Class/Input
+     * Prints the current Board to PHP/Console.
+     * Only needed for this Class.
      *
-     * @param $_board
+     * @param Board $_board
      */
     public function print(Board $_board)
     {

@@ -15,10 +15,10 @@ use UlrichSG\GetOpt;
 /**
  * Class GifOutput
  *
- * Creates an animated gif from game of life boards
- * Use startoutput() to initialize the output
- * Use outputBoard($_board) to save a single board to the list of frames
- * use finishOutput() to generate the gif file
+ * Creates an animated gif from game of life boards.
+ * Use startoutput() to initialize the output.
+ * Use outputBoard($_board) to save a single board to the list of frames.
+ * use finishOutput() to generate the gif file.
  *
  * @package Output
  */
@@ -30,7 +30,7 @@ class GifOutput extends BaseOutput
     private $frameTime = 10;
 
     /**
-     * Initializes the output path of the object
+     * Initializes the output path of the object.
      *
      * @param GetOpt $_options
      */
@@ -64,9 +64,9 @@ class GifOutput extends BaseOutput
     }
 
     /**
-     * Collects the gif frames in an array
+     * Collects the gif frames in an array.
      *
-     * @param \GameOfLife\Board $_board Current game board
+     * @param Board $_board Current game board
      * @param GetOpt $_options
      */
     public function outputBoard(Board $_board, GetOpt $_options)
@@ -78,7 +78,7 @@ class GifOutput extends BaseOutput
     }
 
     /**
-     * Creates and saves the gif file
+     * Creates and saves the gif file.
      *
      * @param $_options
      */
@@ -103,7 +103,7 @@ class GifOutput extends BaseOutput
     }
 
     /**
-     * Adds GifOutput's class specific options to the option list
+     * Adds GifOutput's class specific options to the option list.
      *
      * available options:
      * -cellSize
@@ -111,7 +111,7 @@ class GifOutput extends BaseOutput
      * -bkColor
      * -frameTime
      *
-     * @param \UlrichSG\GetOpt $_options Option List
+     * @param GetOpt $_options Option List
      */
     function addOptions(GetOpt $_options)
     {

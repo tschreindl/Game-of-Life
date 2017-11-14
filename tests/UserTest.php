@@ -16,7 +16,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class UserTest
+ * Tests that the class User works as expected.
  */
 class UserTest extends TestCase
 {

@@ -12,7 +12,7 @@ use GameOfLife\Board;
 use UlrichSG\GetOpt;
 
 /**
- * Output Class to Output the Board in PHP/Terminal
+ * Output Class to Output the Board in PHP/Terminal.
  *
  * @package Output
  */
@@ -23,7 +23,7 @@ class ConsoleOutput extends BaseOutput
     private $echo2 = "─────┘\n";
 
     /**
-     * Runs before the Board Output starts
+     * Runs before the Board Output starts.
      *
      * @param GetOpt $_options
      */
@@ -33,7 +33,7 @@ class ConsoleOutput extends BaseOutput
     }
 
     /**
-     * Prints the current Board in PHP/Terminal
+     * Prints the current Board in PHP/Terminal.
      *
      * @param Board $_board
      * @param GetOpt $_options
@@ -84,7 +84,7 @@ class ConsoleOutput extends BaseOutput
     }
 
     /**
-     * Add available options
+     * Add available options.
      *
      * available options:
      * -cmd

@@ -17,7 +17,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class VideoOutputTest
+ * Tests that the class VideoOutput works as expected.
  */
 class VideoOutputTest extends TestCase
 {

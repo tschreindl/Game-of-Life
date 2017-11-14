@@ -17,7 +17,7 @@ require_once __DIR__ . "/../Board.php";
 require_once __DIR__ . "/../utilities/GifCreator.php";
 
 /**
- * Class GifOutputTest
+ * Tests that the class GifOutput works as expected.
  */
 class GifOutputTest extends TestCase
 {

@@ -18,7 +18,7 @@ require_once "GetOptMock.php";
 
 
 /**
- * Class PNGOutputTest
+ * Tests that the class PNGOutput works as expected.
  */
 class PNGOutputTest extends TestCase
 {

@@ -16,7 +16,7 @@ require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
- * Class GliderInputTest
+ * Tests that the class GliderInput works as expected.
  */
 class GliderInputTest extends TestCase
 {
