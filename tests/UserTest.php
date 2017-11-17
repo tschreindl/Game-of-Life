@@ -10,9 +10,6 @@ use GameOfLife\Board;
 use Input\User;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Inputs/BaseInput.php";
-require_once __DIR__ . "/../Inputs/User.php";
-require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
@@ -27,7 +24,6 @@ class UserTest extends TestCase
         $board = new Board(20, 20);
         $user = new User();
         $options = new GetOptMock();
-        $this->assertTrue(true);
         $user->fillBoard($board, $options->createOpt());
         $this->expectOutputString(
             "------------------------------------------------------------\n" .
@@ -82,29 +78,20 @@ class UserTest extends TestCase
         {
             foreach ($items as $item)
             {
-                if ($item == true)
+                if ($item->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item);
-                    $outString = $outString . " x ";
+                    $this->assertTrue($item->isAlive());
                 }
-                if ($item == false)
+                if ($item->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item);
-                    $outString = $outString . "   ";
+                    $this->assertFalse($item->isAlive());
                 }
             }
-            $outString = $outString . "|\n";
             $this->assertEquals($board->height, count($items));
         }
-        for ($strokes = 1; $strokes <= $board->width; $strokes++)
-        {
-            $outString = $outString . "---";
-        }
-        $outString = $outString . "\n";
 
-        $this->expectOutputString($outString);
         $this->assertEquals($mustBeAlive, $count);
         $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
         $this->assertNotEmpty($userInput);

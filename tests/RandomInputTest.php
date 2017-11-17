@@ -10,9 +10,6 @@ use GameOfLife\Board;
 use Input\RandomInput;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Inputs/BaseInput.php";
-require_once __DIR__ . "/../Inputs/RandomInput.php";
-require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
@@ -32,7 +29,7 @@ class RandomInputTest extends TestCase
         {
             foreach ($item as $val)
             {
-                $this->assertEquals(true, $val); //must set $percent = 100 in RandomInput.php to pass
+                $this->assertEquals(true, $val->isAlive()); //must set $percent = 100 in RandomInput.php to pass
             }
             $this->assertEquals($board->height, count($item));
         }

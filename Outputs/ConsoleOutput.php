@@ -63,11 +63,11 @@ class ConsoleOutput extends BaseOutput
             echo "│";
             for ($x = 0; $x < $_board->width; $x++)
             {
-                if ($_board->board[$x][$y] == false)
+                if ($_board->board[$x][$y]->isAlive() == false)
                 {
                     echo "   ";
                 }
-                elseif ($_board->board[$x][$y] == true)
+                elseif ($_board->board[$x][$y]->isAlive() == true)
                 {
                     echo " ¤ ";
                 }

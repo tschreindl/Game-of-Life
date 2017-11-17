@@ -10,9 +10,6 @@ use GameOfLife\Board;
 use Input\FileInput;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Inputs/BaseInput.php";
-require_once __DIR__ . "/../Inputs/FileInput.php";
-require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
@@ -35,15 +32,15 @@ class FileInputTest extends TestCase
         {
             foreach ($items as $item)
             {
-                if ($item == true)
+                if ($item->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item);
+                    $this->assertTrue($item->isAlive());
                 }
-                if ($item == false)
+                if ($item->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item);
+                    $this->assertFalse($item->isAlive());
                 }
             }
             $this->assertEquals($board->height, count($items));

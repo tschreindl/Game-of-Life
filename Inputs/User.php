@@ -76,7 +76,7 @@ class User extends BaseInput
                         }
                         else
                         {
-                            $currentCellState = $_board->board[$inputX - 1][$inputY - 1];
+                            $currentCellState = $_board->board[$inputX - 1][$inputY - 1]->isAlive();
 
                             $_board->setField($inputX - 1, $inputY - 1, !$currentCellState);
 
@@ -112,11 +112,11 @@ class User extends BaseInput
         {
             for ($x = 0; $x < $_board->width; $x++)
             {
-                if ($_board->board[$x][$y] == false)
+                if ($_board->board[$x][$y]->isAlive() == false)
                 {
                     echo "   ";
                 }
-                elseif ($_board->board[$x][$y] == true)
+                elseif ($_board->board[$x][$y]->isAlive() == true)
                 {
                     echo " x ";
                 }

@@ -10,9 +10,6 @@ use GameOfLife\Board;
 use Output\ImageCreator;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Board.php";
-require_once __DIR__ . "/../utilities/ImageCreator.php";
-
 /**
  * Tests that the class ImageCreator works as expected.
  */

@@ -11,8 +11,6 @@ use Output\BaseOutput;
 use PHPUnit\Framework\TestCase;
 
 require_once "GetOptMock.php";
-require_once __DIR__ . "/../Outputs/BaseOutput.php";
-require_once __DIR__ . "/../Board.php";
 
 /**
  * Class BaseOutputTest

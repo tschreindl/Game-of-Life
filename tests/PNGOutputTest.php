@@ -10,12 +10,7 @@ use GameOfLife\Board;
 use Output\PNGOutput;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Outputs/BaseOutput.php";
-require_once __DIR__ . "/../utilities/ImageCreator.php";
-require_once __DIR__ . "/../Outputs/PNGOutput.php";
-require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
-
 
 /**
  * Tests that the class PNGOutput works as expected.

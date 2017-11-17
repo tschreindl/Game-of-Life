@@ -11,8 +11,6 @@ use Input\BaseInput;
 use PHPUnit\Framework\TestCase;
 
 require_once "GetOptMock.php";
-require_once __DIR__."/../Inputs/BaseInput.php";
-require_once __DIR__."/../Board.php";
 
 /**
  * Class BaseInputTest

@@ -10,9 +10,6 @@ use GameOfLife\Board;
 use Output\ConsoleOutput;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Outputs/BaseOutput.php";
-require_once __DIR__ . "/../Outputs/ConsoleOutput.php";
-require_once __DIR__ . "/../Board.php";
 require_once "GetOptMock.php";
 
 /**
@@ -62,16 +59,16 @@ class ConsoleOutputTest extends TestCase
             $outString = $outString . "│";
             foreach ($items as $item)
             {
-                if ($item == true)
+                if ($item->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item);
+                    $this->assertTrue($item->isAlive());
                     $outString = $outString . " ¤ ";
                 }
-                if ($item == false)
+                if ($item->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item);
+                    $this->assertFalse($item->isAlive());
                     $outString = $outString . "   ";
                 }
             }

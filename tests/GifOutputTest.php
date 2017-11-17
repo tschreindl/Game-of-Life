@@ -11,10 +11,6 @@ use Output\GifOutput;
 use PHPUnit\Framework\TestCase;
 
 require_once "GetOptMock.php";
-require_once __DIR__ . "/../Outputs/GifOutput.php";
-require_once __DIR__ . "/../utilities/ImageCreator.php";
-require_once __DIR__ . "/../Board.php";
-require_once __DIR__ . "/../utilities/GifCreator.php";
 
 /**
  * Tests that the class GifOutput works as expected.

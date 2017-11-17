@@ -8,15 +8,18 @@
 
 ini_set("memory_limit", "2048M");
 
-$loader = require __DIR__."/vendor/autoload.php";
+$loader = require __DIR__ . "/vendor/autoload.php";
 $loader->addPsr4("Input\\", __DIR__ . "/Inputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/Outputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/utilities/");
 $loader->addPsr4("UlrichSG\\", __DIR__ . "/utilities/");
-$loader->addPsr4("GameOfLife\\", __DIR__ . "/");
+$loader->addPsr4("GameOfLife\\", __DIR__ . "/src/");
 $loader->addPsr4("GifCreator\\", __DIR__ . "/utilities/");
+$loader->addPsr4("Rule\\", __DIR__ . "/Rules/");
 
 use GameOfLife\Board;
+use GameOfLife\GameLogic;
+use Rule\CopyRule;
 use UlrichSG\GetOpt;
 
 $options = new  GetOpt(array(
@@ -42,6 +45,13 @@ foreach (glob(__DIR__ . "/Outputs/*.php") as $output)
     $outputClassName = "Output\\" . basename($output, ".php");
     $outputClass = new $outputClassName();
     if ($outputClass instanceof \Output\BaseOutput) $outputClass->addOptions($options);
+}
+
+foreach (glob(__DIR__ . "/Rules/*.php") as $rule)
+{
+    $ruleClassName = "Rule\\" . basename($rule, ".php");
+    $ruleClass = new $ruleClassName();
+    if ($ruleClass instanceof \Rule\BaseRule) $ruleClass->addOptions($options);
 }
 
 $options->parse();
@@ -174,6 +184,8 @@ else
 }
 
 $board = new Board($width, $height);
+$rule = new CopyRule();
+$gameLogic = new GameLogic($rule);
 $input->fillBoard($board, $options);
 
 if ($maxSteps > 0)
@@ -182,7 +194,7 @@ if ($maxSteps > 0)
     for ($i = 0; $i < $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
-        $board->calculateNextStep();
+        $gameLogic->calculateNextBoard($board);
         usleep($sleep * 1000000);
     }
     echo "\nAnzahl von $maxSteps Generationen erreicht.";
@@ -191,13 +203,12 @@ if ($maxSteps > 0)
 else
 {
     $output->startOutput($options);
-
     do
     {
         $output->outputBoard($board, $options);
-        $board->calculateNextStep();
+        $gameLogic->calculateNextBoard($board);
         usleep($sleep * 1000000);
-    } while ($board->isFinished() == false);
+    } while ($gameLogic->isLoopDetected($board) == false);
 
     $output->finishOutput($options);
 }

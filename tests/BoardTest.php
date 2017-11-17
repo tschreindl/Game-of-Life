@@ -9,15 +9,13 @@
 use GameOfLife\Board;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . "/../Board.php";
-
 /**
  * Tests that the class Board works as expected.
  */
 class BoardTest extends TestCase
 {
-    protected $width = 30;
-    protected $height = 20;
+    protected $width = 10;
+    protected $height = 10;
     protected $x = 2;
     protected $y = 5;
 
@@ -25,11 +23,11 @@ class BoardTest extends TestCase
     {
         $board = new Board($this->width, $this->height);
         $this->assertEquals($this->width * $this->height, count($board->initEmpty(), COUNT_RECURSIVE) - $this->width);
-        foreach ($board->initEmpty() as $item)
+        foreach ($board->board as $y => $item)
         {
-            foreach ($item as $val)
+            foreach ($item as $x => $val)
             {
-                $this->assertEquals(false, $val);
+                $this->assertEquals(false, $val->isAlive());
             }
             $this->assertEquals($this->height, count($item));
         }
@@ -38,7 +36,6 @@ class BoardTest extends TestCase
         $this->assertClassHasAttribute("height", Board::class);
         $this->assertClassHasAttribute("width", Board::class);
         $this->assertClassHasAttribute("board", Board::class);
-        $this->assertClassHasAttribute("historyOfBoards", Board::class);
     }
 
     function testSetField()
@@ -46,38 +43,18 @@ class BoardTest extends TestCase
         $value = true;
         $board = new Board($this->width, $this->height);
         $board->setField($this->x, $this->y, $value);
-        $this->assertEquals($value, $board->board[$this->x][$this->y]);
-    }
-
-    function testCalculateNextStep()
-    {
-        $board = new Board($this->width, $this->height);
-        $board->setField(1, 1, true);
-        $board->setField(2, 1, true);
-        $board->setField(3, 1, true);
-        $oldBoard = $board->board;
-        $board->calculateNextStep();
-        $this->assertNotEquals($oldBoard, $board->board);
-        $this->assertEquals($this->width * $this->height, count($board->board, COUNT_RECURSIVE) - $this->width);
+        $this->assertEquals($value, $board->board[$this->x][$this->y]->isAlive());
     }
 
     function testCheckNeighbours()
     {
         $board = new Board($this->width, $this->height);
 
-        $this->assertEquals(0, $board->checkNeighbour($this->x, $this->y));
+        $this->assertEquals(0, $board->neighborsOfField($board->board[0][0]));
         $board->setField(1, 1, true);
         $board->setField(2, 1, true);
         $board->setField(3, 1, true);
-        $this->assertEquals(2, $board->checkNeighbour(02, 1));
+        $this->assertEquals(2, $board->neighborsOfField($board->board[2][1]));
     }
 
-    function testIsFinished()
-    {
-        $board = new Board($this->width, $this->height);
-        $board->initEmpty();
-        $board->calculateNextStep();
-        $this->assertTrue($board->isFinished());
-        $this->expectOutputString("\nKeine weiteren Generationen mehr oder wiederholende Generationen!\n");
-    }
 }
