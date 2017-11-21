@@ -85,7 +85,8 @@ class GameLogic
     {
         foreach ($this->historyOfBoards as $oldBoard)
         {
-            if ($this->generateString($_board) == $oldBoard)
+            $board = $this->generateString($_board);
+            if ($board == $oldBoard || !stristr($board, "1"))
             {
                 echo "\nKeine weiteren Generationen mehr oder wiederholende Generationen!\n";
                 return true;

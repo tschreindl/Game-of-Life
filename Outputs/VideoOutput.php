@@ -134,10 +134,10 @@ class VideoOutput extends BaseOutput
     function addOptions(GetOpt $_options)
     {
         $_options->addOptions(array(
-            array(null, "noSound", GetOpt::NO_ARGUMENT, "VideoOutput - Das Video wird ohne Ton erzeugt."),
+            array(null, "noSound", GetOpt::NO_ARGUMENT, "VideoOutput - Das Video wird ohne Ton erzeugt. Standard: Endlos-Ton"),
             array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Größe der lebenden Zellen. Standard: 40"),
             array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Farbe der lebenden Zellen. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 255,255,0 (Gelb)"),
-            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Hintergrundfarbe des Bildes. Muss als R,G,B oder #HEX angeben werden. Standard: 135,135,135 (Grau)\n"),
+            array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Hintergrundfarbe des Bildes. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 135,135,135 (Grau)\n"),
         ));
     }
 }

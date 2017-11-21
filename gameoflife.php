@@ -119,17 +119,27 @@ if ($options->getOption("sleepTime"))
 
 if ($options->getOption("input"))
 {
+    $getOptInput = $options->getOption("input");
 
-    if (class_exists("Input\\" . $options->getOption("input")))
+    foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
     {
-        $inputClassName = "Input\\" . $options->getOption("input");
+        if (stristr(basename($input, ".php"), $getOptInput))
+        {
+            $getOptInput = basename($input, ".php");
+            break;
+        }
+    }
+
+    if (class_exists("Input\\" . $getOptInput))
+    {
+        $inputClassName = "Input\\" . $getOptInput;
     }
     else
     {
-        echo "Input ->" . $options->getOption("input") . ".php<- wurde nicht gefunden!";
+        echo "Input ->" . $getOptInput . ".php<- wurde nicht gefunden!";
         die();
     }
-    if ($options->getOption("input") == "GliderGun")
+    if ($getOptInput == "GliderGun")
     {
         if ($width < 37 || $height < 11)
         {
@@ -141,26 +151,48 @@ if ($options->getOption("input"))
 
 if ($options->getOption("output"))
 {
-    if (class_exists("Output\\" . $options->getOption("output")))
+    $getOptOutput = $options->getOption("output");
+
+    foreach (glob(__DIR__ . "/Outputs/*.php") as $output)
     {
-        $outputClassName = "Output\\" . $options->getOption("output");
+        if (stristr(basename($output, ".php"), $getOptOutput))
+        {
+            $getOptOutput = basename($output, ".php");
+            break;
+        }
+    }
+
+    if (class_exists("Output\\" . $getOptOutput))
+    {
+        $outputClassName = "Output\\" . $getOptOutput;
     }
     else
     {
-        echo "Output ->" . $options->getOption("output") . ".php<- wurde nicht gefunden!";
+        echo "Output ->" . $getOptOutput . ".php<- wurde nicht gefunden!";
         die();
     }
 }
 
 if ($options->getOption("rule"))
 {
-    if (class_exists("Rule\\" . $options->getOption("rule")))
+    $getOptRule = $options->getOption("rule");
+
+    foreach (glob(__DIR__ . "/Rules/*.php") as $rule)
     {
-        $ruleClassName = "Rule\\" . $options->getOption("rule");
+        if (stristr(basename($rule, ".php"), $getOptRule))
+        {
+            $getOptRule = basename($rule, ".php");
+            break;
+        }
+    }
+
+    if (class_exists("Rule\\" . $getOptRule))
+    {
+        $ruleClassName = "Rule\\" . $getOptRule;
     }
     else
     {
-        echo "Rule ->" . $options->getOption("rule") . ".php<- wurde nicht gefunden!";
+        echo "Rule ->" . $getOptRule . ".php<- wurde nicht gefunden!";
         die();
     }
 }
@@ -179,8 +211,7 @@ if ($options->getOption("help"))
     echo "-Eine tote Zelle mit genau drei lebenden Nachbarn wird in der nächsten Generation neu geboren\n";
     echo "-Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der nächsten Generation an Einsamkeit\n";
     echo "-Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der nächsten Generation am Leben\n";
-    echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der nächsten Generation an Überbevölkerung\n";
-    echo "\n";
+    echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der nächsten Generation an Überbevölkerung\n\n";
     $options->showHelp();
     return;
 }

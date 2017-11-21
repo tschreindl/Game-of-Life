@@ -17,7 +17,7 @@ use GameOfLife\Board;
  *
  * @package Input
  */
-class User extends BaseInput
+class UserInput extends BaseInput
 {
     /**
      * Fills the board with cells that the user inputs.
@@ -33,13 +33,6 @@ class User extends BaseInput
         // input loop
         while ($inputEnd == false)
         {
-            // Print current board
-            for ($strokes = 1; $strokes <= $_board->width; $strokes++)
-            {
-                echo "---";
-            }
-            echo "\n";
-
             $this->print($_board);
 
             // command prompt
@@ -92,15 +85,6 @@ class User extends BaseInput
     }
 
     /**
-     * Adds UserInput specific options to the option list.
-     *
-     * @param GetOpt $_options Options to which the input specific options are added
-     */
-    public function addOptions(GetOpt $_options)
-    {
-    }
-
-    /**
      * Prints the current Board to PHP/Console.
      * Only needed for this Class.
      *
@@ -108,8 +92,17 @@ class User extends BaseInput
      */
     public function print(Board $_board)
     {
+        echo "┌";
+        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        {
+            echo "───";
+        }
+        echo "┐\n";
+
+
         foreach ($_board->board as $line)
         {
+            echo "│";
             foreach ($line as $field)
             {
                 /** @var Field $field */
@@ -119,16 +112,17 @@ class User extends BaseInput
                 }
                 elseif ($field->isAlive() == true)
                 {
-                    echo " x ";
+                    echo " ¤ ";
                 }
             }
-            echo "|\n";
+            echo "│\n";
         }
 
+        echo "└";
         for ($strokes = 1; $strokes <= $_board->width; $strokes++)
         {
-            echo "---";
+            echo "───";
         }
-        echo "\n";
+        echo "┘\n";
     }
 }

@@ -7,7 +7,9 @@
  */
 
 namespace Output;
+
 use GameOfLife\Board;
+use GameOfLife\Field;
 
 /**
  * Class to build an Image for various Outputs.
@@ -79,11 +81,12 @@ class ImageCreator
         $charPosX = 2;
         $charPosY = 2;
 
-        for ($y = 0; $y < $_board->height; $y++)
+        foreach ($_board->board as $line)
         {
-            for ($x = 0; $x < $_board->width; $x++)
+            foreach ($line as $field)
             {
-                if ($_board->board[$x][$y] == true)
+                /** @var Field $field */
+                if ($field->isAlive())
                 {
                     imagefilledrectangle($image, $charPosX + 1, $charPosY + 1, $charPosX + $this->cellSize - 2, $charPosY + $this->cellSize - 2, $charColor);
                 }
@@ -92,6 +95,7 @@ class ImageCreator
             $charPosX = 2;
             $charPosY = $charPosY + $this->cellSize + 2;
         }
+
         return $image;
     }
 

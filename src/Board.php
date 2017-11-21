@@ -57,7 +57,7 @@ class Board
      */
     function setField(int $_x, int $_y, bool $_value)
     {
-        $this->board[$_y][$_x]->setValue($_value);
+        if (isset($this->board[$_y][$_x])) $this->board[$_y][$_x]->setValue($_value);
     }
 
     /**
