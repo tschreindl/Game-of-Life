@@ -6,6 +6,7 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
+use GameOfLife\Board;
 use GameOfLife\Field;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +18,7 @@ class FieldTest extends TestCase
 
     function testSetValue()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $field = new Field($board, 1, 1);
         $field->setValue(true);
         $this->assertTrue($field->isAlive());
@@ -25,7 +26,7 @@ class FieldTest extends TestCase
 
     function testIsAlive()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $field = new Field($board, 1, 1);
         $field->setValue(false);
         $this->assertFalse($field->isAlive());
@@ -33,21 +34,21 @@ class FieldTest extends TestCase
 
     function testX()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $field = new Field($board, 1, 1);
         $this->assertEquals(1, $field->x());
     }
 
     function testY()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $field = new Field($board, 1, 1);
         $this->assertEquals(1, $field->y());
     }
 
     function testLivingNeighbours()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $board->board[1][1]->setValue(true);
         $board->board[2][1]->setValue(true);
         $board->board[1][2]->setValue(true);
@@ -57,7 +58,7 @@ class FieldTest extends TestCase
 
     function testDeadNeighbours()
     {
-        $board = new \GameOfLife\Board(10, 10);
+        $board = new Board(10, 10);
         $board->board[1][1]->setValue(true);
         $board->board[2][1]->setValue(true);
         $board->board[1][2]->setValue(true);

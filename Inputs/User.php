@@ -8,6 +8,7 @@
 
 namespace Input;
 
+use GameOfLife\Field;
 use UlrichSG\Getopt;
 use GameOfLife\Board;
 
@@ -46,9 +47,8 @@ class User extends BaseInput
             echo "\nEnter 's' or 'start' to start the simulation\n\n";
 
 
-            //This is an ugly hack to make unit-tests work. Pleaes bear with it! :-)
+            //This is an ugly hack to make unit-tests work. Please bear with it! :-)
             if (isset($GLOBALS["__user_unit_test"])) break;
-
 
             $inputX = readline("X:");
 
@@ -108,15 +108,16 @@ class User extends BaseInput
      */
     public function print(Board $_board)
     {
-        for ($y = 0; $y < $_board->height; $y++)
+        foreach ($_board->board as $line)
         {
-            for ($x = 0; $x < $_board->width; $x++)
+            foreach ($line as $field)
             {
-                if ($_board->board[$x][$y]->isAlive() == false)
+                /** @var Field $field */
+                if ($field->isAlive() == false)
                 {
                     echo "   ";
                 }
-                elseif ($_board->board[$x][$y]->isAlive() == true)
+                elseif ($field->isAlive() == true)
                 {
                     echo " x ";
                 }

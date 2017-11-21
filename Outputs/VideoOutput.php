@@ -19,6 +19,7 @@ use UlrichSG\GetOpt;
  */
 class VideoOutput extends BaseOutput
 {
+    /** @var ImageCreator */
     private $imageCreator;
     private $generation = 1;
     public $path;
@@ -67,7 +68,7 @@ class VideoOutput extends BaseOutput
     {
         $image = null;
         echo "\rAktuelle Generation: " . $this->generation;
-        if ($this->imageCreator instanceof ImageCreator) $image = $this->imageCreator->createImage($_board);
+        $image = $this->imageCreator->createImage($_board);
         imagepng($image, $this->path . str_pad($this->generation, 4, "0", STR_PAD_LEFT) . ".png");
         imagedestroy($image);
         $this->generation++;

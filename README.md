@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/tschreindl/Game-of-Life.svg?branch=cleaning%2Fimprove-doc)](https://travis-ci.org/tschreindl/Game-of-Life)
 
 # Game-of-Life
-### Game of Life mit Conways Regeln
+### Game of Life mit verschiedenen Regeln
 
-Conways Game of Life ist ein Generationen Spiel
+Game of Life ist ein Generationen Spiel
 
-Spielregeln:
-* Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren
-* Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit
-* Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben
-* Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung
+Spielregeln (Achtung! Gilt nur für die Regeln nach Conway!):
+* Eine tote Zelle mit genau drei lebenden Nachbarn wird in der nächsten Generation neu geboren
+* Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der nächsten Generation an Einsamkeit
+* Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der nächsten Generation am Leben
+* Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der nächsten Generation an Überbevölkerung
 
 <br />
 
@@ -23,10 +23,13 @@ php gameoflife.php [option] [parameter]
 
 ### Folgende Optionen können beim Start benutzt werden:
 ```
--i oder --input    [String]   --> Legt einen Input fest der sich im Ordner "Inputs" befinden muss. Z.b RandomInput, GliderInput, etc. Standard ist RandomInput.
+-i oder --input    [String]   --> Legt einen Input fest der sich im Ordner "Inputs" befinden muss. z.B. RandomInput, GliderInput, etc. Standard ist RandomInput.
+-o oder --output   [String]   --> Legt einen Output fest der sich im Ordner "Outputs" befinden muss. z.B. ConsoleOutput, VideoOutput, etc. Standard ist ConsoleOutput.
+-r oder --rule     [String]   --> Legt eine Regel fest die sich im Ordner "Rules" befinden muss. z.B. StandardRule(Conway), CopyRule, etc. Standard ist Conway.
 -w oder --width    [Integer]  --> Legt die Breite des Spielfeldes fest. Standard ist 20.
 -h oder --height   [Integer]  --> Legt die Höhe des Spielfeldes fest. Standard ist 20.
 -s oder --maxSteps [Integer]  --> Legt die maximale Anzahl an Schritten fest um in keine Endlos-Schleife zu geraten.
+-t oder --sleepTime[Integer]  --> Legt die Pause zwischen jeder neuen Generation fest. Angabe in Sekunden. Standard ist 0.0 Sek.
 -v oder --version             --> Gibt die aktuelle Version des Spieles aus.
 -r oder --help                --> Gibt eine Hilfe über Parameter und Regeln aus.
 ```

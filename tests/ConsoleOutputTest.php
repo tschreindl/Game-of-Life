@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use Output\ConsoleOutput;
 use PHPUnit\Framework\TestCase;
 
@@ -54,26 +55,27 @@ class ConsoleOutputTest extends TestCase
         $outString = $outString . "─────┐\n";
 
 
-        foreach ($board->board as $items)
+        foreach ($board->board as $line)
         {
             $outString = $outString . "│";
-            foreach ($items as $item)
+            foreach ($line as $field)
             {
-                if ($item->isAlive() == true)
+                /** @var Field $field */
+                if ($field->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item->isAlive());
+                    $this->assertTrue($field->isAlive());
                     $outString = $outString . " ¤ ";
                 }
-                if ($item->isAlive() == false)
+                if ($field->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item->isAlive());
+                    $this->assertFalse($field->isAlive());
                     $outString = $outString . "   ";
                 }
             }
             $outString = $outString . "│\n";
-            $this->assertEquals($board->height, count($items));
+            $this->assertEquals($board->height, count($line));
         }
         $outString = $outString . "└";
         for ($strokes = 1; $strokes <= $board->width; $strokes++)

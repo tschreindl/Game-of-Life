@@ -9,6 +9,7 @@
 namespace Output;
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use UlrichSG\GetOpt;
 
 /**
@@ -58,16 +59,18 @@ class ConsoleOutput extends BaseOutput
         }
         echo $this->echo1;
 
-        for ($y = 0; $y < $_board->height; $y++)
+
+        foreach ($_board->board as $line)
         {
             echo "│";
-            for ($x = 0; $x < $_board->width; $x++)
+            foreach ($line as $field)
             {
-                if ($_board->board[$x][$y]->isAlive() == false)
+                /** @var Field $field */
+                if ($field->isAlive() == false)
                 {
                     echo "   ";
                 }
-                elseif ($_board->board[$x][$y]->isAlive() == true)
+                elseif ($field->isAlive() == true)
                 {
                     echo " ¤ ";
                 }

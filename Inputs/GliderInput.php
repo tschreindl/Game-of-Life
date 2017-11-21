@@ -58,7 +58,7 @@ class GliderInput extends BaseInput
     {
         $_options->addOptions(array(
             array(null, "PosX", GetOpt::REQUIRED_ARGUMENT, "GliderInput - Legt die X Position des Gliders fest. Standard: Mittig"),
-            array(null, "PosY", GetOpt::REQUIRED_ARGUMENT, "GliderInput - Legt die Y Position des Gliders fest. Standard: Mitiig\n"),
+            array(null, "PosY", GetOpt::REQUIRED_ARGUMENT, "GliderInput - Legt die Y Position des Gliders fest. Standard: Mittig\n"),
         ));
     }
 }

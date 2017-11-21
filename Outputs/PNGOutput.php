@@ -18,6 +18,7 @@ use UlrichSG\GetOpt;
  */
 class PNGOutput extends BaseOutput
 {
+    /** @var ImageCreator */
     private $imageCreator;
     private $generation = 1;
     public $path;

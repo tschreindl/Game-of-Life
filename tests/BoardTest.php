@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,13 +24,14 @@ class BoardTest extends TestCase
     {
         $board = new Board($this->width, $this->height);
         $this->assertEquals($this->width * $this->height, count($board->initEmpty(), COUNT_RECURSIVE) - $this->width);
-        foreach ($board->board as $y => $item)
+        foreach ($board->board as $line)
         {
-            foreach ($item as $x => $val)
+            foreach ($line as $field)
             {
-                $this->assertEquals(false, $val->isAlive());
+                /** @var Field $field */
+                $this->assertEquals(false, $field->isAlive());
             }
-            $this->assertEquals($this->height, count($item));
+            $this->assertEquals($this->height, count($line));
         }
         $this->assertNotEmpty($board->initEmpty());
 

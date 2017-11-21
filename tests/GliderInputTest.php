@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use Input\GliderInput;
 use PHPUnit\Framework\TestCase;
 
@@ -25,14 +26,14 @@ class GliderInputTest extends TestCase
         $random = new GliderInput();
         $options = new  GetOptMock();
         $random->fillBoard($board, $options->createOpt());
-        foreach ($board->board as $item)
+        foreach ($board->board as $line)
         {
-            foreach ($item as $val)
+            foreach ($line as $field)
             {
-                if ($val->isAlive() == true) $count++;
-                //$this->assertEquals(true, $val); //must set $percent = 100 in RandomInput.php to pass
+                /** @var Field $field */
+                if ($field->isAlive() == true) $count++;
             }
-            $this->assertEquals($board->height, count($item));
+            $this->assertEquals($board->height, count($line));
         }
         $this->assertEquals(5, $count);
         $this->assertNotEmpty($random);

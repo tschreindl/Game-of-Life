@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use Input\RandomInput;
 use PHPUnit\Framework\TestCase;
 
@@ -25,13 +26,14 @@ class RandomInputTest extends TestCase
         $random = new RandomInput();
         $options = new  GetOptMock();
         $random->fillBoard($board, $options->createOpt());
-        foreach ($board->board as $item)
+        foreach ($board->board as $line)
         {
-            foreach ($item as $val)
+            foreach ($line as $field)
             {
-                $this->assertEquals(true, $val->isAlive()); //must set $percent = 100 in RandomInput.php to pass
+                /** @var Field $field */
+                $this->assertEquals(true, $field->isAlive());
             }
-            $this->assertEquals($board->height, count($item));
+            $this->assertEquals($board->height, count($line));
         }
         $this->assertNotEmpty($random);
         unset($GLOBALS["__user_unit_test"]);

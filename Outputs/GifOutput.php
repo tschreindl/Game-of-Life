@@ -16,7 +16,7 @@ use UlrichSG\GetOpt;
  * Class GifOutput
  *
  * Creates an animated gif from game of life boards.
- * Use startoutput() to initialize the output.
+ * Use starOutput() to initialize the output.
  * Use outputBoard($_board) to save a single board to the list of frames.
  * use finishOutput() to generate the gif file.
  *
@@ -24,6 +24,7 @@ use UlrichSG\GetOpt;
  */
 class GifOutput extends BaseOutput
 {
+    /** @var ImageCreator */
     private $imageCreator;
     public $frames = array();
     public $path;

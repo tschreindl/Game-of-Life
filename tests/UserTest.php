@@ -74,22 +74,23 @@ class UserTest extends TestCase
 
         $userInput = new User();
         $userInput->print($board);
-        foreach ($board->board as $items)
+        foreach ($board->board as $line)
         {
-            foreach ($items as $item)
+            foreach ($line as $field)
             {
-                if ($item->isAlive() == true)
+                /** @var \GameOfLife\Field $field */
+                if ($field->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item->isAlive());
+                    $this->assertTrue($field->isAlive());
                 }
-                if ($item->isAlive() == false)
+                if ($field->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item->isAlive());
+                    $this->assertFalse($field->isAlive());
                 }
             }
-            $this->assertEquals($board->height, count($items));
+            $this->assertEquals($board->height, count($line));
         }
 
         $this->assertEquals($mustBeAlive, $count);

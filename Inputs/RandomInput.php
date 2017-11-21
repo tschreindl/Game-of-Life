@@ -33,7 +33,7 @@ class RandomInput extends BaseInput
             if ($fillingLVL < 1 || $fillingLVL > 100)
             {
                 echo "Der Wert darf nur zwischen 1 und 100 liegen\n";
-                echo "Zufälligen Füllungsgrad von " . $percent . " % ausgewählt\n";
+                echo "Zufälligen Füllgrad von " . $percent . " % ausgewählt\n";
             }
             else
             {

@@ -19,39 +19,45 @@ $loader->addPsr4("Rule\\", __DIR__ . "/Rules/");
 
 use GameOfLife\Board;
 use GameOfLife\GameLogic;
-use Rule\CopyRule;
+use Input\BaseInput;
+use Input\RandomInput;
+use Output\BaseOutput;
+use Output\ConsoleOutput;
+use Rule\BaseRule;
+use Rule\StandardRule;
 use UlrichSG\GetOpt;
 
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
     array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
+    array("r", "rule", GetOpt::REQUIRED_ARGUMENT, "Wendet verschiedene Regeln für die nächste Generation an."),
     array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 20."),
     array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 20"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
     array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.0"),
     array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
-    array("r", "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an.\n"),
+    array(null, "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an.\n"),
 ));
 
 foreach (glob(__DIR__ . "/Inputs/*.php") as $input)
 {
     $inputClassName = "Input\\" . basename($input, ".php");
     $inputClass = new $inputClassName();
-    if ($inputClass instanceof \Input\BaseInput) $inputClass->addOptions($options);
+    if ($inputClass instanceof BaseInput) $inputClass->addOptions($options);
 }
 
 foreach (glob(__DIR__ . "/Outputs/*.php") as $output)
 {
     $outputClassName = "Output\\" . basename($output, ".php");
     $outputClass = new $outputClassName();
-    if ($outputClass instanceof \Output\BaseOutput) $outputClass->addOptions($options);
+    if ($outputClass instanceof BaseOutput) $outputClass->addOptions($options);
 }
 
 foreach (glob(__DIR__ . "/Rules/*.php") as $rule)
 {
     $ruleClassName = "Rule\\" . basename($rule, ".php");
     $ruleClass = new $ruleClassName();
-    if ($ruleClass instanceof \Rule\BaseRule) $ruleClass->addOptions($options);
+    if ($ruleClass instanceof BaseRule) $ruleClass->addOptions($options);
 }
 
 $options->parse();
@@ -63,6 +69,7 @@ $generation = 0;
 $sleep = 0.0;
 $inputClassName = null;
 $outputClassName = null;
+$ruleClassName = null;
 
 if ($options->getOption("width"))
 {
@@ -105,7 +112,7 @@ if ($options->getOption("sleepTime"))
     $sleep = $options->getOption("sleepTime");
     if ($sleep > 5)
     {
-        echo "Sleeptime sollte nicht mehr als 5 Sekunden betragen!";
+        echo "Die Pause sollte nicht mehr als 5 Sekunden betragen!";
         die();
     }
 }
@@ -145,6 +152,19 @@ if ($options->getOption("output"))
     }
 }
 
+if ($options->getOption("rule"))
+{
+    if (class_exists("Rule\\" . $options->getOption("rule")))
+    {
+        $ruleClassName = "Rule\\" . $options->getOption("rule");
+    }
+    else
+    {
+        echo "Rule ->" . $options->getOption("rule") . ".php<- wurde nicht gefunden!";
+        die();
+    }
+}
+
 if ($options->getOption("version"))
 {
     echo "Game of Life -- Version 1.8\n";
@@ -154,12 +174,12 @@ if ($options->getOption("version"))
 if ($options->getOption("help"))
 {
     echo "Hilfe:\n\n";
-    echo "Conways Game of Life ist ein Generationen Spiel\n";
-    echo "Spielregeln:\n";
-    echo "-Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren\n";
-    echo "-Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit\n";
-    echo "-Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration am Leben\n";
-    echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung\n";
+    echo "Game of Life ist ein Generationen Spiel\n";
+    echo "Spielregeln: (Achtung! Gilt nur für die Regeln nach Conway!)\n";
+    echo "-Eine tote Zelle mit genau drei lebenden Nachbarn wird in der nächsten Generation neu geboren\n";
+    echo "-Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der nächsten Generation an Einsamkeit\n";
+    echo "-Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der nächsten Generation am Leben\n";
+    echo "-Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der nächsten Generation an Überbevölkerung\n";
     echo "\n";
     $options->showHelp();
     return;
@@ -171,7 +191,7 @@ if ($inputClassName != null)
 }
 else
 {
-    $input = new Input\RandomInput();
+    $input = new RandomInput();
 }
 
 if ($outputClassName != null)
@@ -180,11 +200,19 @@ if ($outputClassName != null)
 }
 else
 {
-    $output = new Output\ConsoleOutput();
+    $output = new ConsoleOutput();
+}
+
+if ($ruleClassName != null)
+{
+    $rule = new $ruleClassName();
+}
+else
+{
+    $rule = new StandardRule();
 }
 
 $board = new Board($width, $height);
-$rule = new CopyRule();
 $gameLogic = new GameLogic($rule);
 $input->fillBoard($board, $options);
 

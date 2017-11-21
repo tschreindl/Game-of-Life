@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use Input\GliderGun;
 use PHPUnit\Framework\TestCase;
 
@@ -27,22 +28,23 @@ class GliderGunTest extends TestCase
         $gliderGun = new GliderGun();
         $options = new  GetOptMock();
         $gliderGun->fillBoard($board, $options->createOpt());
-        foreach ($board->board as $items)
+        foreach ($board->board as $line)
         {
-            foreach ($items as $item)
+            foreach ($line as $field)
             {
-                if ($item->isAlive() == true)
+                /** @var Field $field */
+                if ($field->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item->isAlive());
+                    $this->assertTrue($field->isAlive());
                 }
-                if ($item->isAlive() == false)
+                if ($field->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item->isAlive());
+                    $this->assertFalse($field->isAlive());
                 }
             }
-            $this->assertEquals($board->height, count($items));
+            $this->assertEquals($board->height, count($line));
         }
         $this->assertEquals(36, $count);
         $this->assertEquals($board->width * $board->height - 36, $falseCount);

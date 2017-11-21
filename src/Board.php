@@ -15,6 +15,8 @@ class Board
 {
     public $width;
     public $height;
+
+    /** @var array|Field[][] */
     public $board = array();
 
     function __construct($_width, $_height)
@@ -24,9 +26,12 @@ class Board
         $this->board = $this->initEmpty();
     }
 
+
     /**
      * Initialize an empty field.
      * Sets every entry of "array" board to false.
+     *
+     * @return Field[][]
      */
     public function initEmpty()
     {

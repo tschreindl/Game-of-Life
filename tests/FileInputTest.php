@@ -7,6 +7,7 @@
  */
 
 use GameOfLife\Board;
+use GameOfLife\Field;
 use Input\FileInput;
 use PHPUnit\Framework\TestCase;
 
@@ -28,22 +29,23 @@ class FileInputTest extends TestCase
         $fileInput = new FileInput();
         $options = new  GetOptMock();
         $fileInput->fillBoard($board, $options->createOpt());
-        foreach ($board->board as $items)
+        foreach ($board->board as $line)
         {
-            foreach ($items as $item)
+            foreach ($line as $field)
             {
-                if ($item->isAlive() == true)
+                /** @var Field $field */
+                if ($field->isAlive() == true)
                 {
                     $count++;
-                    $this->assertTrue($item->isAlive());
+                    $this->assertTrue($field->isAlive());
                 }
-                if ($item->isAlive() == false)
+                if ($field->isAlive() == false)
                 {
                     $falseCount++;
-                    $this->assertFalse($item->isAlive());
+                    $this->assertFalse($field->isAlive());
                 }
             }
-            $this->assertEquals($board->height, count($items));
+            $this->assertEquals($board->height, count($line));
         }
         $this->assertEquals($mustBeAlive, $count);
         $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);

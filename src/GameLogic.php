@@ -7,6 +7,7 @@
  */
 
 namespace GameOfLife;
+
 use Rule\BaseRule;
 
 /**
@@ -28,7 +29,6 @@ class GameLogic
      * Calculates the next Board based on the previous Board.
      *
      * @param Board $_board
-     * @return Board
      */
     public function calculateNextBoard(Board $_board)
     {
@@ -38,6 +38,7 @@ class GameLogic
         {
             for ($x = 0; $x < $_board->width; $x++)
             {
+                /** @var Field[][] $nextBoard */
                 $nextBoard[$x][$y]->setValue($this->rule->calculateNewState($_board->board[$x][$y]));
             }
         }
@@ -55,15 +56,17 @@ class GameLogic
     private function generateString(Board $_board)
     {
         $addString = "";
-        for ($y = 0; $y < $_board->height; $y++)
+
+        foreach ($_board->board as $line)
         {
-            for ($x = 0; $x < $_board->width; $x++)
+            foreach ($line as $field)
             {
-                if ($_board->board[$x][$y]->isAlive() == false)
+                /** @var Field $field */
+                if ($field->isAlive() == false)
                 {
                     $addString .= "0";
                 }
-                else if ($_board->board[$x][$y]->isAlive() == true)
+                else if ($field->isAlive() == true)
                 {
                     $addString .= "1";
                 }
@@ -88,5 +91,6 @@ class GameLogic
                 return true;
             }
         }
+        return false;
     }
 }
