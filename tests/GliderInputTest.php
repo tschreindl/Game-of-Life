@@ -33,7 +33,7 @@ class GliderInputTest extends TestCase
                 /** @var Field $field */
                 if ($field->isAlive() == true) $count++;
             }
-            $this->assertEquals($board->height, count($line));
+            $this->assertEquals($board->width, count($line));
         }
         $this->assertEquals(5, $count);
         $this->assertNotEmpty($random);

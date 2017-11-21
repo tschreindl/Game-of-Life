@@ -65,7 +65,7 @@ class User extends BaseInput
                 {
                     $inputY = readline("Y:");
 
-                    if ($inputY == "s" || $inputX == "start") $inputEnd = true;
+                    if ($inputY == "s" || $inputY == "start") $inputEnd = true;
                     else
                     {
                         $inputY = intval($inputY);
@@ -76,7 +76,7 @@ class User extends BaseInput
                         }
                         else
                         {
-                            $currentCellState = $_board->board[$inputX - 1][$inputY - 1]->isAlive();
+                            $currentCellState = $_board->board[$inputY - 1][$inputX - 1]->isAlive();
 
                             $_board->setField($inputX - 1, $inputY - 1, !$currentCellState);
 

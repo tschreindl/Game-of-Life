@@ -21,15 +21,16 @@ class GameLogicTest extends TestCase
         $board = new Board(5, 5);
         $rule = new StandardRule();
         $gameLogic = new GameLogic($rule);
-        $board->setField(1, 1, true);
-        $board->setField(2, 1, true);
-        $board->setField(3, 1, true);
+        $board->setField(1, 2, true);
+        $board->setField(2, 2, true);
+        $board->setField(3, 2, true);
         $gameLogic->calculateNextBoard($board);
-        $this->assertTrue($board->board[2][0]->isAlive());
-        $this->assertTrue($board->board[2][1]->isAlive());
+
+        $this->assertTrue($board->board[1][2]->isAlive());
         $this->assertTrue($board->board[2][2]->isAlive());
-        $this->assertFalse($board->board[1][1]->isAlive());
-        $this->assertFalse($board->board[3][1]->isAlive());
+        $this->assertTrue($board->board[3][2]->isAlive());
+        $this->assertFalse($board->board[2][1]->isAlive());
+        $this->assertFalse($board->board[2][3]->isAlive());
     }
 
     function testIsLoopDetected()

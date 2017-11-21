@@ -88,7 +88,7 @@ class Field
                 {
                     if ($x !== $this->x || $y !== $this->y)
                     {
-                        if ($this->board->board[$x][$y]->isAlive() === true)
+                        if ($this->board->board[$y][$x]->isAlive() === true)
                         {
                             $aliveNeighbours++;
                         }

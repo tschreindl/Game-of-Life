@@ -39,7 +39,7 @@ class GameLogic
             for ($x = 0; $x < $_board->width; $x++)
             {
                 /** @var Field[][] $nextBoard */
-                $nextBoard[$x][$y]->setValue($this->rule->calculateNewState($_board->board[$x][$y]));
+                $nextBoard[$y][$x]->setValue($this->rule->calculateNewState($_board->board[$y][$x]));
             }
         }
         $_board->board = $nextBoard;

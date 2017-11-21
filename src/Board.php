@@ -40,7 +40,7 @@ class Board
         {
             for ($x = 0; $x < $this->width; $x++)
             {
-                $newBoard[$x][$y] = new Field($this, $x, $y);
+                $newBoard[$y][$x] = new Field($this, $x, $y);
             }
         }
         return $newBoard;
@@ -57,7 +57,7 @@ class Board
      */
     function setField(int $_x, int $_y, bool $_value)
     {
-        $this->board[$_x][$_y]->setValue($_value);
+        $this->board[$_y][$_x]->setValue($_value);
     }
 
     /**

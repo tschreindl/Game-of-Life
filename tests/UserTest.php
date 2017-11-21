@@ -60,7 +60,6 @@ class UserTest extends TestCase
         $count = 0;
         $falseCount = 0;
         $mustBeAlive = 5;
-        $outString = "";
 
         $board = new Board(20, 20);
         $board->initEmpty();
@@ -71,9 +70,9 @@ class UserTest extends TestCase
         $board->setField(5, 5, true);
         $board->setField(6, 6, true);
 
-
         $userInput = new User();
         $userInput->print($board);
+
         foreach ($board->board as $line)
         {
             foreach ($line as $field)

@@ -45,7 +45,7 @@ class BoardTest extends TestCase
         $value = true;
         $board = new Board($this->width, $this->height);
         $board->setField($this->x, $this->y, $value);
-        $this->assertEquals($value, $board->board[$this->x][$this->y]->isAlive());
+        $this->assertEquals($value, $board->board[$this->y][$this->x]->isAlive());
     }
 
     function testCheckNeighbours()
