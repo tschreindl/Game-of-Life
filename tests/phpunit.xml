@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="bootstrap.php"
          verbose="true">
-    >
+
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../Outputs</directory>
             <directory suffix=".php">../Inputs</directory>
-            <directory suffix="Board.php">../</directory>
+            <directory suffix=".php">../Rules</directory>
+            <directory suffix=".php">../src</directory>
             <directory suffix="CreateUser.php">../tests</directory>
         </whitelist>
     </filter>
