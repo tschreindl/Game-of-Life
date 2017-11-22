@@ -21,12 +21,14 @@ class ImageCreator
     private $cellSize = 40;
     private $cellColor = array(255, 255, 0); //yellow
     private $backgroundColor = array(135, 135, 135);  //grey
+    private $lineColor = array(255, 255, 255); //white
 
-    function __construct($_cellSize, $_cellColor, $_backgroundColor)
+    function __construct($_cellSize, $_cellColor, $_backgroundColor, $_lineColor)
     {
         if ($_cellSize != null) $this->cellSize = $_cellSize;
         if ($_cellColor != null) $this->cellColor = $this->getColor($_cellColor);
         if ($_backgroundColor != null) $this->backgroundColor = $this->getColor($_backgroundColor);
+        if ($_lineColor != null) $this->lineColor = $this->getColor($_lineColor);
     }
 
     /**
@@ -44,7 +46,7 @@ class ImageCreator
 
         $image = imagecreate($sizeX, $sizeY);
         imagecolorallocate($image, $this->backgroundColor[0], $this->backgroundColor[1], $this->backgroundColor[2]);
-        $lineColor = imagecolorallocate($image, 255, 255, 255);
+        $lineColor = imagecolorallocate($image, $this->lineColor[0], $this->lineColor[1], $this->lineColor[2]);
         $charColor = imagecolorallocate($image, $this->cellColor[0], $this->cellColor[1], $this->cellColor[2]);
 
         imageline($image, 0, 0, $sizeX, 0, $lineColor);
@@ -232,7 +234,7 @@ class ImageCreator
                     break;
 
                 default:
-                    die("Keine Farbe mit diesem Namen gefunden! Bitte über R,G,B oder als HEX eingeben!");
+                    die("Keine Farbe mit diesem Namen gefunden! Bitte über R,G,B oder als #HEX eingeben!");
 
             endswitch;
         }

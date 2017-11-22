@@ -52,6 +52,7 @@ php gameoflife.php [option] [parameter]
     --cellSize  [Integer] --> Ändert die Zellgröße. Standard ist 40px
     --cellColor [String]  --> Ändert die Zellfarbe. Im Format R,G,B oder #HEX oder Standard Farbe. Standard ist Gelb.
     --bkColor   [String]  --> Ändert die Hintergrundfarbe. Im Format R,G,B oder #HEX oder Standard Farbe. Standard ist Grau.
+    --lineColor [String]  --> Ändert die Farbe des Gitternetz. Im Format R,G,B oder #HEX oder Standard Farbe. Standard ist Weiß.
     
 --output GifOutput
     --frameTime [Integer] --> Legt die FPS (Frames per second) für die Gif Datei fest. Standard ist 10.

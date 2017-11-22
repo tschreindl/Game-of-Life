@@ -38,6 +38,7 @@ class VideoOutput extends BaseOutput
         $cellSize = null;
         $cellColor = null;
         $bkColor = null;
+        $lineColor = null;
 
         $this->path = __DIR__ . "\\Video\\" . round(microtime(true)) . "\\Frames\\";
 
@@ -53,7 +54,11 @@ class VideoOutput extends BaseOutput
         {
             $bkColor = $_options->getOption("bkColor");
         }
-        $this->imageCreator = new ImageCreator($cellSize, $cellColor, $bkColor);
+        if ($_options->getOption("lineColor") != null)
+        {
+            $lineColor = $_options->getOption("lineColor");
+        }
+        $this->imageCreator = new ImageCreator($cellSize, $cellColor, $bkColor, $lineColor);
         if (!file_exists($this->path)) mkdir($this->path, 0777, true);
     }
 
@@ -138,6 +143,7 @@ class VideoOutput extends BaseOutput
             array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Größe der lebenden Zellen. Standard: 40"),
             array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Farbe der lebenden Zellen. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 255,255,0 (Gelb)"),
             array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Hintergrundfarbe des Bildes. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 135,135,135 (Grau)\n"),
+            array(null, "lineColor", GetOpt::REQUIRED_ARGUMENT, "VideoOutput - Die Farbe des Gitternetz. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 255,255,255 (Weiß)")
         ));
     }
 }

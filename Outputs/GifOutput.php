@@ -42,6 +42,7 @@ class GifOutput extends BaseOutput
         $cellSize = null;
         $cellColor = null;
         $bkColor = null;
+        $lineColor = null;
 
         $this->path = __DIR__ . "\\GIF\\" . round(microtime(true));
 
@@ -61,7 +62,11 @@ class GifOutput extends BaseOutput
         {
             $this->frameTime = $_options->getOption("frameTime");
         }
-        $this->imageCreator = new ImageCreator($cellSize, $cellColor, $bkColor);
+        if ($_options->getOption("lineColor") != null)
+        {
+            $lineColor = $_options->getOption("lineColor");
+        }
+        $this->imageCreator = new ImageCreator($cellSize, $cellColor, $bkColor, $lineColor);
     }
 
     /**
@@ -120,6 +125,7 @@ class GifOutput extends BaseOutput
             array(null, "cellSize", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Größe der lebenden Zellen. Standard: 40"),
             array(null, "cellColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Farbe der lebenden Zellen. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 255,255,0 (Gelb)"),
             array(null, "bkColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Hintergrundfarbe des Bildes. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 135,135,135 (Grau)"),
+            array(null, "lineColor", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Farbe des Gitternetz. Muss als R,G,B oder #HEX oder Standard-Farbe angeben werden. Standard: 255,255,255 (Weiß)"),
             array(null, "frameTime", GetOpt::REQUIRED_ARGUMENT, "GifOutput - Die Dauer der einzelnen Frames. Standard: 10\n")
         ));
     }
