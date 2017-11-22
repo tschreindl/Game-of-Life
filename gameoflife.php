@@ -31,6 +31,7 @@ $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
     array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
     array("r", "rule", GetOpt::REQUIRED_ARGUMENT, "Wendet verschiedene Regeln für die nächste Generation an."),
+    array(null, "set-rule", GetOpt::REQUIRED_ARGUMENT),
     array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 20."),
     array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 20"),
     array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
@@ -241,6 +242,10 @@ if ($ruleClassName != null)
 else
 {
     $rule = new StandardRule();
+    if ($options->getOption("set-rule"))
+    {
+        $rule->setRule($options->getOption("set-rule"));
+    }
 }
 
 $board = new Board($width, $height);

@@ -48,6 +48,27 @@ class BaseRule
         }
     }
 
+    function setRule(String $_rule)
+    {
+        $this->birthRule = null;
+        $this->dieRule = array(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        if (!stristr($_rule, "/")) die("Regel nicht gültig!");
+        $explode = explode("/", $_rule);
+        if (!is_numeric($explode[0]) || !is_numeric($explode[1])) die("Nur Zahlen von 0-8 erlaubt!");
+        $split = str_split($explode[1]);
+        foreach ($split as $char)
+        {
+            if ((int)$char > 8) die("Nur Zahlen von 0-8 gültig!");
+            $this->birthRule[] = $char;
+        }
+        $split = str_split($explode[0]);
+        foreach ($split as $char)
+        {
+            $search = array_search($char, $this->dieRule);
+            if ($search !== false) unset($char, $this->dieRule[$search]);
+        }
+    }
+
     /**
      * Add available options.
      *
