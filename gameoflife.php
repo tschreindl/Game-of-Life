@@ -199,7 +199,7 @@ if ($options->getOption("rule"))
 
 if ($options->getOption("version"))
 {
-    echo "Game of Life -- Version 1.8\n";
+    echo "Game of Life -- Version 6.4\n";
     return;
 }
 

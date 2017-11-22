@@ -26,10 +26,8 @@ class Board
         $this->board = $this->initEmpty();
     }
 
-
     /**
-     * Initialize an empty field.
-     * Sets every entry of "array" board to false.
+     * Creates a new Field object for each field and set it so false(dead).
      *
      * @return Field[][]
      */
@@ -64,7 +62,7 @@ class Board
      * Returns the living neighbours of the given field.
      *
      * @param Field $_field
-     * @return int
+     * @return int Number of living Neighbours
      */
     function neighborsOfField(Field $_field)
     {

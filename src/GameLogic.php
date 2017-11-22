@@ -11,7 +11,7 @@ namespace GameOfLife;
 use Rule\BaseRule;
 
 /**
- * Class GameLogic
+ * Class GameLogic that handles the logic of the game.
  *
  * @package GameOfLife
  */
@@ -79,7 +79,8 @@ class GameLogic
      * Checks each past generation to prevent there is a repeating generation and the game runs endless.
      *
      * @param Board $_board
-     * @return bool
+     * @return bool True: No further generation or loop detected.
+     *              False: No loop. Game can go on.
      */
     public function isLoopDetected(Board $_board)
     {

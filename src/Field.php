@@ -9,7 +9,7 @@
 namespace GameOfLife;
 
 /**
- * Class Field
+ * Class that serves as a every field of the board.
  *
  * @package GameOfLife
  */
@@ -39,9 +39,10 @@ class Field
     }
 
     /**
-     * Returns the current state of the Field (alive = true, dead = false).
+     * Returns the current state of the Field.
      *
-     * @return bool
+     * @return bool True: Field is alive.
+     *              False: Field is not alive.
      */
     public function isAlive()
     {

@@ -9,7 +9,8 @@
 namespace Rule;
 
 /**
- * Class StandardRule
+ * Class for Standard Conway Rule.
+ * Rule 23/3
  *
  * @package Rule
  */

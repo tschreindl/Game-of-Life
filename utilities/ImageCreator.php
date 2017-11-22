@@ -20,7 +20,7 @@ class ImageCreator
 {
     private $cellSize = 40;
     private $cellColor = array(255, 255, 0); //yellow
-    private $backgroundColor = array(135, 135, 135);  //grey
+    private $backgroundColor = array(128, 128, 128);  //grey
     private $lineColor = array(255, 255, 255); //white
 
     function __construct($_cellSize, $_cellColor, $_backgroundColor, $_lineColor)
@@ -136,7 +136,7 @@ class ImageCreator
         else
         {
             switch (strtolower($_color)):
-
+                // 16 default colors according to VGA palette
                 case "black":
                     $color[0] = 0;
                     $color[1] = 0;

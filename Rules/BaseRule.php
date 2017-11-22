@@ -12,7 +12,7 @@ use GameOfLife\Field;
 use UlrichSG\GetOpt;
 
 /**
- * Class BaseRule
+ * Base Class for all Rules.
  *
  * @package Rule
  */

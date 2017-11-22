@@ -9,7 +9,8 @@
 namespace Rule;
 
 /**
- * Class CopyRule
+ * Class for custom Rule.
+ * Rule 1357/1357.
  *
  * @package Rule
  */

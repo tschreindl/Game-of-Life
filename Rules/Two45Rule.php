@@ -9,7 +9,8 @@
 namespace Rule;
 
 /**
- * Class Two45Rule
+ * Class for custom Rule.
+ * Rule 245/3.
  *
  * @package Rule
  */
