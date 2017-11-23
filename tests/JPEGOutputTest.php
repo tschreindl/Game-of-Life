@@ -37,6 +37,8 @@ class JPEGOutputTest extends TestCase
         $JPEGOutput->outputBoard($board, $options->createOpt());
         $this->expectOutputString("JPEG Dateien werden erzeugt. Bitte warten...\n\rAktuelle Generation: 1");
         $this->assertFileExists($JPEGOutput->path . "\\1.jpeg");
+        unlink($JPEGOutput->path . "\\1.jpeg");
+        rmdir($JPEGOutput->path);
     }
 
     function testFinishOutput()

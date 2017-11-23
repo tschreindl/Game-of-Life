@@ -53,6 +53,8 @@ class GifOutputTest extends TestCase
         $this->assertDirectoryExists($gifOutput->path);
         $this->assertFileExists($gifOutput->path . "/Gif_1.gif");
         $this->expectOutputString("Gif Datei wird erzeugt. Bitte warten...\n\r1 Generationen berechnet\nGIF Datei wurde erzeugt.\n");
+        unlink($gifOutput->path . "/Gif_1.gif");
+        rmdir($gifOutput->path);
 
     }
 

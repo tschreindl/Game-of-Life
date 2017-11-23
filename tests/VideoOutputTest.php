@@ -52,6 +52,8 @@ class VideoOutputTest extends TestCase
         if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN")
         {
             $this->assertFileExists($videoOutput->path . "/../GOL.avi");
+            unlink($videoOutput->path . "/../GOL.avi");
+            rmdir($videoOutput->path . "/../");
         }
         else
         {

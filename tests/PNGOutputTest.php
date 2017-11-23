@@ -37,6 +37,8 @@ class PNGOutputTest extends TestCase
         $PNGOutput->outputBoard($board, $options->createOpt());
         $this->expectOutputString("PNG Dateien werden erzeugt. Bitte warten...\n\rAktuelle Generation: 1");
         $this->assertFileExists($PNGOutput->path . "\\1.png");
+        unlink($PNGOutput->path . "\\1.png");
+        rmdir($PNGOutput->path);
     }
 
     function testFinishOutput()
