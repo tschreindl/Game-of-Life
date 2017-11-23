@@ -18,13 +18,13 @@ class ImageCreatorTest extends TestCase
     function testCreateImage()
     {
         $board = new Board(20, 20);
-        $imageCreator = new ImageCreator(null, null, null);
+        $imageCreator = new ImageCreator(null, null, null, null);
         $this->assertNotEmpty($imageCreator->createImage($board));
     }
 
     function testGetColor()
     {
-        $imageCreator = new ImageCreator(null, null, null);
+        $imageCreator = new ImageCreator(null, null, null, null);
         $color = $imageCreator->getColor("#FF00FF");
         $this->arrayHasKey($color);
         $this->assertEquals(255, $color[0]);
