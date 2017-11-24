@@ -255,9 +255,10 @@ $input->fillBoard($board, $options);
 if ($maxSteps > 0)
 {
     $output->startOutput($options);
-    for ($i = 0; $i < $maxSteps; $i++)
+    for ($i = 0; $i <= $maxSteps; $i++)
     {
         $output->outputBoard($board, $options);
+        if ($gameLogic->isEmpty($board)) break;
         $gameLogic->calculateNextBoard($board);
         usleep($sleep * 1000000);
     }

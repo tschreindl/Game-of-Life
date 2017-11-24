@@ -95,4 +95,21 @@ class GameLogic
         }
         return false;
     }
+
+    /**
+     * Checks if the board is complete empty.
+     * Needed for maxSteps.
+     *
+     * @param Board $_board
+     * @return bool
+     */
+    public function isEmpty(Board $_board)
+    {
+        if (!stristr($this->generateString($_board), "1"))
+        {
+            echo "\nKeine Zelle mehr am Leben!\n";
+            return true;
+        }
+        return false;
+    }
 }
