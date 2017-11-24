@@ -48,6 +48,11 @@ class BaseRule
         }
     }
 
+    /**
+     * Function to set a custom defined rule.
+     *
+     * @param String $_rule
+     */
     function setRule(String $_rule)
     {
         $this->birthRule = null;

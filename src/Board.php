@@ -13,8 +13,8 @@ namespace GameOfLife;
  */
 class Board
 {
-    public $width;
-    public $height;
+    private $width;
+    private $height;
 
     /** @var array|Field[][] */
     public $board = array();
@@ -67,5 +67,25 @@ class Board
     function neighborsOfField(Field $_field)
     {
         return $_field->livingNeighbours();
+    }
+
+    /**
+     * Returns the width of the current board.
+     *
+     * @return mixed
+     */
+    public function width()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Returns the height of the current board.
+     *
+     * @return mixed
+     */
+    public function height()
+    {
+        return $this->height;
     }
 }

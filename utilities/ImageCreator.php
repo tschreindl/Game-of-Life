@@ -41,8 +41,8 @@ class ImageCreator
      */
     public function createImage(Board $_board)
     {
-        $sizeX = $_board->width * ($this->cellSize + 2) + 2;
-        $sizeY = $_board->height * ($this->cellSize + 2) + 2;
+        $sizeX = $_board->width() * ($this->cellSize + 2) + 2;
+        $sizeY = $_board->height() * ($this->cellSize + 2) + 2;
 
         $image = imagecreate($sizeX, $sizeY);
         imagecolorallocate($image, $this->backgroundColor[0], $this->backgroundColor[1], $this->backgroundColor[2]);
@@ -65,7 +65,7 @@ class ImageCreator
         $posY = $this->cellSize + 2;
 
         //draw horizontal lines
-        for ($x = 0; $x < $_board->width; $x++)
+        for ($x = 0; $x < $_board->width(); $x++)
         {
             imageline($image, $posX, 0, $posX, $sizeY, $lineColor);
             imageline($image, $posX + 1, 0, $posX + 1, $sizeY, $lineColor);
@@ -73,7 +73,7 @@ class ImageCreator
         }
 
         //draw vertical lines
-        for ($y = 0; $y < $_board->height; $y++)
+        for ($y = 0; $y < $_board->height(); $y++)
         {
             imageline($image, 0, $posY, $sizeX, $posY, $lineColor);
             imageline($image, 0, $posY + 1, $sizeX, $posY + 1, $lineColor);

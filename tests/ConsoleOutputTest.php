@@ -48,7 +48,7 @@ class ConsoleOutputTest extends TestCase
         $consoleOutput->outputBoard($board, $options->createOpt());
 
         $outString = $outString . "Aktuelle Generation: 0\n┌";
-        for ($strokes = 1; $strokes <= $board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $board->width(); $strokes++)
         {
             $outString = $outString . "───";
         }
@@ -75,10 +75,10 @@ class ConsoleOutputTest extends TestCase
                 }
             }
             $outString = $outString . "│\n";
-            $this->assertEquals($board->height, count($line));
+            $this->assertEquals($board->height(), count($line));
         }
         $outString = $outString . "└";
-        for ($strokes = 1; $strokes <= $board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $board->width(); $strokes++)
         {
             $outString = $outString . "───";
         }
@@ -86,7 +86,7 @@ class ConsoleOutputTest extends TestCase
 
         $this->expectOutputString($outString);
         $this->assertEquals($mustBeAlive, $count);
-        $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
+        $this->assertEquals($board->width() * $board->height() - $mustBeAlive, $falseCount);
         $this->assertNotEmpty($consoleOutput);
     }
 

@@ -85,7 +85,7 @@ class Field
         {
             for ($y = $this->y - 1; $y <= $this->y + 1; $y++)
             {
-                if ($y >= 0 && $y < $this->board->height && $x >= 0 && $x < $this->board->width)
+                if ($y >= 0 && $y < $this->board->height() && $x >= 0 && $x < $this->board->width())
                 {
                     if ($x !== $this->x || $y !== $this->y)
                     {
@@ -112,7 +112,7 @@ class Field
         {
             for ($y = $this->y - 1; $y <= $this->y + 1; $y++)
             {
-                if ($y >= 0 && $y < $this->board->height && $x >= 0 && $x < $this->board->width)
+                if ($y >= 0 && $y < $this->board->height() && $x >= 0 && $x < $this->board->width())
                 {
                     if ($x !== $this->x || $y !== $this->y)
                     {

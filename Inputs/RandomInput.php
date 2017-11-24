@@ -44,9 +44,9 @@ class RandomInput extends BaseInput
 
         if (isset($GLOBALS["__user_unit_test"])) $percent = 100; //only for unit test
 
-        for ($x = 0; $x < $_board->width; $x++)
+        for ($x = 0; $x < $_board->width(); $x++)
         {
-            for ($y = 0; $y < $_board->height; $y++)
+            for ($y = 0; $y < $_board->height(); $y++)
             {
                 $rand = rand(1, 100);
                 if ($rand <= $percent) $_board->setField($x, $y, true);

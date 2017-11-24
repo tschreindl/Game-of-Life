@@ -34,9 +34,9 @@ class GameLogic
     {
         $this->historyOfBoards[] = $this->generateString($_board);
         $nextBoard = $_board->initEmpty();
-        for ($y = 0; $y < $_board->height; $y++)
+        for ($y = 0; $y < $_board->height(); $y++)
         {
-            for ($x = 0; $x < $_board->width; $x++)
+            for ($x = 0; $x < $_board->width(); $x++)
             {
                 /** @var Field[][] $nextBoard */
                 $nextBoard[$y][$x]->setValue($this->rule->calculateNewState($_board->board[$y][$x]));

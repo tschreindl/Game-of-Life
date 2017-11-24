@@ -27,8 +27,8 @@ class FieldSelector extends BaseInput
     function fillBoard(Board $_board, GetOpt $_options)
     {
         echo "Das Selector Tool wird gestartet. Bitte warten...\n";
-        if ($_board->width > 90 || $_board->height > 60) echo "Achtung! Zu große Felder können zu Problemen mit dem Selector Tool führen!\n";
-        exec(__DIR__ . "/../utilities/FieldSelector.exe $_board->width $_board->height", $output, $return);
+        if ($_board->width() > 90 || $_board->height() > 60) echo "Achtung! Zu große Felder können zu Problemen mit dem Selector Tool führen!\n";
+        exec(__DIR__ . "/../utilities/FieldSelector.exe " . $_board->width() . " " . $_board->height(), $output, $return);
         if ($return != 0 || stristr($output[0], "exit")) die("Das Selector Tool wurde beendet.");
         if (!stristr($output[0], "1")) die("Keine Felder ausgewählt.");
 

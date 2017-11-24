@@ -44,10 +44,10 @@ class GliderGunTest extends TestCase
                     $this->assertFalse($field->isAlive());
                 }
             }
-            $this->assertEquals($board->height, count($line));
+            $this->assertEquals($board->height(), count($line));
         }
         $this->assertEquals(36, $count);
-        $this->assertEquals($board->width * $board->height - 36, $falseCount);
+        $this->assertEquals($board->width() * $board->height() - 36, $falseCount);
         $this->assertNotEmpty($gliderGun);
     }
 

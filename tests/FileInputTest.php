@@ -45,10 +45,10 @@ class FileInputTest extends TestCase
                     $this->assertFalse($field->isAlive());
                 }
             }
-            $this->assertEquals($board->height, count($line));
+            $this->assertEquals($board->height(), count($line));
         }
         $this->assertEquals($mustBeAlive, $count);
-        $this->assertEquals($board->width * $board->height - $mustBeAlive, $falseCount);
+        $this->assertEquals($board->width() * $board->height() - $mustBeAlive, $falseCount);
         $this->assertNotEmpty($fileInput);
     }
 

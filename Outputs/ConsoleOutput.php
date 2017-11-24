@@ -53,7 +53,7 @@ class ConsoleOutput extends BaseOutput
         $this->generation++;
 
         echo "┌";
-        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $_board->width(); $strokes++)
         {
             echo "───";
         }
@@ -79,7 +79,7 @@ class ConsoleOutput extends BaseOutput
         }
 
         echo "└";
-        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $_board->width(); $strokes++)
         {
             echo "───";
         }

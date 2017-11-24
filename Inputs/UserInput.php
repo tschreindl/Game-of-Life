@@ -50,9 +50,9 @@ class UserInput extends BaseInput
             {
                 $inputX = intval($inputX);
 
-                if ($inputX - 1 < 0 || $inputX - 1 >= $_board->width)
+                if ($inputX - 1 < 0 || $inputX - 1 >= $_board->width())
                 {
-                    echo "\nError: X Coordinate must be between 1 and " . $_board->width . "\n\n";
+                    echo "\nError: X Coordinate must be between 1 and " . $_board->width() . "\n\n";
                 }
                 else
                 {
@@ -63,9 +63,9 @@ class UserInput extends BaseInput
                     {
                         $inputY = intval($inputY);
 
-                        if ($inputY - 1 < 0 || $inputY - 1 >= $_board->height)
+                        if ($inputY - 1 < 0 || $inputY - 1 >= $_board->height())
                         {
-                            echo "\nError: Y Coordinate must be between 1 and " . $_board->height . "\n\n";
+                            echo "\nError: Y Coordinate must be between 1 and " . $_board->height() . "\n\n";
                         }
                         else
                         {
@@ -93,7 +93,7 @@ class UserInput extends BaseInput
     public function print(Board $_board)
     {
         echo "┌";
-        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $_board->width(); $strokes++)
         {
             echo "───";
         }
@@ -119,7 +119,7 @@ class UserInput extends BaseInput
         }
 
         echo "└";
-        for ($strokes = 1; $strokes <= $_board->width; $strokes++)
+        for ($strokes = 1; $strokes <= $_board->width(); $strokes++)
         {
             echo "───";
         }

@@ -33,7 +33,7 @@ class RandomInputTest extends TestCase
                 /** @var Field $field */
                 $this->assertEquals(true, $field->isAlive());
             }
-            $this->assertEquals($board->width, count($line));
+            $this->assertEquals($board->width(), count($line));
         }
         $this->assertNotEmpty($random);
         unset($GLOBALS["__user_unit_test"]);

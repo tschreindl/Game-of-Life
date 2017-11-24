@@ -26,14 +26,14 @@ class GliderInput extends BaseInput
      */
     function fillBoard(Board $_board, GetOpt $_options)
     {
-        $posX = round(($_board->width - 3) / 2);
-        $posY = round(($_board->height - 3) / 2);
+        $posX = round(($_board->width() - 3) / 2);
+        $posY = round(($_board->height() - 3) / 2);
 
-        if ($_options->getOption("PosX") != null && $_options->getOption("PosX") < $_board->width)
+        if ($_options->getOption("PosX") != null && $_options->getOption("PosX") < $_board->width())
         {
             $posX = $_options->getOption("PosX");
         }
-        if ($_options->getOption("PosY") != null && $_options->getOption("PosY") < $_board->height)
+        if ($_options->getOption("PosY") != null && $_options->getOption("PosY") < $_board->height())
         {
             $posY = $_options->getOption("PosY");
         }

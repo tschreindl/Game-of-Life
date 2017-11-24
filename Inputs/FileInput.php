@@ -55,10 +55,10 @@ class FileInput extends BaseInput
 
         $newPath = $this->path . $this->fileName . ".txt";
         $lines = file($newPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $centerX = ($_board->height - count($lines)) / 2;
+        $centerX = ($_board->height() - count($lines)) / 2;
         if ($centerX < 1) $centerX = 0;
         $reset = $centerX;
-        $centerY = ($_board->width - strlen($lines[0])) / 2;
+        $centerY = ($_board->width() - strlen($lines[0])) / 2;
         if ($centerY < 1) $centerY = 0;
         for ($y = 0; $y < count($lines); $y++)
         {
