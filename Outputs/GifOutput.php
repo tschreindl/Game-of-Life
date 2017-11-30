@@ -86,7 +86,8 @@ class GifOutput extends BaseOutput
     /**
      * Creates and saves the gif file.
      *
-     * @param $_options
+     * @param GetOpt $_options
+     * @throws \Exception
      */
     public function finishOutput(GetOpt $_options)
     {

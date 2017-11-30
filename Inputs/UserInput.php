@@ -36,8 +36,8 @@ class UserInput extends BaseInput
             $this->print($_board);
 
             // command prompt
-            echo "\nEnter the coordinates of the cell that you want to set/unset";
-            echo "\nEnter 's' or 'start' to start the simulation\n\n";
+            echo "\nGib die Koordinaten der Zelle ein die gesetzt/zurückgesetzt werden soll";
+            echo "\nGib 's' oder 'start' ein um die Simulation zu starten\n\n";
 
 
             //This is an ugly hack to make unit-tests work. Please bear with it! :-)
@@ -52,7 +52,7 @@ class UserInput extends BaseInput
 
                 if ($inputX - 1 < 0 || $inputX - 1 >= $_board->width())
                 {
-                    echo "\nError: X Coordinate must be between 1 and " . $_board->width() . "\n\n";
+                    echo "\nFehler: X Koordinate muss zwischen 1 und " . $_board->width() . " sein\n\n";
                 }
                 else
                 {
@@ -65,18 +65,21 @@ class UserInput extends BaseInput
 
                         if ($inputY - 1 < 0 || $inputY - 1 >= $_board->height())
                         {
-                            echo "\nError: Y Coordinate must be between 1 and " . $_board->height() . "\n\n";
+                            echo "\nFehler: Y Koordinate muss zwischen 1 und " . $_board->height() . " sein\n\n";
                         }
                         else
                         {
-                            $currentCellState = $_board->board[$inputY - 1][$inputX - 1]->isAlive();
+                            /** @var Field $field */
+                            $field = $_board->board[$inputY - 1][$inputX - 1];
+                            $currentCellState = $field->isAlive();
 
                             $_board->setField($inputX - 1, $inputY - 1, !$currentCellState);
 
-                            echo "Successfully ";
-                            if ($currentCellState == true) echo "unset ";
-                            else echo "set ";
-                            echo "the cell at (" . $inputX . "|" . $inputY . ")!\n\n";
+                            echo "Zelle auf (" . $inputX . "|" . $inputY . ") ";
+                            if ($currentCellState == true) echo "zurückgesetzt";
+                            else echo "gesetzt";
+                            echo "\n\n";
+
                         }
                     }
                 }

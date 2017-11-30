@@ -250,7 +250,6 @@ else
 
 $board = new Board($width, $height);
 $gameLogic = new GameLogic($rule);
-$input->fillBoard($board, $options);
 
 echo "  ____                                __    _     _  __      
  / ___| __ _ _ __ ___   ___     ___  / _|  | |   (_)/ _| ___ 
@@ -258,6 +257,7 @@ echo "  ____                                __    _     _  __
 | |_| | (_| | | | | | |  __/  | (_) |  _|  | |___| |  _|  __/
  \____|\__,_|_| |_| |_|\___|   \___/|_|    |_____|_|_|  \___|\n\n";
 
+$input->fillBoard($board, $options);
 if ($maxSteps > 0)
 {
     $output->startOutput($options);
