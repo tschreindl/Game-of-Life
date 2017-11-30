@@ -48,8 +48,8 @@ class UserInputTest extends TestCase
             "│                                                            │\n" .
             "│                                                            │\n" .
             "└────────────────────────────────────────────────────────────┘\n" .
-            "\nEnter the coordinates of the cell that you want to set/unset" .
-            "\nEnter 's' or 'start' to start the simulation\n\n");
+            "\nGib die Koordinaten der Zelle ein die gesetzt/zurückgesetzt werden soll" .
+            "\nGib 's' oder 'start' ein um die Simulation zu starten\n\n");
 
         //cleanup messy stuff
         unset($GLOBALS["__user_unit_test"]);
