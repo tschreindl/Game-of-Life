@@ -46,7 +46,8 @@ php gameoflife.php [option] [parameter]
         --set-rule  [String]   --> Legt eine eigene Regel fest. Muss in "alternativer Bezeichung" angegeben werden (Wikipedia). z.B. 1357/1357 (Copy Rule).
 -w oder --width     [Integer]  --> Legt die Breite des Spielfeldes fest. Standard ist 20.
 -h oder --height    [Integer]  --> Legt die Höhe des Spielfeldes fest. Standard ist 20.
--s oder --maxSteps  [Integer]  --> Legt die maximale Anzahl an Schritten fest. Es wird nur abgebrochen wenn ALLE Zellen tot sind.
+-s oder --steps     [Integer]  --> Legt fest die wievielte Generation immer ausgegeben werden soll. Standard ist 1 (Jede).
+-m oder --maxSteps  [Integer]  --> Legt die maximale Anzahl an Schritten fest. Es wird nur abgebrochen wenn ALLE Zellen tot sind.
 -t oder --sleepTime [Integer]  --> Legt die Pause zwischen jeder neuen Generation fest. Angabe in Sekunden. Standard ist 0.0 Sek.
 -v oder --version              --> Gibt die aktuelle Version des Spieles aus.
         --help                 --> Gibt eine Hilfe über Parameter und Regeln aus.

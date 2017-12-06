@@ -30,11 +30,12 @@ use UlrichSG\GetOpt;
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),
     array("o", "output", GetOpt::REQUIRED_ARGUMENT, "Output des Feldes wählen. Standard: Console."),
-    array("r", "rule", GetOpt::REQUIRED_ARGUMENT, "Wendet verschiedene Regeln für die nächste Generation an."),
-    array(null, "set-rule", GetOpt::REQUIRED_ARGUMENT),
+    array("r", "rule", GetOpt::REQUIRED_ARGUMENT, "Wendet verschiedene Regeln für die nächste Generation an. Standard: Conway"),
+    array(null, "set-rule", GetOpt::REQUIRED_ARGUMENT, "Legt eine eigene Regel fest. Standard: Conway (23/3) "),
     array("w", "width", GetOpt::REQUIRED_ARGUMENT, "Breite des Feldes auswählen. Standard: 20."),
     array("h", "height", GetOpt::REQUIRED_ARGUMENT, "Höhe des Feldes auswählen. Standard: 20"),
-    array("s", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
+    array("s", "steps", GetOpt::REQUIRED_ARGUMENT, "Anzahl die wievielte Generation immer ausgegeben werden soll. Standard: 1 (Jede)"),
+    array("m", "maxSteps", GetOpt::REQUIRED_ARGUMENT, "Maximale Anzahl der Generationen. Standard: 0"),
     array("t", "sleepTime", GetOpt::REQUIRED_ARGUMENT, "Pause zwischen jeder neuen Generation. Angabe in Sekunden. Standard: 0.0"),
     array("v", "version", GetOpt::NO_ARGUMENT, "Zeigt die aktuelle Version an."),
     array(null, "help", GetOpt::NO_ARGUMENT, "Zeigt die Hilfe an.\n"),
@@ -65,6 +66,7 @@ $options->parse();
 
 $height = 20;
 $width = 20;
+$steps = 1;
 $maxSteps = 0;
 $generation = 0;
 $sleep = 0.0;
@@ -96,6 +98,11 @@ if ($width > 80 || $height > 80)
 {
     echo "Achtung! Ein großes Feld verbraucht viel RAM!\n";
     sleep(2);
+}
+
+if ($options->getOption("steps"))
+{
+    $steps = $options->getOption("steps");
 }
 
 if ($options->getOption("maxSteps"))
@@ -265,7 +272,10 @@ if ($maxSteps > 0)
     {
         $output->outputBoard($board, $options);
         if ($gameLogic->isEmpty($board)) break;
-        $gameLogic->calculateNextBoard($board);
+        for ($j = 0; $j < $steps; $j++)
+        {
+            $gameLogic->calculateNextBoard($board);
+        }
         usleep($sleep * 1000000);
     }
     echo "\nAnzahl von $maxSteps Generationen erreicht.";
@@ -277,7 +287,10 @@ else
     do
     {
         $output->outputBoard($board, $options);
-        $gameLogic->calculateNextBoard($board);
+        for ($j = 0; $j < $steps; $j++)
+        {
+            $gameLogic->calculateNextBoard($board);
+        }
         usleep($sleep * 1000000);
     } while ($gameLogic->isLoopDetected($board) == false);
 
