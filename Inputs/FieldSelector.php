@@ -9,7 +9,7 @@
 namespace Input;
 
 use GameOfLife\Board;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Input Class to fill the board from an external tool.

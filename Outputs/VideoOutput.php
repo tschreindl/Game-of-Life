@@ -8,9 +8,8 @@
 
 namespace Output;
 
-
 use GameOfLife\Board;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Output Class to Output the Board to a Video File.

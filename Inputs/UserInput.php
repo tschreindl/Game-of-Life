@@ -9,8 +9,8 @@
 namespace Input;
 
 use GameOfLife\Field;
-use UlrichSG\Getopt;
 use GameOfLife\Board;
+use Ulrichsg\Getopt;
 
 /**
  * Input Class to let the user input which cells are alive.

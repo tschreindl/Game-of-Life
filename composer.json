@@ -3,5 +3,7 @@
         "PHPUnit/PHPUnit": "^6.3"
     },
     "require": {
+        "ulrichsg/getopt-php": "1.0.1",
+        "sybio/gif-creator": "1.0"
     }
 }

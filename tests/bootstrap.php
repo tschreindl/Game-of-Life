@@ -10,7 +10,5 @@ $loader = require __DIR__ . "/../vendor/autoload.php";
 $loader->addPsr4("Input\\", __DIR__ . "/../Inputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/../Outputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/../utilities/");
-$loader->addPsr4("UlrichSG\\", __DIR__ . "/../utilities/");
 $loader->addPsr4("GameOfLife\\", __DIR__ . "/../src/");
-$loader->addPsr4("GifCreator\\", __DIR__ . "/../utilities/");
 $loader->addPsr4("Rule\\", __DIR__ . "/../Rules/");

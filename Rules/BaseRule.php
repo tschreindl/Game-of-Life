@@ -9,7 +9,7 @@
 namespace Rule;
 
 use GameOfLife\Field;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Base Class for all Rules.

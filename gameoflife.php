@@ -12,9 +12,7 @@ $loader = require __DIR__ . "/vendor/autoload.php";
 $loader->addPsr4("Input\\", __DIR__ . "/Inputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/Outputs/");
 $loader->addPsr4("Output\\", __DIR__ . "/utilities/");
-$loader->addPsr4("UlrichSG\\", __DIR__ . "/utilities/");
 $loader->addPsr4("GameOfLife\\", __DIR__ . "/src/");
-$loader->addPsr4("GifCreator\\", __DIR__ . "/utilities/");
 $loader->addPsr4("Rule\\", __DIR__ . "/Rules/");
 
 use GameOfLife\Board;
@@ -25,7 +23,7 @@ use Output\BaseOutput;
 use Output\ConsoleOutput;
 use Rule\BaseRule;
 use Rule\StandardRule;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 $options = new  GetOpt(array(
     array("i", "input", GetOpt::REQUIRED_ARGUMENT, "Auszuführendes Input auswählen. Standard: Random."),

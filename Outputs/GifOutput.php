@@ -10,7 +10,7 @@ namespace Output;
 
 use GameOfLife\Board;
 use GifCreator\GifCreator;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Class GifOutput

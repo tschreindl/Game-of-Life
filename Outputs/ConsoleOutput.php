@@ -10,7 +10,7 @@ namespace Output;
 
 use GameOfLife\Board;
 use GameOfLife\Field;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Output Class to Output the Board in PHP/Terminal.

@@ -9,7 +9,7 @@
 namespace Input;
 
 use GameOfLife\Board;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Input Class for a generation called "Glider".

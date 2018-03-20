@@ -8,7 +8,7 @@
 
 namespace Output;
 use GameOfLife\Board;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Base Class for all outputs.

@@ -6,9 +6,9 @@
  * @author Tim Schreindl <tim.schreindl@cn-consult.eu>
  */
 
-require_once __DIR__ . "/../utilities/GetOpt.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 /**
  * Class to mock options so they can be used to test classes where they needed.

@@ -9,7 +9,7 @@
 namespace Input;
 
 use GameOfLife\Board;
-use UlrichSG\GetOpt;
+use Ulrichsg\Getopt;
 
 
 /**
